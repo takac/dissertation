@@ -1,5 +1,8 @@
 \documentclass[10pt,twocolumn]{article}
 \usepackage{times}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{./}{figs/}}
+
 \begin{document}
 \title{Artificial Life Creation Comparing Genetic Algorithms And Genetic Programming}
 \author{Tom Cammann\\\\
@@ -7,8 +10,7 @@ Computer Science, cy004947@reading.ac.uk}
 \date{}
 \maketitle
 \begin{abstract}
-
-	Abstract stuff here here here
+This report focuses on the generating artificial life through two distinct methods, genetic algorithms and genetic programming. The report describes the fundamentals of these two methodologies, compares and contrasts their differences in the creation of similar artificial life. The report outlines tools developed during this project to accomplish an effective comparison of these two methods. These include a method of visualising the artificial life and the environment it inhabits during its existence. The outcome of this project demonstrates how genetic programming requires more advanced programming but can lead to novel and emergent behaviour, in contrast to genetic algorithms which are much simpler and can better replicate biological processes that go on around us. 
 \end{abstract}
 
 
@@ -29,8 +31,12 @@ Each member in the population is a solution to the problem, however these soluti
 Each member of the population is assigned a fitness value to correspond with how close the solution is to correct, or how effective the solution is.
 In the Context of artificial life this fitness value may correspond to how well the life form survives in a given environment.
 
-\paragraph{}
 % why are we comparing these 2 methods
+\paragraph{}
+The purpose of this investigation is to compare and contrast the usage of genetic algorithms and genetic programming in the creation of artificial life. Genetic programming first became prevelvant in the early 1990 after Koza used used GP to solve ??? ~\cite{Koza90}. After the advancements made by Koza many applications for GP emerged and one of the earlier appications was in ALife. Before these advancements GA was the primary method for generating ALife.
+
+However these two have very different implementations and usage, this report will investigate the usage of both in the context of artificial life creation. 
+% Genetic programming can generate unique solutions, unrestrained, GA more restrained. 
 
 \paragraph{}
 %how we compare them
@@ -59,7 +65,7 @@ If numbers are being represented in binary strings the most significant bit is a
 
 
 \subsection{MUTATION}
-In genetic algorithms mutation occurs on a per gene basis. If a mutation for a population member is needed then a gene in that 
+In genetic algorithms mutation occurs on a per gene basis. If a mutation for a population member is needed then a gene in that~\cite{j1}. 
 
 %better title needed!!!
 %Section about how this project uses GA
@@ -76,11 +82,28 @@ In genetic algorithms mutation occurs on a per gene basis. If a mutation for a p
 
 
 
-\section{METHODOLOGY}
+\section{SIMULATION}
+To evaluate a common artificial life form a simulation environment has been created. This environment is a 2D arena where a life form must continue to consume food to survive, the more food the life form consumes the fitter the  
 
-\subsection{EVOLUTIONARY FRAMEWORK}
+
+
 %talking about how the project framework
-%how a frame to accomodate genetic programming and GA
+%how a frame to accommodate genetic programming and GA
+\subsection{EVOLUTIONARY FRAMEWORK}
+To investigate and compare these two algorithms %? algorithms??%
+a framework to accommodate both algorithms was produced.  
 
+
+
+\begin{figure} [ht]
+\centering
+\includegraphics[scale = 0.25]{gen1-2500.png}
+\caption{My figure}
+\label{the-label-for-cross-referencing}
+\end{figure}
+
+
+\bibliographystyle{plain}
+\bibliography{dis}
 
 \end{document}
