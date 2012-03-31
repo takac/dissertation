@@ -30,6 +30,12 @@ Each member of the population is assigned a fitness value to correspond with how
 In the Context of artificial life this fitness value may correspond to how well the life form survives in a given environment.
 
 \paragraph{}
+% why are we comparing these 2 methods
+
+\paragraph{}
+%how we compare them
+
+
 
 \section{GENETIC ALGORITHMS}
 
@@ -41,15 +47,40 @@ These genes were historically represented in binary form, however more modern im
 These genes must be able to mutate, this is easy to understand when using binary number, to mutate a binary number you flip one bit in the gene sequence. 
 
 \subsection{POPULATION REPRESENTATION}
-In genetic algorithms each member of the population (or candidate solution) is represented by a list or string of values. Each value represents a parameter that will be used in the solution. The value could represent the number of iterations of a loop or represent 
+In genetic algorithms each member of the population (or candidate solution) is represented by a list or string of values.
+Each value represents a parameter that will be used in the solution.
+The value could represent the number of iterations of a loop or represent a operator in a sum.
+Traditionally binary numbers strings were used to represent a member of the population.
+This was because of the ease of which this could be manipulated by computers and the simplicity mutations could be achieved.
+To mutate a binary string a bit can be flipped.
+This can work in most situations however it soon becomes apparent that this cannot useful in all situations.
+%Fix and show formula? Find solutin.
+If numbers are being represented in binary strings the most significant bit is at start of the string, if this is flipped then the number will change by a factor of ???.
+
 
 \subsection{MUTATION}
 In genetic algorithms mutation occurs on a per gene basis. If a mutation for a population member is needed then a gene in that 
 
+%better title needed!!!
+%Section about how this project uses GA
+\subsection{USAGE IN THIS}
+
+\section{GENETIC PROGRAMMING}
+%intro to gp
+
+\subsection{POPULATION REPRESENTATION}
+%obv
+
+\subsection{MUTATION}
+%asdsss
+
+
 
 \section{METHODOLOGY}
 
-\subsection{GENETIC ALGORITHMS}
+\subsection{EVOLUTIONARY FRAMEWORK}
+%talking about how the project framework
+%how a frame to accomodate genetic programming and GA
 
 
 \end{document}
