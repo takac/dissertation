@@ -73,6 +73,9 @@ In genetic algorithms mutation occurs on a per gene basis. If a mutation for a p
 
 \section{GENETIC PROGRAMMING}
 %intro to gp
+Genetic programming is one of the newest forms of evolutionary computing. 
+%different ways
+
 
 \subsection{POPULATION REPRESENTATION}
 %obv
@@ -83,15 +86,71 @@ In genetic algorithms mutation occurs on a per gene basis. If a mutation for a p
 
 
 \section{SIMULATION}
-To evaluate a common artificial life form a simulation environment has been created. This environment is a 2D arena where a life form must continue to consume food to survive, the more food the life form consumes the fitter the  
+To evaluate a common artificial life form a simulation environment has been created.
+This environment is a 2D arena where a life form must continue to consume food to survive, the more food the life form consumes the fitter the  
 
+The underlying genetic and evolutionary computations were completed on a Java framework called JGAP (Java Genetic Algorithms Package).
+This package provides a tried and very well tested method for using genetic algorithms in Java, while also providing the 
+ability to extend the package and use the package to fit into this projects needs. The package was tested several times before usage
+and simple life forms were developed to ensure this package was appropriate. Other packages such as %TODO other packages
+were used but found to be lacking extendibility and documentation. JGAP has very good documentation, which meant that extending
+the package and adapting the package to this projects needs was even easier.
 
+JGAP provides two general over arching algorithm frameworks to work with, genetic algorithms and genetic programming. However
+the package does not provide any high level interfaces between the genetic algorithms side and the genetic programming side. A 
+lot of development during this project was focused on developing a framework for evolution that could incorporate both GAs and GPs developed
+using JGAP. 
+
+Visualising both the GP and GA in the life form meant developing an abstract way of representing the state of the life form. This was done
+through an abstract class called ALife. This abstract class provided a high level interface for other objects to read (and modify if necessary)
+the state of the life form. The abstract class contained many of the variables for the life form and the setting and getting functions 
+associated with them. 
+
+\subsection{LIFE}
+
+This project has modeled life on upon a fairly simple scenario, with only a few state variables. The states that this life form
+can control are: its position on the map, its orientation and its energy level. Its position can be changed by moving forward, these 
+forms can only move in the direction they are facing. The can modify their orientation by moving either right or left of where they 
+are currently facing. They can also change their energy, however this is more passive than active. The life form's energy will
+deplete during its life based on how much it moves and what actions it takes. However its energy can be increased by consuming a 
+resource, this resource will contain a number of calories which can be converted into energy. This conversion rate is variable
+depending on the life forms parameters. 
+
+The simulation is split up into frames, during each frame the life form has a chance to move and interact with the environment. If their
+are multiple life forms in the environment then each life form in turn will get a chance to interact during this frame. These frames are
+meant to represent time for the life forms, it has been slightly simplified to be an amount of time a life form can move forward or interact in another way. Only one 'major' interaction can be completed per frame. These include moving, consuming a resource and turning.
+
+To survive in an environment the life form must keep its energy above zero for the duration of the simulation, if the life forms energy
+drops to zero or below then the life form will be assumed deceased and can no longer make any more interactions with its environment. A simulation can have indefinite run time and how long the life form can survive will depend on its fitness and availability of resources for energy.
+
+\subsection{MAP}
+
+The environment that the life forms exist on during the simulations are referred to as maps. These maps are two dimensional and can vary in size.
+The size of the map can be set at run time and can also be set to dynamically change during a run if necessary. The map also holds references
+to the resources contained in the environment. The map is split up into cells which form a 2D grid for which the life forms can inhabite. 
+
+Generally for evolving good fit life forms a unique map is generated for each simulation. This creates an enviroment in the life form has not
+seen before and has not adapted to before. This means that the fit life forms are the ones which will be able to adapt to any give situation
+and still be able to consume and interact with their environment. Each time a map is generated a new set of resources is generated with different
+positions on the map and different calorie values. If a static map is used, with the same positions of resources for each run, a very specialised 
+life form can evolve but as soon as this life form is transposed into another environment this life form is very unfit.
+
+The resources generated for each map are randomly placed, with random calorific values. 
 
 %talking about how the project framework
 %how a frame to accommodate genetic programming and GA
 \subsection{EVOLUTIONARY FRAMEWORK}
 To investigate and compare these two algorithms %? algorithms??%
-a framework to accommodate both algorithms was produced.  
+a framework to accommodate both algorithms was produced. 
+
+\subsection{VISUALISATION}
+Visualisation of the solutions (or life forms) produced by the algorithms was key
+to understanding the differences between the two algorithms. A visualisation of the map and life form
+was developed early on. The visualisation was developed using the model view controller architecture,
+which gave meant that the map and the life form were completely detached from the visualisation.
+The map and life form are abstracted using an abstract class which contains the basic variables need for the life
+form and some simple functions to get and set these variables. These include the life forms position, orientation
+and energy level. 
 
 
 
