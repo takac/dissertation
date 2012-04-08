@@ -66,7 +66,21 @@ both need to interface with the artificial life in an abstract manner so one can
 
 \paragraph
 The first problem identified was producing an environment for the artificial life. This environment will support the artificial life and allow interaction between the resources present
-in the environment and also other life in the environment. T
+in the environment and also other life in the environment. The environment that the artificial life will inhabit will be fairly simple with serveral parameters than can be affected such as
+size, and objects for the artificial life to interact with. These objects that the artificial life can interact with will either be resources which the artificial life can possible consume
+or an obstacle which the artificial life cannot move over, instead bypass. Keeping this environment simple will enable this project to focus more on producing a high quality artificial life
+which will interact correctly and effectively with their environment. 
+
+\paragraph
+Another problem idenified is what methods and values would be used when comparing these two algorithms. To draw conclusions from this project the data generated from both algorithms needs 
+to be comparable but also similar. Simple methods for comparing the algorithms will be runtime, memory/space requirments to compute a solution to a give problem. Further detail will need to
+be drawn from the algorithms, such as average fitness of a whole generation of artificial life forms, the effectiveness of the algorithm to find a global optimimum solution and also the
+intelligence of the artificial life produced. 
+
+Producing these statistics will require the alorithms to be generating information that can be interpretted by a statistical model to be translated to graphs and values that can be
+used to directly compare the algorithms. This will be done by implementing a several class that will aid this process, objects that can read in an entire generation of life forms
+and record information about these life forms. 
+
 
 The key issues with this project are based around a fair comparison of the algorithms. 
 
@@ -251,9 +265,22 @@ and run time parameters were involved with its creation.
 
 \subsection{PROGRAM FLOW}
 
+\section{PROBLEMS ENCOUNTERED}
+
+During implementation many hurdles had to be over come during each sprint phase of the project. However there were some issues that were much harder to overcome than others. One of these problems was
+producing fair and equal output per time frame from each algorithm. The problem was that during each time frame the artificial life had the oppurtunity to survey its environment and then react to this
+environment, hopefully in a way such that it can find more resources to consume, but the rules governing these interactions differed between the two algorithms.
+This was because of the way the two algorithms generate output which controls the life form it was difficult to align
+the rules governing the two algorithms. Originally the genetic programming solution controlled the artificial life by calling functions with in its chromosome tree, such as move forward, turn left etc.
+However it was quickly realised that this would not work as the genetic program could call these functions multiple times during one time frame. This method would not work in this project because
+of the way the genetic algorithm controlled the artificial life. The GA did not have an opporutunity to call functions multiple times during one time frame. These methods of control had to be aligned. 
+
+To do this
+
 
 
 \section{RESULTS}
+
 
 
 
