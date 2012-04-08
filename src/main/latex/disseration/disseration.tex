@@ -96,6 +96,16 @@ meant that development could quickly begin from any location with git available.
 
 \subsection{DESIGN AND ARCHITECTURE}
 
+Before implementation the architecture and design of this project was laidout in UML. The actual design has changed somewhat since the first UML diagram was
+constructed, however this was expected and planned for. Most software projects usually have changing requirements and aims during their lifecycles as did this
+project. The project used a software development cycle akin to agile software development, where first a feature list was made up with consolation, this list
+contained all requirements for the upcoming sprint in the project. These features were then implemented in the project, such as developing new features in the
+user interface. These features were then rigirously tested and fixed where necessary. Then the cycle was repeated again, drawing up a new feature list.
+This project consisted 3 sprint periods where new features were drawn up, implemented, tested and bugs fixed.
+
+As Java was the language being developed the design was very focused towards object orientation; this meant using the concepts of encapsulation, abstraction
+and polymorphism. The map design revolved around encapsulating all life, resources and obstacles under one object, making this overall object only expose 
+necessary attributes and readonly methods. This meant the underlying objects would not be distrubed by any GUI or user interface functions that exist on top.  
 
 \section{SIMULATION}
 To evaluate a common artificial life form a simulation environment has been created.
@@ -153,8 +163,8 @@ positions on the map and different calorie values. If a static map is used, with
 life form can evolve but as soon as this life form is transposed into another environment this life form is very unfit.
 
 The resources generated for each map are randomly placed, with random calorific values. Only one resource can ocupy a cell on the map, each resoruce also has
-a type which can be checked by the life form. If a life form is on top of a resource, i.e. it is in the same cell then the life form can consume a resource. 
-T 
+a type which can be checked by the life form. If a life form is on top of a resource, i.e. if it is in the same cell then the life form can consume a resource. 
+ 
 
 %talking about how the project framework
 %how a frame to accommodate genetic programming and GA
@@ -188,6 +198,12 @@ tested out on. A previously generated made could be loaded and the life form cou
 Another feature that was added was the ablitity to run the simulation frame by frame. The user can pause the simulation and step through the simulation, this again provides another method of fully understanding how a life form interacts with the enviroment. 
 Along with the ablities to interact with the simulation was the ablitity to access information on the current life form, such as its genetic make what generation
 and run time parameters were involved with its creation.
+
+\subsection{PROGRAM FLOW}
+
+
+
+\section{RESULTS}
 
 
 
