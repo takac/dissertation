@@ -1,6 +1,8 @@
 \documentclass[10pt,twocolumn]{article}
 \usepackage{times}
 \usepackage[pdftex]{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \graphicspath{{./}{figs/}}
 
 \begin{document}
@@ -41,7 +43,32 @@ However these two have very different implementations and usage, this report wil
 \paragraph{}
 %how we compare them
 
+\subsection{Requirements}
+Comparing evolutionary algorithms in a fair and equal way has certain requirments. First both of the algorithms have to be implemented in such a way that allows a direct comparison. 
+This can be done by constructing an enviromental problem for artificial life to solve, and then implemented a GA to solve to problem and then a GP to solve the problem. Direct
+comparisons can be made on how these algorithms were implemented and how effecient and effective they are at solving the given enviromental proble. This problem can then be changed, 
+and the algorithms reimplemented and a comparison can be made on how well the algorithms could be adapted to the new problem and again how effective the algorithms were at
+finding a solution to this problem.
 
+To setup these enviromental problems for the artificial life to solve an environment needs to be constructed, in which either algorithm can generate an artificial life form
+to inhabit.
+
+
+\section{ANALYSIS}
+
+\subsection{KEY PROBLEMS}
+Producing artificial life that can solve the enviromental and situational problems that are presented in the simulated enviroment %TENSE?!
+will be the biggest problem to over come in this project. Generating artificial life is a complex process; first an environment to simulate the artificial life has to be produced, and then
+an interface between the artificial life and the environment has to be implemented. Finally the process for creating artificial life through a GA or GP can be produced, but these algorithms
+both need to interface with the artificial life in an abstract manner so one can not distinguish between an GP implementation of artificial life and a GA implementation.
+
+
+
+\paragraph
+The first problem identified was producing an environment for the artificial life. This environment will support the artificial life and allow interaction between the resources present
+in the environment and also other life in the environment. T
+
+The key issues with this project are based around a fair comparison of the algorithms. 
 
 \section{GENETIC ALGORITHMS}
 
@@ -51,6 +78,29 @@ The general form of a genetic algorithm uses genes to represent parameters insid
 These parameters effect the running of a program.
 These genes were historically represented in binary form, however more modern implementations can use any value as a gene, from programming objects to double floating point numbers.
 These genes must be able to mutate, this is easy to understand when using binary number, to mutate a binary number you flip one bit in the gene sequence. 
+
+\begin{algorithm}
+\caption{Pseduocode for a simple genetic algorithm}
+\label{Genetic algorithm pseduocode}
+\begin{algorithmic}
+\Function{GenerateInitialPopulation}{$popsize$}
+	\For{$i = 0 \to popsize$}
+		\State $i \gets i + 1$ 
+		\State \Return $popsize$
+	\EndFor
+\EndFunction
+
+%\State $population =$ GenerateInitialPopulation()
+%\State evaluate( $population )
+%\Repeat
+%\State $pop \gets 10$
+%\State select fit individuals for crossover and/or elitism
+%\State generate new individuals through crossover and mutation
+%\State replace old generation with new individuals
+%\State evaluate fitness of each individual in population
+%\Until { fitest individual \geq fitness required OR time elapsed \geq time allowed } 
+\end{algorithmic}
+\end{algorithm}
 
 \subsection{POPULATION REPRESENTATION}
 In genetic algorithms each member of the population (or candidate solution) is represented by a list or string of values.

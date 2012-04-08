@@ -1,0 +1,113 @@
+\documentclass[12]{article}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{./}{figs/}}
+\begin{document}
+\title{Appendix 4 - Further Particular for ‘CS’ degree project}
+\maketitle
+\newcounter{counter}
+\section{}
+Most Computer Science projects falls into three broad types. 
+\begin{list}{Type \Roman{counter}:~}{\usecounter{counter}\setlength\labelwidth{3in}}
+\item Projects which involve substantial design effort followed by an implementation
+and testing phase. For example a compiler for a small subset of a certain programming 
+language. A part of such projects will be in the form of a users manual, specifying what 
+the package does and how it is to be used, together with support documentation giving 
+sufficient details for someone, who so desires, to modify the coding. 
+\item Projects in which the work of analysis and design is so complex as to constitute 
+a complete project in itself. The end-project will usually be a system design document, 
+but the project will show in exceptional detail full use of all the phases of the software 
+lifecycle that precede and lead to the creation of  that design. As always, a critical 
+assessment of the methods used will be expected in the report. 
+\item Projects which involve substantial  analysis followed by a specification (and 
+possibly a verification) phase. Typically these are projects of a theoretical nature which 
+usually contain a high mathematical content. Such project may involve formal 
+specifications, development of proof methods and refinement techniques. A prototype 
+may be implemented for evaluation purposes or software written to provide automated 
+tools. 
+\end{list}
+All reports should be organized into sections, and sections with a common theme should be 
+arranged into chapters. Bearing in mind the different requirements of  each type of project, a 
+possible report structure is shown below (the headings are meant to suggest themes and should 
+not necessarily be taken literally). 
+\subsection{Abstract, Contents page}
+All reports should contain:  
+\begin{list}{\roman{counter}}{\usecounter{counter}}
+\item A title page consisting of - University of Reading 
+School of Systems Engineering 
+CS3Q2 / SE3Q2 - Computer Science Final Project Report  
+Title of Project  
+Name of Student  26 
+Names of Supervisor, Second Reader 
+Date  
+\item An abstract page. The abstract should be a single page summary of what the project is about and to 
+what extent its aims have been realized. Include all the important points and place as much information 
+here as space permits. 
+\item A contents page.  
+\end{list}
+\subsection{Introducing the Project and Specification}
+This applies to all types of projects 
+\begin{list}{\roman{counter}}{\usecounter{counter}}
+\item Declaration of the aims and objectives of the project. 
+\item Review of published work where appropriate.  General descriptions of the survey area and its 
+importance/interest to the computing community. 
+\item General statement of the problem, in other words, a general informal requirements specification.  
+\item Division of responsibility if joint project.
+\end{list}
+\subsection{Analysis and Design}
+\begin{list}{\roman{counter}}{\usecounter{counter}}
+\item An in-depth analysis of the problem. Identification of the key problems associated with your project.  
+\item This section will include a complete requirements analysis, transformed into a complete 
+specification, transformed into a complete design. In the case of large projects the report will probably 
+include only a selection of parts of the system. The selection should be made for clear, stated reasons, 
+for example, that they illustrate particular difficulties experienced or specially complex parts of the 
+problem domain. For type III projects this section will contain a discussion of the formal technique 
+used including an explanation of notation and methods. 
+\item Any other aspects of the design process. Describe any problems.  
+\end{list}
+\subsection{Development and Implementation}
+\begin{list}{\roman{counter}}{\usecounter{counter}}
+\item List the technical difficulties experienced; description and clearly labelled diagrams of the data 
+structures employed and why they were chosen; high level coherently organized descriptions of the 
+various component programs and how they relate together. The presentation and description of the 
+underlying algorithms (but don’t simply duplicate listings in the text) 
+\item Specifications of programs, detailed input  data and formats, output results layout, operating 
+environment including compilers, library routines, etc.; The flow of control through the entire program 
+or design should be indicated on a single side. Relationship between specifications and program listings 
+should be made clear. 
+\item For type III projects this section will contain a description of the system, details of the construction 
+of a formal model of the system that is being studied. Where some form of prototyping has been 
+attempted, its aims and usefulness must be discussed.  
+\end{list}
+\subsection{Results}
+\begin{list}{\roman{counter}}{\usecounter{counter}}
+\item Test data and the results produced, together with their significance. Use graphs and tables. 
+Interpretation of results. This section may not apply to all projects.  
+\end{list}
+\subsection{Testing}
+\begin{list}{\roman{counter}}{\usecounter{counter}}
+\subsubsection{Testing and Quality (Type I and II projects)}
+\item Details of strategy used for testing purposes.  Exhaustive testing is not expected, but the testing 
+method used should be clearly shown. Why was a particular testing strategy chosen and what were the 
+aims? Specify the steps used to ensure that quality is achieved. Did testing detect any problems? 
+Results of testing. For type I projects this includes details of data vetting and error messages. For type 
+II projects there needs to be evidence that the design as such has been verified in some industrystandard manner. Describe any problems in testing and ensuring quality.  27 
+\subsubsection{Correctness Analysis (Type III projects)}
+\item What can be deduced about the proposed design or system by reasoning about the formal model 
+constructed? What correctness criteria can be formulated and can these correctness criteria be satisfied? 
+Describe any problems in testing and ensuring quality. 
+\end{list}
+\subsection{Summary, Conclusions and Critique}
+\begin{list}{\roman{counter}}{\usecounter{counter}}
+\item Costings: In the preliminary report, costing techniques (as taught in Software Engineering) were 
+used to produce a estimate of the time and effort required for the project. How would you reconcile the 
+estimated costings with the actual cost? You will not be penalised if the estimated cost and the actual 
+cost do not match. For type III projects, in place of the costing techniques used in Software 
+Engineering, the student should try to quantify and discuss the use of formal techniques, not discarding 
+the ideas of Software Engineering, but working out how they may be applied (or not) in a new context. 
+\item To what extent have the aims of the project been fulfilled? Include a critical assessment of he design 
+tools and methods used. Summarise the major problems and drawbacks with your approach. What are 
+the main conclusions and findings of the project? 
+\item How would you alter the method or approach in the light of experience? What else would you have 
+liked to do if the time were available? Suggest possible improvements and areas for future work.
+\end{list}
+\end{document}
