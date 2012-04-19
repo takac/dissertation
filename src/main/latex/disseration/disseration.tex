@@ -148,15 +148,18 @@ Genetic programming is one of the newest forms of evolutionary computing.
 %asdsss
 \section{DEVELOPMENT}
 
-This project was written in Java programming language and was developed on serveral operating systems during its life time. Java was chosen because of
-a strong prior intimate knowledge of the language and because of the libraries available to develop with. The evolutionary computation libraries which
-this project are based also use Java, this made interfacing with them very easy. Another reason Java was chosen was because of the graphical user interface 
-programming libraries supplied as standard in Java. Having prior knowledge of these also meant that developing a visual format for the simulation could be 
-accomplished. 
-
-Along with using Java for development several other tools were used these were Eclipse, Maven and Git. Eclipse is a Intergrated Development Enviroment or IDE which
-provides the user with an interface with faster programming and debugging ablities than are available as standard. This meant faster development. Maven was used a build tool to manage dependcies and build jar files for running the application that contains the simulations. Using this made it easy to develop on any computer, as managing the depenecies necessary for the program done all by Maven. Git was used as the the version control system for this project, this was only adopted towards the end of the project as it became more necessary to manage versions and have a reliable branching system. This project was hosted on GitHub.com which 
-meant that development could quickly begin from any location with git available. 
+This project was written in Java programming language and was developed on serveral operating systems during its life time. 
+Java was chosen because of a strong prior intimate knowledge of the language and because of the libraries available to develop with. 
+The evolutionary computation libraries which this project are based also use Java, this made interfacing with them very easy. 
+Another reason Java was chosen was because of the graphical user interface programming libraries supplied as standard in Java. 
+Having prior knowledge of these also meant that developing a visual format for the simulation could be accomplished.  Along with using 
+Java for development several other tools were used these were Eclipse, Maven and Git. Eclipse is a Intergrated Development Enviroment or 
+IDE which provides the user with an interface with faster programming and debugging ablities than are available as standard.
+This meant faster development. Maven was used a build tool to manage dependcies and build jar files for running the application 
+that contains the simulations. Using this made it easy to develop on any computer, as managing the depenecies necessary for the 
+program done all by Maven. Git was used as the the version control system for this project, this was only adopted towards the 
+end of the project as it became more necessary to manage versions and have a reliable branching system. This project was hosted 
+on GitHub.com which meant that development could quickly begin from any location with git available. 
 
 \subsection{DESIGN AND ARCHITECTURE}
 
@@ -171,7 +174,11 @@ As Java was the language being developed the design was very focused towards obj
 and polymorphism. The map design revolved around encapsulating all life, resources and obstacles under one object, making this overall object only expose 
 necessary attributes and readonly methods. This meant the underlying objects would not be distrubed by any GUI or user interface functions that exist on top.  
 
-\section{SIMULATION}
+\subsection{PROJECT DESIGN}
+
+
+
+\section{IMPLEMENTATION}
 To evaluate a common artificial life form a simulation environment has been created.
 This environment is a 2D arena where a life form must continue to consume food to survive, the more food the life form consumes the fitter the  
 
@@ -273,15 +280,136 @@ environment, hopefully in a way such that it can find more resources to consume,
 This was because of the way the two algorithms generate output which controls the life form it was difficult to align
 the rules governing the two algorithms. Originally the genetic programming solution controlled the artificial life by calling functions with in its chromosome tree, such as move forward, turn left etc.
 However it was quickly realised that this would not work as the genetic program could call these functions multiple times during one time frame. This method would not work in this project because
-of the way the genetic algorithm controlled the artificial life. The GA did not have an opporutunity to call functions multiple times during one time frame. These methods of control had to be aligned. 
+of the way the genetic algorithm controls the artificial life. The GA did not have an opporutunity to call functions multiple times during one time frame. These methods of control had to be aligned. 
 
-To do this
+This was a difficult problem to solve, either the genetic algorithm had to modified in such a way that meant it could call interaction mehtods
+a number of times or limit the number of calls the GP could make to these interactions. It was deemed easier to modify the GP, and a solution
+was devised to fix this issue. The solution was to change the way the GP controlled the ALife. Instead of directly calling the interaction methods
+the GP would instead return a number, this number would then refer to a specific action. The interactions that could take place in 
+the environment are then hard coded into the program, e.g. if 1 is returned the ALife turns left, if 2 is returned the ALife turns right.
 
+\paragraph
 
+Another problem encountered was during refactoring of the code. Towards the end of the project the code base was fairly substantial, and any
+untested modification to the code could produce errors. During some refactoring of the EnvironmentMap class serveral bugs slipped through
+which meant a longer than necessary amount of time was spent debugging. However due to this project adopting the software version control system
+Git, a 'diff' or file comparison could be made on the changed files. For the refactoring a new branch was created on git, the refactored code
+was then developed on this refactoring branch, and the working unfactored code remained on the master branch. When the bugs occured in the
+projects code the file comparsion between these two branches was extremely helpful in locating exactly what had been changed and what
+possible bugs could have arisen from these changes. In this particular case a method that was acting as the sight for the artificial life
+contained an erroneous 'not' symbol causing havoc. Initially it was hard to understand where the bug had arisen as many methods had been
+altered, but using git diff meant I could easily inspect the changes and quickly went through any changes would could have produced the
+results that were being produced by the project.
 
 \section{RESULTS}
 
+\section{TESTING}
+The main goal behind testing this project was to ensure complete correctness of the implementation which utilises the JGAP framework.
 
+Unit testing was one of the main tools used for this project. JUnit 4 was used in this project and was chosen for this project because
+of its high renown in software engineering, and is usually the defacto choice for any testing in Java. It provides a robust framework
+in which tests can be written and run with ease. JUnit also intergrates extremely well with Eclipse, the main IDE used during this project. Eclipse has default plugins for running and writing JUnit tests making the whole testing process even easier. Any test
+failures will be shown, along with an exact reference on screen to where they failed. Individual test methods can then be run and
+debugged to enable the code being test to be fixed very quickly.
+This project also utilised Maven 3, Maven has the ablity to run JUnit tests and generate reports from these tests. Using the Maven
+Surefire plugin and enabling reporting from these tests produced very useful reports on the project in HTML, although these were not
+that useful as most of the tests were run through Eclipse. However Maven really comes into its own when other testing plugins are
+utilised. This project used the Maven Cobertura plugin, Cobertura is a ''tool that calculates the percentage of code accessed by 
+tests'' - http://cobertura.sourceforge.net. Using the Cobertura with Maven's reporting capabilities meant that detailed reports
+on exactly what code was being tested by the unit tests. The HTML reports produced show the exact source code that is run during the
+testing. This meant that JUnit tests could also be checked for correctness, and that any code that needed to be tested has not been
+missed out.
+Another tool used for testing was FindBugs, this tool usesd static code analysis to find errors in Java source code. This tool also
+has a Maven reporting plugin which produced more HTML reports in readable and easily accessible format. Findbugs assisted in finding bugs in the projects code which would have otherwise been missed. FindBugs not only finds bugs and issues with the logic in the code
+but also assess the performance, security, style and code convention. Many trivial issues can be raised by FindBugs such as 
+incorrectly defining static fields or other simple programming mistakes. It can produce very useful feedback for producing
+higher quality code and helps the programmer avoid common mistakes and improve efficientcy of the code. The find bugs report breaks
+down the issues it finds by class, and then by priority. Most reports generated during this project contained many 'low' priority
+issues such as: ''uses the same code for two switch clauses'', these issues are often ignored due to the fact they are artifacts
+from code that is still in development, but occasionaly a 'high' prirority issue arises and these that often need to be immediately
+addressed in the code. 
+
+This project also used
+CheckStyle for helping the code adhere to strict Java programming code conventions. Adhereing to these code conventions meant that
+the code produced is more readable, easier to understand, easier to debug and helps avoid bugs.
+
+This complete strategy for testing was chosen as it enabled this project to focus on development of the code and spend as little
+time as possible on developing tests. This streamlined testing process improved the efficenency of the project, tests could 
+be written, tested and verified in very little time. Using Cobertura the tests could be verified that they were covering the
+correct areas, FinbBugs, Checkstyle improved the readablity and transparency of the code and also helped stop static code
+bugs occur.
+
+
+\paragraph
+
+The Unit tests written for this project were aimed at the most important and complex areas of code. Exhaustive testing was 
+unfortuantely of the scope of this project, and full test coverage of the entire code was not feasible to implement.
+
+This project focused on implementing test driven development, TDD, which meant writing unit tests alongside writing project code.
+This increased the work load but was essential to ensure correctness of the code being produced. Major benefits were seen from
+writing these unit tests concurently with the project code. Bugs that would have very hard to track down from a mis-assigned
+variable were very easy to locate. Performance of the code was also improved, due the fact that each time JUnit runs the test
+it also reports how long this took. Using this it was easy to see which parts of the code are very innefficent and which needed
+refactoring. 
+
+However the 
+areas of the code that could produce 'silent' bugs were targeted for testing. A silent bug is one which would not throw an error
+or even produce erroreous output, but would perhaps alter the outcome of a run slightly. A example of this was a method that
+was used as the eyes of the ALife in the genetic algorithm. The range value is taken from the set of genes, and is used to 
+to limit how far the artificial life can see. The method that was written accidentaly reduced this range by 1 due to an issue
+in incrementing a for-loop. This bug was not spotted until a test for this method was written. 
+\paragraph
+
+The logging used in this project was implemented through Log4j, this system enabled this project to customise the logging 
+ablitity without costing the project runtime. During debugging the trace log can be enabled which will slow down the
+run time of the project but provide invaluable help when debugging the code. When logging is turned off the perfomance
+of the code has very similar performance to code with any logging statements in, this makes log4j very powerful. Also
+log4j has many built in output and format options which means one can customise it to suit any project. Log4j is often
+thought of as industry defacto logging platform and therefore is highly supported meaning increased performance
+and one of the safest logging platforms in terms of the number of bugs because of its age and community support. All these
+factors contribute to a highly effective and stable logging platform. 
+
+Log4j has several levels of logging, fatal, error, warn, info, debug, trace. Each of these logging levels can be used throughout
+the project, however logging in this project was used with a strict set of rules. Any errors or errorneous outcomes will 
+be logged as either fatal or with error level logging, fatal will be used in a case where any further outcome of the project
+will be invalid or erroroneous, error will be used for logging any error that will cause the current run of the system to be
+erroroneous however will probably not impact the rest of the run. Warn will be used when parameters exceed recommended
+extremes or an acceptable or expected bad input is recorded and adjusted. Info is used for recording the current state of
+the projec run, for example each time a new generation is started during either the GA or GP run the info logging level is
+used to print and record that this is the current state of the program. It is used to record high level state of the run,
+not the low level state of each of the components which combine together during this run. Other common info level logging
+information would be the fitness of the entire generation or if a target is reached in the code such as a fitness leve.
+Debug and trace are only used for debugging, and often trace is disabled at run time because of the impact enabling this
+logging level has on the code. Most logging that occurs in this project is trace or debug logging, logging statements are
+put into frequently used methods and classes to record the current state that they are in and to help during the debugging
+process. The trace log level is used for calls that are very frequent and if not disabled would likely produce a significant
+low down during runtime. 
+
+\subsection{Test ALife}
+
+Testing the correctness of the ALife was a slightly more complex task, and could not be completely automated through unit testing.
+The common errors that occured during development of the project which affected the ALife simulation were normally due to the
+artificial life evolving to exploit bugs in the simulation. One such bug allowed to the artificial life to never die by exploiting
+a case were it could skip code that required energy to drecremented at the end of each turn, and therefore the ALife did not need
+to consume resources to become fit.
+
+Another common bug would be where the ALife would get stuck in the corner of the map and not be able to escape this corner. This
+was an error to do with the ALife's navigation and movement commands.
+
+These bugs were discovered by inspection and not through automated testing. This meant these bugs took longer to find and longer to
+debug. Automated tests could not be written for the ALife as there was not an expected behaviour to test against. The best
+test for these artificial life forms was the fitness function. The life form would be successful and pass the tests if the fitness
+was above a certain threshold. Through a particular run of the project if the fitness outcomes were expectionally high or close to 
+zero then this run would probably have a bug in the implementation of the project and would be inspected. When this occured
+it was often a time costly bug as the cause would not be given and would have to be found. However the tools developed in this
+project helped greatly in finding these bugs. The first one was using the visualisation frame, an ALife form could be chosen
+and run on a chosen map. The artificial life could then be debugged by stepping through its life, using the visualisation tools.
+Using the verbose logging setup throughout the project and the ability to run the life form time frame by time frame meant that
+some bugs could quickly be found through this process. Different maps could be loaded and the whole process reloaded again for
+repeatitive testing. 
+
+
+\subsection{TESTING THE ENVIRONMENT}
 
 
 \begin{figure} [ht]
