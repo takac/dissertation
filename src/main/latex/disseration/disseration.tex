@@ -3,6 +3,7 @@
 \usepackage[pdftex]{graphicx}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{qtree}
 \graphicspath{{./}{figs/}}
 
 \begin{document}
@@ -21,7 +22,10 @@ This report focuses on the generating artificial life through two distinct metho
 Artificial life or ALife is the study and implementation of systems that are simulations or replications of natural life.
 These systems can be biochemical, mechanical, computer software and many other medium that supports the existence of structured self controlled information.
 This report will be looking at software artificial life, or Soft ALife and how it can be implemented using evolutionary computation.
-Evolutionary computation has been used for the creation of artificial life for many decades, REF + EXAMPLE.
+Evolutionary computation has been used for the creation of artificial life for many decades, REF + EXAMPLE. Koza demonstrated the use of GP in 1992 ??? to solve the ant's nest problem. This used a set
+of available commands for the ants to use, such as move forward, turn, move to nest. The idea was for
+the ants problem was to order a set or resources on a simple 2D map. This simple example showed how ALife could
+be used in the context of genetic programming.
 Using evolutionary computation has many qualities that replicate naturally evolved life, and is one few computational methods known that can generate solutions to problems without human interaction.
 Evolutionary computation has been applied to artificial life to generate life forms that can inhabit an environment and are 'solutions' to this environment.
 
@@ -39,6 +43,23 @@ The purpose of this investigation is to compare and contrast the usage of geneti
 
 However these two have very different implementations and usage, this report will investigate the usage of both in the context of artificial life creation. 
 % Genetic programming can generate unique solutions, unrestrained, GA more restrained. 
+Being able to compare this two types of algorithms will enable faster and better selection of algorithms during 
+the design for an artificially evolved life form. It can be very daunting prospect to choose an algorithm
+for developing and evolving aritificial life, there are many factors that will need to be considered and this
+project will help future research into artificial life by comparing the two algorithms used in this project.
+These algorithms will both have their benefits and pitfalls, with these exposed through this report this 
+will enable better understanding of which algorithm to choose.
+
+
+\paragraph{}
+This project will design and implement an application which will launch and visualise the evolution of a
+simple artificial life form. This application will make use of either genetic algorithms or genetic programming,
+depending on conditions chosen. The initial parameters can be choosen for developing this artificial life form
+and then this will produce a statistics of the evolutionary process, graphing the fitness over generations
+and also the ability to visualise the life form in its environment. This will give the use the advantage of being
+able to study the behaviour of the life form and understand it better than reading the genome of the fit life forms
+produced by the evolutionary algorithm.
+
 
 \paragraph{}
 %how we compare them
@@ -53,6 +74,15 @@ finding a solution to this problem.
 To setup these enviromental problems for the artificial life to solve an environment needs to be constructed, in which either algorithm can generate an artificial life form
 to inhabit.
 
+\paragraph{}
+This interoperability between the two algorithms will also carry over to the visualisation of the artificial life. This will mean
+that the visualisation and statistics generated about these artificial life forms will not care if the life form was created
+through an GA or a GP, this information will be abstracted away. This will increase the ease of which the algoriths output can
+be compared. However this will pose a challenge to program, to be able to implement the same functionality between the 
+different algorithms. For example if the life form has a sight function or 'ability' this need to be programmed for both
+the GA and GP because of the way the two algorithms work. These need give the same response in the same situation. One of the
+algorithms can not have advantages over another.
+	
 
 \section{ANALYSIS}
 
@@ -62,16 +92,14 @@ will be the biggest problem to over come in this project. Generating artificial 
 an interface between the artificial life and the environment has to be implemented. Finally the process for creating artificial life through a GA or GP can be produced, but these algorithms
 both need to interface with the artificial life in an abstract manner so one can not distinguish between an GP implementation of artificial life and a GA implementation.
 
-
-
-\paragraph
+\paragraph{}
 The first problem identified was producing an environment for the artificial life. This environment will support the artificial life and allow interaction between the resources present
 in the environment and also other life in the environment. The environment that the artificial life will inhabit will be fairly simple with serveral parameters than can be affected such as
 size, and objects for the artificial life to interact with. These objects that the artificial life can interact with will either be resources which the artificial life can possible consume
 or an obstacle which the artificial life cannot move over, instead bypass. Keeping this environment simple will enable this project to focus more on producing a high quality artificial life
 which will interact correctly and effectively with their environment. 
 
-\paragraph
+\paragraph{}
 Another problem idenified is what methods and values would be used when comparing these two algorithms. To draw conclusions from this project the data generated from both algorithms needs 
 to be comparable but also similar. Simple methods for comparing the algorithms will be runtime, memory/space requirments to compute a solution to a give problem. Further detail will need to
 be drawn from the algorithms, such as average fitness of a whole generation of artificial life forms, the effectiveness of the algorithm to find a global optimimum solution and also the
@@ -142,10 +170,49 @@ Genetic programming is one of the newest forms of evolutionary computing.
 
 
 \subsection{POPULATION REPRESENTATION}
-%obv
+
+In genetic programming there is a variety of ways to represent a solution, however JGAP only supports one. Genetic algorithms are most
+commonly represented in tree form and this is the only one supported by JGAP. Other methods of reprensenting a genetically programmed
+solution such as a graph pose a greater programming/implementation challenge.
+%TODO REF+SOURCE+EXAMPLE
+The use of trees in genetic programming is easy to understand and was easy to use and implement for this project. In JGAP the tree
+that represents the solution to the given problem is made up of genes, each gene represents a function which the life form can execute. 
+This tree will contain only one root node and this node will be executed first, subsequent nodes can have a varying airity. The choice of
+which node will be executed next will depend on the function node that was last executed. If the root node had an airity of two, then
+the next node to execute will depend on the outcome of the root node. A simple example could be that the function checks whether the Y
+position of the life form is greater than 50, if this is true it will execute the left node, if false it will execute the right node.
+If in this example the position of the life form was greater than 50 on the Y-axis the left node would execute and this would 
+execute its function, this could be move forward and then it would execute its subsequent node. Figure 1 shows how this could be
+represented. What is hard to represent in the tree diagram is that fact that values can be passed down the tree during the execution.
+In the execution of the example given in figure one, the amount that Y is greater than 50 would be passed down. This value can
+then be used if input is needed. Some nodes will require input and other will not, this will depend on how they are setup during
+development. 
+
+%TREE
+\begin{figure} [ht]
+%\centering
+\Tree [.{ $Y < 50$ } [.{Move Forward} {Turn Right} ] {\ldots} ]
+\label{the-label-for-cross-referencing}
+\caption{Example genetic programming execution tree}
+\end{figure}
+
 
 \subsection{MUTATION}
 %asdsss
+
+Mutation of the genetic program is handled by JGAP, however when and how much this mutation occurs can be altered through JGAP
+configuration. The genetic code of each life form is made of of nodes on a tree, each of these nodes can be mutated by either
+replacing the node or removing the node. The nodes can be replaced with an another node with the same airity and type, the
+removal of node is fairly simple can is done by replacing the node with a null node. This will be a empty child node and
+will just end execution if this node is reached during the trees execution.
+
+\subsection{CROSSOVER}
+
+As specified earlier this implementation is using trees, this means that the crossover during the evolutionary computation
+will work through the tree representation. Using trees for representing your solution means that genetic cross over is
+very simple. Two solution trees will first be selected for crossover, this selection will be based around the fitness of the given
+solutions. This selection could be done 
+
 \section{DEVELOPMENT}
 
 This project was written in Java programming language and was developed on serveral operating systems during its life time. 
@@ -288,8 +355,7 @@ was devised to fix this issue. The solution was to change the way the GP control
 the GP would instead return a number, this number would then refer to a specific action. The interactions that could take place in 
 the environment are then hard coded into the program, e.g. if 1 is returned the ALife turns left, if 2 is returned the ALife turns right.
 
-\paragraph
-
+\paragraph{}
 Another problem encountered was during refactoring of the code. Towards the end of the project the code base was fairly substantial, and any
 untested modification to the code could produce errors. During some refactoring of the EnvironmentMap class serveral bugs slipped through
 which meant a longer than necessary amount of time was spent debugging. However due to this project adopting the software version control system
@@ -340,7 +406,7 @@ correct areas, FinbBugs, Checkstyle improved the readablity and transparency of 
 bugs occur.
 
 
-\paragraph
+\paragraph{}
 
 The Unit tests written for this project were aimed at the most important and complex areas of code. Exhaustive testing was 
 unfortuantely of the scope of this project, and full test coverage of the entire code was not feasible to implement.
@@ -358,7 +424,7 @@ or even produce erroreous output, but would perhaps alter the outcome of a run s
 was used as the eyes of the ALife in the genetic algorithm. The range value is taken from the set of genes, and is used to 
 to limit how far the artificial life can see. The method that was written accidentaly reduced this range by 1 due to an issue
 in incrementing a for-loop. This bug was not spotted until a test for this method was written. 
-\paragraph
+\paragraph{}
 
 The logging used in this project was implemented through Log4j, this system enabled this project to customise the logging 
 ablitity without costing the project runtime. During debugging the trace log can be enabled which will slow down the
