@@ -211,7 +211,21 @@ will just end execution if this node is reached during the trees execution.
 As specified earlier this implementation is using trees, this means that the crossover during the evolutionary computation
 will work through the tree representation. Using trees for representing your solution means that genetic cross over is
 very simple. Two solution trees will first be selected for crossover, this selection will be based around the fitness of the given
-solutions. This selection could be done 
+solutions. This selection could be done several through several methods and is left to be explained elsewhere. Once two trees
+have been selected for crossover and that the return types of all the nodes is the same, then the process of crosssing over
+is fairly straight forward.
+
+Figure 2 demonstrates a cross over at point C on tree 1 and J on tree 2.
+
+%TREE
+\begin{figure} [ht]
+\Tree [.A [.B C] [D [.E F] ] ]
+\Tree [.G [.H R] [J [.K L] ] ]
+%\Tree [.G [.H I ] [J [.K L] ] ]
+\label{the-label-for-cross-referencing}
+\caption{}
+\end{figure}
+
 
 \section{DEVELOPMENT}
 
