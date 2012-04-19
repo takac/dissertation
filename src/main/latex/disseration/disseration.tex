@@ -182,18 +182,17 @@ which node will be executed next will depend on the function node that was last 
 the next node to execute will depend on the outcome of the root node. A simple example could be that the function checks whether the Y
 position of the life form is greater than 50, if this is true it will execute the left node, if false it will execute the right node.
 If in this example the position of the life form was greater than 50 on the Y-axis the left node would execute and this would 
-execute its function, this could be move forward and then it would execute its subsequent node. Figure 1 shows how this could be
-represented. What is hard to represent in the tree diagram is that fact that values can be passed down the tree during the execution.
-In the execution of the example given in figure one, the amount that Y is greater than 50 would be passed down. This value can
-then be used if input is needed. Some nodes will require input and other will not, this will depend on how they are setup during
-development. 
+execute its function, this could be move forward and then it would execute its subsequent node. Figure~\ref{fig:exectree} shows how
+this could be represented. What is hard to represent in the tree diagram is that fact that values can be passed down the tree 
+during the execution.  In the execution of the example given in figure one, the amount that Y is greater than 50 would be 
+passed down. This value can then be used if input is needed. Some nodes will require input and other will not, this will depend on 
+how they are setup during development. 
 
 %TREE
 \begin{figure} [ht]
 %\centering
 \Tree [.{ $Y < 50$ } [.{Move Forward} {Turn Right} ] {\ldots} ]
-\label{the-label-for-cross-referencing}
-\caption{Example genetic programming execution tree}
+\caption{Genetic Programming tree solution \label{fig:exectree}}
 \end{figure}
 
 
@@ -215,15 +214,21 @@ solutions. This selection could be done several through several methods and is l
 have been selected for crossover and that the return types of all the nodes is the same, then the process of crosssing over
 is fairly straight forward.
 
-Figure 2 demonstrates a cross over at point C on tree 1 and J on tree 2.
+Figures ~\ref{fig:treesab} and ~\ref{fig:resultanttrees} demonstrates a crossover at point C on tree a. and 4 on tree b. in
+figure  ~\ref{fig:treesab}, giving the two resultant trees in figure ~\ref{fig:resultanttrees}.
 
-%TREE
 \begin{figure} [ht]
-\Tree [.A [.B C] [D [.E F] ] ]
-\Tree [.G [.H R] [J [.K L] ] ]
-%\Tree [.G [.H I ] [J [.K L] ] ]
-\label{the-label-for-cross-referencing}
-\caption{}
+a. \Tree [.1 [ 4 5 6 7 ].2 [ 8 9 ].3 ]
+\hfil
+b. \Tree [.A [ D E ].B [ F G H I ].C ]
+\caption{Trees \label{fig:treesab}}
+\end{figure}
+
+\begin{figure} [ht]
+a. \Tree [.A [ D E ].B 4 ]
+\vfil
+b .\Tree [.1 [ [ F G H I ].C 5 6 7 ].2 [ 8 9 ].3 ]
+\caption{Resultant trees after crossover, around node C and 4 \label{fig:resultanttrees}}
 \end{figure}
 
 
