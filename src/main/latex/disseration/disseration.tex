@@ -1,42 +1,60 @@
-\documentclass[10pt,twocolumn]{article}
+\documentclass[12pt]{article}
 \usepackage{times}
+\usepackage{fullpage}
+\usepackage{fancyhdr}
 \usepackage[pdftex]{graphicx}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{qtree}
 \usepackage{titlesec}
 \usepackage{textcase}
+\usepackage{abstract}
 \usepackage[bf,center]{caption}
-%\usepackage{subfigure}
+\usepackage{subfigure}
 \graphicspath{{./}{figs/}}
+\setlength{\headheight}{15.2pt}
+\setlength{\voffset}{-20pt}
+\setlength{\topmargin}{-35pt}
+\setlength{\headsep}{40pt}
+\setlength\absleftindent{0.5in}
+\setlength\absrightindent{0.5in}
+\newcommand{\mytitle}{Artificial Life Creation Comparing Genetic Algorithms and Genetic Programming}
+
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt} % remove lines as well
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[R]{\small \it{Tom Cammann}}
+\fancyhead[L]{\small \it \mytitle}
 
 \captionsetup[figure]{labelformat=simple, labelsep=period}
 \titleformat{\section}
-	{\normalfont\large\bfseries\centering}{\MakeUppercase{\thesection.}}{1em}{\MakeUppercase}
+	{\normalfont\large\bfseries}{\thesection.}{1em}{}
 \titleformat{\subsection}
-	{\normalfont\normalsize\bfseries}{\thesubsection.}{1em}{}
+	{\normalfont\normalsize\it}{\thesubsection.}{1em}{}
 %\titleformat{\subsubsection}
 %	{\normalfont\normalsize\it}{\thesubsubsection}{1em}{}
-
 \begin{document}
-\title{\LARGE \bf ARTIFICIAL LIFE CREATION COMPARING GENETIC ALGORITHMS AND GENETIC PROGRAMMING\vspace{1cm}}
-\author{\large Tom Cammann\\\\
-Computer Science, cy004947@reading.ac.uk}
+\title{\LARGE \bf Artificial Life Creation Comparing Genetic Algorithms and Genetic Programming\vspace{1cm}}
+\author{\small Tom Cammann\\
+\small \it{School of Systems Engineering, The University of Reading, UK}}
+%Computer Science, cy004947@reading.ac.uk}
 \date{}
 \maketitle
 
-\renewcommand{\abstractname}{ABSTRACT}
-\begin{abstract}
-This report focuses on the generating artificial life through two distinct methods, genetic algorithms and genetic programming. The
+\renewcommand{\abstractname}{}
+\begin{onecolabstract}
+\noindent \it Abstract - This report focuses on the generating artificial life through two distinct methods, genetic algorithms and genetic programming. The
 report describes the fundamentals of these two methodologies, compares and contrasts their differences in the creation of similar 
 artificial life. The report outlines tools developed during this project to accomplish an effective comparison of these two methods.
 These include a method of visualising the artificial life and the environment it inhabits during its existence. The outcome of 
 this project demonstrates how genetic programming requires more advanced programming but can lead to novel and emergent behaviour,
 in contrast to genetic algorithms which are much simpler and can better replicate biological processes that go on around us. 
-\end{abstract}
+\end{onecolabstract}
 
 
-\section{introduction}
+\section{Introduction}
 
 Artificial life or ALife is the study and implementation of systems that are simulations or replications of natural life.
 These systems can be biochemical, mechanical, computer software and many other medium that supports the existence of structured self controlled information.
@@ -103,9 +121,9 @@ the GA and GP because of the way the two algorithms work. These need give the sa
 algorithms can not have advantages over another.
 	
 
-\section{ANALYSIS}
+\section{Analysis}
 
-\subsection{KEY PROBLEMS}
+\subsection{Key Problems}
 Producing artificial life that can solve the enviromental and situational problems that are presented in the simulated enviroment %TENSE?!
 will be the biggest problem to over come in this project. Generating artificial life is a complex process; first an environment to simulate the artificial life has to be produced, and then
 an interface between the artificial life and the environment has to be implemented. Finally the process for creating artificial life through a GA or GP can be produced, but these algorithms
@@ -131,7 +149,7 @@ and record information about these life forms.
 
 The key issues with this project are based around a fair comparison of the algorithms. 
 
-\section{GENETIC ALGORITHMS}
+\section{Genetic Algorithms}
 
 Genetic algorithms were first designed and implemented by ??? in ??? when ???.
 
@@ -163,7 +181,7 @@ These genes must be able to mutate, this is easy to understand when using binary
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{POPULATION REPRESENTATION}
+\subsection{Population Representation}
 In genetic algorithms each member of the population (or candidate solution) is represented by a list or string of values.
 Each value represents a parameter that will be used in the solution.
 The value could represent the number of iterations of a loop or represent a operator in a sum.
@@ -175,20 +193,20 @@ This can work in most situations however it soon becomes apparent that this cann
 If numbers are being represented in binary strings the most significant bit is at start of the string, if this is flipped then the number will change by a factor of ???.
 
 
-\subsection{MUTATION}
+\subsection{Mutation}
 In genetic algorithms mutation occurs on a per gene basis. If a mutation for a population member is needed then a gene in that~\cite{j1}. 
 
 %better title needed!!!
 %Section about how this project uses GA
 \subsection{USAGE IN THIS}
 
-\section{GENETIC PROGRAMMING}
+\section{Genetic Programming}
 %intro to gp
 Genetic programming is one of the newest forms of evolutionary computing. 
 %different ways
 
 
-\subsection{POPULATION REPRESENTATION}
+\subsection{Population Representation}
 
 In genetic programming there is a variety of ways to represent a solution, however JGAP only supports one. Genetic algorithms are most
 commonly represented in tree form and this is the only one supported by JGAP. Other methods of reprensenting a genetically programmed
@@ -215,7 +233,7 @@ how they are setup during development.
 \end{figure}
 
 
-\subsection{MUTATION}
+\subsection{Mutation}
 %asdsss
 
 Mutation of the genetic program is handled by JGAP, however when and how much this mutation occurs can be altered through JGAP
@@ -224,9 +242,9 @@ replacing the node or removing the node. The nodes can be replaced with an anoth
 removal of node is fairly simple can is done by replacing the node with a null node. This will be a empty child node and
 will just end execution if this node is reached during the trees execution.
 
-\subsection{CROSSOVER}
+\subsection{Crossover}
 
-As specified earlier this implementation is using trees, this means that the crossover during the evolutionary computation
+as specified earlier this implementation is using trees, this means that the crossover during the evolutionary computation
 will work through the tree representation. Using trees for representing your solution means that genetic cross over is
 very simple. Two solution trees will first be selected for crossover, this selection will be based around the fitness of the given
 solutions. This selection could be done several through several methods and is left to be explained elsewhere. Once two trees
@@ -237,22 +255,29 @@ Figures ~\ref{fig:treesab} and ~\ref{fig:resultanttrees} demonstrates a crossove
 figure  ~\ref{fig:treesab}, giving the two resultant trees in figure ~\ref{fig:resultanttrees}.
 
 \begin{figure} [ht]
-%\subfigure[Random Tree]{\label{fig:tree-a}\Tree [.1 [ 4 5 6 7 ].2 [ 8 9 ].3 ]}
+\centering
+\subfigure[]{\label{fig:tree-a}\Tree [.1 [ 4 5 6 7 ].2 [ 8 9 ].3 ]}
 \hfil
-\Tree [.1 [ 4 5 6 7 ].2 [ 8 9 ].3 ]
-b. \Tree [.A [ D E ].B [ F G H I ].C ]
+\subfigure[]{\label{fig:tree-b}\Tree [.A [ D E ].B [ F G H I ].C ]}
+
+%a. \Tree [.1 [ 4 5 6 7 ].2 [ 8 9 ].3 ]
+%\hfil
+%b. \Tree [.A [ D E ].B [ F G H I ].C ]
+
+
 \caption{Trees to be crossed over.\label{fig:treesab}}
 \end{figure}
 
 \begin{figure} [ht]
-a. \Tree [.A [ D E ].B 4 ]
-\vfil
-b .\Tree [.1 [ [ F G H I ].C 5 6 7 ].2 [ 8 9 ].3 ]
+\centering
+\subfigure[]{\label{fig:tree-Ra}\Tree [.A [ D E ].B 4 ]}
+\hfil
+\subfigure[]{\label{fig:tree-Rb}\Tree [.1 [ [ F G H I ].C 5 6 7 ].2 [ 8 9 ].3 ]}
 \caption{Resultant trees after crossover, around node C and 4 \label{fig:resultanttrees}}
 \end{figure}
 
 
-\section{DEVELOPMENT}
+\section{Development}
 
 This project was written in Java programming language and was developed on serveral operating systems during its life time. 
 Java was chosen because of a strong prior intimate knowledge of the language and because of the libraries available to develop with. 
@@ -267,7 +292,7 @@ program done all by Maven. Git was used as the the version control system for th
 end of the project as it became more necessary to manage versions and have a reliable branching system. This project was hosted 
 on GitHub.com which meant that development could quickly begin from any location with git available. 
 
-\subsection{DESIGN AND ARCHITECTURE}
+\subsection{Design and Architecture}
 
 Before implementation the architecture and design of this project was laidout in UML. The actual design has changed somewhat since the first UML diagram was
 constructed, however this was expected and planned for. Figure ~\ref{fig:umldiag1} shows the first uml design for this project.
@@ -284,16 +309,16 @@ necessary attributes and readonly methods. This meant the underlying objects wou
 
 \begin{figure} [ht]
 \centering
-\includegraphics[scale = 0.25]{uml1.png}
+\includegraphics[scale = 0.5]{uml1.png}
 \caption{First UML Project Design}
 \label{fig:umldiag1}
 \end{figure}
 
-\subsection{PROJECT DESIGN}
+\subsection{Project Design}
 
 
 
-\section{IMPLEMENTATION}
+\section{Implementation}
 To evaluate a common artificial life form a simulation environment has been created.
 This environment is a 2D arena where a life form must continue to consume food to survive, the more food the life form consumes the fitter the  
 
@@ -314,9 +339,9 @@ through an abstract class called ALife. This abstract class provided a high leve
 the state of the life form. The abstract class contained many of the variables for the life form and the setting and getting functions 
 associated with them. 
 
-\subsection{LIFE}
+\subsection{Life}
 
-This project has modeled life on upon a fairly simple scenario, with only a few state variables. The states that this life form
+this project has modeled life on upon a fairly simple scenario, with only a few state variables. The states that this life form
 can control are: its position on the map, its orientation and its energy level. Its position can be changed by moving forward, these 
 forms can only move in the direction they are facing. The can modify their orientation by moving either right or left of where they 
 are currently facing. They can also change their energy, however this is more passive than active. The life form's energy will
@@ -336,7 +361,7 @@ with a nominal energy value, so that it does not die at the start of the simulat
 that it can consume to increase its energy level. The fitness of the life forms is accessed usually assessed by its energy level at the end of the simulation. 
 
 
-\subsection{MAP}
+\subsection{Map}
 
 The environment that the life forms exist on during the simulations are referred to as maps. These maps are two dimensional and can vary in size.
 The size of the map can be set at run time and can also be set to dynamically change during a run if necessary. The map also holds references
@@ -354,7 +379,7 @@ a type which can be checked by the life form. If a life form is on top of a reso
 
 %talking about how the project framework
 %how a frame to accommodate genetic programming and GA
-\subsection{EVOLUTIONARY FRAMEWORK}
+\subsection{Evolutionary Framework}
 To investigate and compare these two algorithms %? algorithms??%
 a framework to accommodate both algorithms was produced. This framework had to allow comparison of the effectiveness and fitness of the life forms evolved, efficency of the 
 evolutionary computations in generating a fit life form and the correctness of the solutions generated. To enable all these things an abstract framework had 
@@ -362,7 +387,7 @@ to be developed to allow comparison without respect to the algorithm that was us
 manually inspecting the fitest life form of each generation. 
 
 
-\subsection{VISUALISATION}
+\subsection{Visualisation}
 Visualisation of the solutions (or life forms) produced by the algorithms was key
 to understanding the differences produced in the life forms between the two algorithms. A visualisation of the map and life form
 was developed early on. The visualisation was developed using the model view controller architecture,
@@ -385,9 +410,9 @@ Another feature that was added was the ablitity to run the simulation frame by f
 Along with the ablities to interact with the simulation was the ablitity to access information on the current life form, such as its genetic make what generation
 and run time parameters were involved with its creation.
 
-\subsection{PROGRAM FLOW}
+\subsection{Program Flow}
 
-\section{PROBLEMS ENCOUNTERED}
+\section{Problems Encountered}
 
 During implementation many hurdles had to be over come during each sprint phase of the project. However there were some issues that were much harder to overcome than others. One of these problems was
 producing fair and equal output per time frame from each algorithm. The problem was that during each time frame the artificial life had the oppurtunity to survey its environment and then react to this
@@ -415,9 +440,9 @@ contained an erroneous 'not' symbol causing havoc. Initially it was hard to unde
 altered, but using git diff meant I could easily inspect the changes and quickly went through any changes would could have produced the
 results that were being produced by the project.
 
-\section{RESULTS}
+\section{Results}
 
-\section{TESTING}
+\section{Testing}
 The main goal behind testing this project was to ensure complete correctness of the implementation which utilises the JGAP framework.
 
 Unit testing was one of the main tools used for this project. JUnit 4 was used in this project and was chosen for this project because
@@ -523,7 +548,7 @@ some bugs could quickly be found through this process. Different maps could be l
 repeatitive testing. 
 
 
-\subsection{TESTING THE ENVIRONMENT}
+\subsection{Testing The Environment}
 
 
 \begin{figure} [ht]
