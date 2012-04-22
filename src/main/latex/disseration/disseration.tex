@@ -28,6 +28,9 @@
 \renewcommand{\footrulewidth}{0pt}
 \fancyhead[R]{\small \it{Tom Cammann}}
 \fancyhead[L]{\small \it \mytitle}
+\fancyfoot[R]{\small Page \thepage}
+\fancyfoot[L]{\small \it 183 CS/2012/UG/TC/1}
+
 
 \captionsetup[figure]{labelformat=simple, labelsep=period}
 \titleformat{\section}
@@ -66,6 +69,18 @@ the ants problem was to order a set or resources on a simple 2D map. This simple
 be used in the context of genetic programming.
 Using evolutionary computation has many qualities that replicate naturally evolved life, and is one few computational methods known that can generate solutions to problems without human interaction.
 Evolutionary computation has been applied to artificial life to generate life forms that can inhabit an environment and are 'solutions' to this environment.
+
+\paragraph{}
+This project also aims to develop an application that can be modified and extending, providing revelvant documentation, adopting established design
+patterns and developing readable source code. This application will facilitate the running of two evolutionary computation algorithms and allows
+custom goals to be set for these algorithms. Different environment and challeneges can be developed for the artificial life to solve using the 
+genetic algorithms, with easy to use structured code set up to allow the extension and alteration of these environments for new and further
+usage of the application. This application will also provide real time feed back to the use about the algorithms progress and the life forms
+this algorithm produces. This will allow quicker understanding of whether the right implementation has been chosen and great visual feedback
+to confirm the correct implementation has been chosen. The application will also allow indepth simulation of the ALife, with the ability to 
+run the ALife on a previously saved environment or a new randomly generated one. The simulations can be paused and slowed, and run through 
+step by step to help understand the ALife generated even better. 
+
 
 \paragraph{}
 Evolutionary computation generally works by generating a population of solutions to a problem, and then using this population to create a better next population that can solve the given problem better.
@@ -209,12 +224,13 @@ This was because of the ease of which this could be manipulated by computers and
 To mutate a binary string a bit can be flipped.
 This can work in most situations however it soon becomes apparent that this cannot useful in all situations.
 %Fix and show formula? Find solutin.
-If numbers are being represented in binary strings the most significant bit is at start of the string, if this is flipped then the number will change by a factor of ???.
+If numbers are being represented in binary strings the most significant bit is at start of the string, if this is flipped 
+then the number will change by a factor of ???.
 
 
 \subsection{Mutation}
 In genetic algorithms mutation occurs on a per gene basis. In the configuration of the genetic algorithm there will be a value which 
-determines the likelihood of a mutation on a gene within an individual.
+determines the likelihood of a mutation on a gene within an individual. This mutation is ususally applied after crossover 
 
 %better title needed!!!
 %Section about how this project uses GA
@@ -228,7 +244,7 @@ The run of a genetic programming algorithm is very similar to that of the geneti
 population is constructed and then the fitness is computed. Individuals are selected for crossover and mutation which then forms a new 
 population to repeat this process on. The main difference between genetic algorithms and genetic programming is in genetic programming
 the program to evaluate is the individual in contrast to genetic algorithms where the genes represented in the individual are applied to
-a program for evaluation ~cite{gpintro98}. Each individual in the population represents an entire program, rather than a set of values which can be
+a program for evaluation ~cite{whitley94} ~cite{gpintro98}. Each individual in the population represents an entire program, rather than a set of values which can be
 applied to a program. 
 
 \subsection{Population Representation}
@@ -275,22 +291,12 @@ child node then only the second child node is evaluated (the middle node). If th
 left most node is evaluated. As we can see from figure ~\ref{fig:tree-if} the LifeAhead terminal will not get evaluated, as the 
 control statement child \(5*0\) will evaluate to 0 which is considered false, and therefore only the true branch will be evaluated.
 
-
 %TREE
 \begin{figure} [ht]
 %\centering
 \Tree [.+ [ [ 5 0 ].* {LifeAhead} {WallAhead} ].{IF} [ {SmellFood} {LifeBehind} ].- ]
 \caption{Control statement tree \label{fig:tree-if}}
 \end{figure}
-
-
-position of the life form is greater than 50, if this is true it will execute the left node, if false it will execute the right node.
-If in this example the position of the life form was greater than 50 on the Y-axis the left node would execute and this would 
-execute its function, this could be move forward and then it would execute its subsequent node. Figure~\ref{fig:exectree} shows how
-this could be represented. What is hard to represent in the tree diagram is that fact that values can be passed down the tree 
-during the execution.  In the execution of the example given in figure one, the amount that Y is greater than 50 would be 
-passed down. This value can then be used if input is needed. Some nodes will require input and other will not, this will depend on 
-how they are setup during development. 
 
 \subsection{Mutation}
 %asdsss
@@ -317,6 +323,7 @@ figure  ~\ref{fig:treesab}, giving the two resultant trees in figure ~\ref{fig:r
 \centering
 \subfigure[]{\label{fig:tree-b}\Tree [.A [ D E ].B [ F G H I ].C ]}
 \hfil
+\subfigure[]{\label{fig:tree-a}\Tree [.1 [ 4 5 6 7 ].2 [ 8 9 ].3 ]}
 \caption{Trees to be crossed over.\label{fig:treesab}}
 \end{figure}
 
@@ -367,8 +374,30 @@ necessary attributes and readonly methods. This meant the underlying objects wou
 \end{figure}
 
 \subsection{Project Design}
+The requirements of this project were to create a evolutionary computation implementation along with a application to visualise and
+display the ALife created by the evolutionary computation. Breaking down the requirements we can see there are two many aspects
+the evolutionary computation and the visualisation components, these two components are fairly abstract and do not need to alter
+each others states during execution the the application. The visualisation only references the ALife and does not need to alter
+the ALife, and the ALife does not need to know of the existance of the visualisation; the same goes for the evolutionary framework
+in which it does not need to know the existance of the visualisation and the visualisation does not need to alter any state or
+information this program may contain. Visualising the ALife presents a common programming problem, in which we have a model a view and a controlling
+device. The view will be the graphical user interface, which will display the animation of the ALife inside its environment, the 
+model will be the environment in which the ALife inhabits and the controller will be the ALife. This problem has a generic programming
+solution or architectural pattern called Model View Controller (MVC) ~\cite{fowler03}. This pattern facilitates seperation or responsibility
+and independence between these three components. The application desinged followed this model, figure ~\ref{fig:mvc} demonstrates 
+how this model can be applied to this application. The arrows on this figure demonstrate which components interaction, a leading arrow
+shows that this component interacts and may alter the component it is point to.
 
+\begin{figure} [ht]
+\centering
+\includegraphics[scale = 0.5]{mvc.png}
+\caption{Model View Controller architecture for project application}
+\label{fig:mvc}
+\end{figure}
 
+The application developed for this project created several high level interfaces to allow for this model, and the development for each
+component was done seperately. Development of one component, eg. ALife controller would not affect any development of the visual 
+GUI components.
 
 \section{Implementation}
 To evaluate a common artificial life form a simulation environment has been created.
