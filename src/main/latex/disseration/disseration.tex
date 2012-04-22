@@ -4,20 +4,39 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{qtree}
+\usepackage{titlesec}
+\usepackage{textcase}
+\usepackage[bf,center]{caption}
+%\usepackage{subfigure}
 \graphicspath{{./}{figs/}}
 
+\captionsetup[figure]{labelformat=simple, labelsep=period}
+\titleformat{\section}
+	{\normalfont\large\bfseries\centering}{\MakeUppercase{\thesection.}}{1em}{\MakeUppercase}
+\titleformat{\subsection}
+	{\normalfont\normalsize\bfseries}{\thesubsection.}{1em}{}
+%\titleformat{\subsubsection}
+%	{\normalfont\normalsize\it}{\thesubsubsection}{1em}{}
+
 \begin{document}
-\title{Artificial Life Creation Comparing Genetic Algorithms And Genetic Programming}
-\author{Tom Cammann\\\\
+\title{\LARGE \bf ARTIFICIAL LIFE CREATION COMPARING GENETIC ALGORITHMS AND GENETIC PROGRAMMING\vspace{1cm}}
+\author{\large Tom Cammann\\\\
 Computer Science, cy004947@reading.ac.uk}
 \date{}
 \maketitle
+
+\renewcommand{\abstractname}{ABSTRACT}
 \begin{abstract}
-This report focuses on the generating artificial life through two distinct methods, genetic algorithms and genetic programming. The report describes the fundamentals of these two methodologies, compares and contrasts their differences in the creation of similar artificial life. The report outlines tools developed during this project to accomplish an effective comparison of these two methods. These include a method of visualising the artificial life and the environment it inhabits during its existence. The outcome of this project demonstrates how genetic programming requires more advanced programming but can lead to novel and emergent behaviour, in contrast to genetic algorithms which are much simpler and can better replicate biological processes that go on around us. 
+This report focuses on the generating artificial life through two distinct methods, genetic algorithms and genetic programming. The
+report describes the fundamentals of these two methodologies, compares and contrasts their differences in the creation of similar 
+artificial life. The report outlines tools developed during this project to accomplish an effective comparison of these two methods.
+These include a method of visualising the artificial life and the environment it inhabits during its existence. The outcome of 
+this project demonstrates how genetic programming requires more advanced programming but can lead to novel and emergent behaviour,
+in contrast to genetic algorithms which are much simpler and can better replicate biological processes that go on around us. 
 \end{abstract}
 
 
-\section{INTRODUCTION}
+\section{introduction}
 
 Artificial life or ALife is the study and implementation of systems that are simulations or replications of natural life.
 These systems can be biochemical, mechanical, computer software and many other medium that supports the existence of structured self controlled information.
@@ -218,10 +237,11 @@ Figures ~\ref{fig:treesab} and ~\ref{fig:resultanttrees} demonstrates a crossove
 figure  ~\ref{fig:treesab}, giving the two resultant trees in figure ~\ref{fig:resultanttrees}.
 
 \begin{figure} [ht]
-a. \Tree [.1 [ 4 5 6 7 ].2 [ 8 9 ].3 ]
+%\subfigure[Random Tree]{\label{fig:tree-a}\Tree [.1 [ 4 5 6 7 ].2 [ 8 9 ].3 ]}
 \hfil
+\Tree [.1 [ 4 5 6 7 ].2 [ 8 9 ].3 ]
 b. \Tree [.A [ D E ].B [ F G H I ].C ]
-\caption{Trees \label{fig:treesab}}
+\caption{Trees to be crossed over.\label{fig:treesab}}
 \end{figure}
 
 \begin{figure} [ht]
