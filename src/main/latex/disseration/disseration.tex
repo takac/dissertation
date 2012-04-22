@@ -11,6 +11,7 @@
 \usepackage{abstract}
 \usepackage[bf,center]{caption}
 \usepackage{subfigure}
+\usepackage{mathtools}
 \graphicspath{{./}{figs/}}
 \setlength{\headheight}{15.2pt}
 \setlength{\voffset}{-20pt}
@@ -163,7 +164,7 @@ These genes must be able to mutate, this is easy to understand when using binary
 
 \begin{algorithm}
 \caption{Pseduocode for a simple genetic algorithm}
-\label{Genetic algorithm pseduocode}
+\label{fig:garun}
 \begin{algorithmic}
 %\Function{GenerateInitialPopulation}{$popsize$}
 %	\State $population \gets ( )$
@@ -212,7 +213,8 @@ If numbers are being represented in binary strings the most significant bit is a
 
 
 \subsection{Mutation}
-In genetic algorithms mutation occurs on a per gene basis. If a mutation for a population member is needed then a gene in that~\cite{j1}. 
+In genetic algorithms mutation occurs on a per gene basis. In the configuration of the genetic algorithm there will be a value which 
+determines the likelihood of a mutation on a gene within an individual.
 
 %better title needed!!!
 %Section about how this project uses GA
@@ -222,16 +224,24 @@ In genetic algorithms mutation occurs on a per gene basis. If a mutation for a p
 %intro to gp
 Genetic programming is one of the newest forms of evolutionary computing. 
 %different ways
-
+The run of a genetic programming algorithm is very similar to that of the genetic algorithm given in figure ~\ref{fig:garun}. An initial
+population is constructed and then the fitness is computed. Individuals are selected for crossover and mutation which then forms a new 
+population to repeat this process on. The main difference between genetic algorithms and genetic programming is in genetic programming
+the program to evaluate is the individual in contrast to genetic algorithms where the genes represented in the individual are applied to
+a program for evaluation ~cite{gpintro98}. Each individual in the population represents an entire program, rather than a set of values which can be
+applied to a program. 
 
 \subsection{Population Representation}
 
-In genetic programming there is a variety of ways to represent a solution, however JGAP only supports one. Genetic algorithms are most
-commonly represented in tree form and this is the only one supported by JGAP. Other methods of reprensenting a genetically programmed
-solution such as a graph pose a greater programming/implementation challenge.
-%TODO REF+SOURCE+EXAMPLE
-The use of trees in genetic programming is easy to understand and was easy to use and implement for this project. In JGAP the tree
-that represents the solution to the given problem is made up of genes, each gene represents a function which the life form can execute. 
+In genetic programming there is a variety of ways to represent a solution. Genetic algorithms are most
+commonly represented in tree form which was first made popular by Nicheal Lynn Cramer after publishing his research in 1985 ~\cite{cramer1985} ~\cite{conf1985}.
+Other methods of reprensenting a genetically programmed solution such as a graph pose a greater programming/implementation 
+challenge ~\cite{gpintro98} ~cite{poli99}. These more complex method were out of the scope of this research project and so a easier
+to implement tree based system has been used.
+The software package used to build the genetic program had very good support for tree based genetic programming which made implementation
+of this project much quicker, this was another reason the tree based represenation has been chosen.
+Using this method or representation, the solution to a given problem is made up of node genes, each gene represents a function or variable
+which the life form can execute or reference.
 This tree will contain only one root node and this node will be executed first, subsequent nodes can have a varying airity. The choice of
 which node will be executed next will depend on the function node that was last executed. If the root node had an airity of two, then
 the next node to execute will depend on the outcome of the root node. Figure ~\ref{fig:tree1} shows a simple program represented in
@@ -239,8 +249,41 @@ tree form. This is the standard form that a genetic program will take. Any non l
 Functions can be any type of function that takes in at least one input (an airty of at least 1) and returns a value. A terminal is a
 function that does not take any input or a variable. In figure ~\ref{fig:tree1} the leaf nodes are the numbers 4, 19, 8 and 12 in this
 case. The functions are addition (+), subtraction (-) and multiplication (*). These functions all have an airity of two and therefore
-require two input, or two sub nodes.
-A simple example could be that the function checks whether the Y
+require two input, or two sub nodes. Evaluating this example tree gives:
+
+\begin{math}
+( ( 4 + 19 ) + (12 - (8 * 4) ) )
+\end{math}
+
+%TREE
+\begin{figure} [ht]
+%\centering
+\Tree [.+ [ [ {4} {19} ].+ ] [ 12 [ 8 4 ].* ].- ]
+\caption{Genetic Programming tree solution \label{fig:tree1}}
+\end{figure}
+
+
+To expand on this example we can replace the basic math functions of addition, subtraction, etc with functions that the ALife can
+do or carry out that require input and receive and we can replace the terminal with either state variables or with functions that do not 
+require an input. These functions could be checking for a wall ahead or checking for life, could issue a command to turn a certain
+amount or any other command that the ALife is programmed to carry out that requires an input. The terminals could also be functions
+such as move forward, which do not require any input or can be simple state variables such as y position or x position on a given map.
+The program trees can be also made more complex by adding control statements into the tree. Figure ~\ref{fig:tree-if} shows a visual
+representation of this. The IF node requires 3 child nodes; the right most child is evaluated first, this the control statement. If
+the control statement is evaluated to a value above 0 then this gives a true response. If a true response is received from this 
+child node then only the second child node is evaluated (the middle node). If the control child node evaluates to false, only the 
+left most node is evaluated. As we can see from figure ~\ref{fig:tree-if} the LifeAhead terminal will not get evaluated, as the 
+control statement child \(5*0\) will evaluate to 0 which is considered false, and therefore only the true branch will be evaluated.
+
+
+%TREE
+\begin{figure} [ht]
+%\centering
+\Tree [.+ [ [ 5 0 ].* {LifeAhead} {WallAhead} ].{IF} [ {SmellFood} {LifeBehind} ].- ]
+\caption{Control statement tree \label{fig:tree-if}}
+\end{figure}
+
+
 position of the life form is greater than 50, if this is true it will execute the left node, if false it will execute the right node.
 If in this example the position of the life form was greater than 50 on the Y-axis the left node would execute and this would 
 execute its function, this could be move forward and then it would execute its subsequent node. Figure~\ref{fig:exectree} shows how
@@ -248,14 +291,6 @@ this could be represented. What is hard to represent in the tree diagram is that
 during the execution.  In the execution of the example given in figure one, the amount that Y is greater than 50 would be 
 passed down. This value can then be used if input is needed. Some nodes will require input and other will not, this will depend on 
 how they are setup during development. 
-
-%TREE
-\begin{figure} [ht]
-%\centering
-\Tree [.+ [.{+} [ {4} {19} ] ] [.- [ {8} [.* [ 4 4 ] ] ] ] ]
-\caption{Genetic Programming tree solution \label{fig:exectree}}
-\end{figure}
-
 
 \subsection{Mutation}
 %asdsss
@@ -275,20 +310,13 @@ solutions. This selection could be done several through several methods and is l
 have been selected for crossover and that the return types of all the nodes is the same, then the process of crosssing over
 is fairly straight forward.
 
-Figures ~\ref{fig:treesab} and ~\ref{fig:resultanttrees} demonstrates a crossover at point C on tree a. and 4 on tree b. in
+Figures ~\ref{fig:treesab} and ~\ref{fig:resultanttrees} demonstrates a crossover at node C on tree ~\ref{fig:tree-b} and 4 on tree ~\ref{fig:tree-a}. in
 figure  ~\ref{fig:treesab}, giving the two resultant trees in figure ~\ref{fig:resultanttrees}.
 
 \begin{figure} [ht]
 \centering
-\subfigure[]{\label{fig:tree-a}\Tree [.1 [ 4 5 6 7 ].2 [ 8 9 ].3 ]}
-\hfil
 \subfigure[]{\label{fig:tree-b}\Tree [.A [ D E ].B [ F G H I ].C ]}
-
-%a. \Tree [.1 [ 4 5 6 7 ].2 [ 8 9 ].3 ]
-%\hfil
-%b. \Tree [.A [ D E ].B [ F G H I ].C ]
-
-
+\hfil
 \caption{Trees to be crossed over.\label{fig:treesab}}
 \end{figure}
 
