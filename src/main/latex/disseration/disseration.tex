@@ -151,7 +151,10 @@ The key issues with this project are based around a fair comparison of the algor
 
 \section{Genetic Algorithms}
 
-Genetic algorithms were first designed and implemented by ??? in ??? when ???.
+Genetic algorithms were first became a main stream theory in the 1970s when John Holland published his ideas on the future of evolutionary 
+computation. His book on Adapation in Nature and Artificial System in 1975 laid the ground works for modern genetic algorithms. However due to computation
+power of the computers at these times genetic algorithms did not take off until the 1980s when the average desktops computational power became
+high enough to allow any practical application of genetic algorithms. designed and implemented by ??? in ??? when ???.
 
 The general form of a genetic algorithm uses genes to represent parameters inside a program.
 These parameters effect the running of a program.
@@ -162,12 +165,27 @@ These genes must be able to mutate, this is easy to understand when using binary
 \caption{Pseduocode for a simple genetic algorithm}
 \label{Genetic algorithm pseduocode}
 \begin{algorithmic}
-\Function{GenerateInitialPopulation}{$popsize$}
-	\For{$i = 0 \to popsize$}
-		\State $i \gets i + 1$ 
-		\State \Return $popsize$
-	\EndFor
-\EndFunction
+%\Function{GenerateInitialPopulation}{$popsize$}
+%	\State $population \gets ( )$
+%	\For{$i = 0 \to popsize$}
+%		\State $i \gets i + 1$ 
+%	\State $population + randomGenes$		
+%	\EndFor
+%	\State \Return $population$
+%\EndFunction
+
+\State $pop = GenerateInitialPopulation(100)$
+\State $pop \gets assignFitnessToEachMember(pop)$
+\While{$time > allowTime$}
+	\State $newPop \gets selectMembersOfPopForCrossover(pop)$
+	\State $newPop \gets mutatePopulation(newPop)$
+	\State $pop \gets assignFitnessToEachMember(pop)$
+	\If{$highestFitnessInPopulation(pop) > fitnessRequired$}
+		\State \Return $fittestMemeberOfPopulation(pop)$
+	\EndIf
+\EndWhile
+\State \Return $fittestMemeberOfPopulation(pop)$
+
 
 %\State $population =$ GenerateInitialPopulation()
 %\State evaluate( $population )
@@ -216,7 +234,13 @@ The use of trees in genetic programming is easy to understand and was easy to us
 that represents the solution to the given problem is made up of genes, each gene represents a function which the life form can execute. 
 This tree will contain only one root node and this node will be executed first, subsequent nodes can have a varying airity. The choice of
 which node will be executed next will depend on the function node that was last executed. If the root node had an airity of two, then
-the next node to execute will depend on the outcome of the root node. A simple example could be that the function checks whether the Y
+the next node to execute will depend on the outcome of the root node. Figure ~\ref{fig:tree1} shows a simple program represented in
+tree form. This is the standard form that a genetic program will take. Any non leaf node is a function and the leaf nodes are terminals.
+Functions can be any type of function that takes in at least one input (an airty of at least 1) and returns a value. A terminal is a
+function that does not take any input or a variable. In figure ~\ref{fig:tree1} the leaf nodes are the numbers 4, 19, 8 and 12 in this
+case. The functions are addition (+), subtraction (-) and multiplication (*). These functions all have an airity of two and therefore
+require two input, or two sub nodes.
+A simple example could be that the function checks whether the Y
 position of the life form is greater than 50, if this is true it will execute the left node, if false it will execute the right node.
 If in this example the position of the life form was greater than 50 on the Y-axis the left node would execute and this would 
 execute its function, this could be move forward and then it would execute its subsequent node. Figure~\ref{fig:exectree} shows how
@@ -228,7 +252,7 @@ how they are setup during development.
 %TREE
 \begin{figure} [ht]
 %\centering
-\Tree [.{ $Y < 50$ } [.{Move Forward} {Turn Right} ] {\ldots} ]
+\Tree [.+ [.{+} [ {4} {19} ] ] [.- [ {8} [.* [ 4 4 ] ] ] ] ]
 \caption{Genetic Programming tree solution \label{fig:exectree}}
 \end{figure}
 
