@@ -576,6 +576,35 @@ right gene in one particular run. The fitness took more generations to climb to 
 turn left. This shows how much more resilient the genetic algorithm is to change in the genome, it is able to adapt better to changed in
 the environment also.
 
+\subsection{Tools}
+\subsubsection{User Interface}
+To help in the comparison of the two algorithms a user interface was developed. There are several cal parts to the user interface, the main
+interface was the ALife visualisation. This interface has been robust and very informative throughout the project, providing valuable
+feedback about the ALife the from both algorithms. Figure ~\ref{fig:interface1} shows this main interface, using a small sized map.
+
+\begin{figure} [ht]
+\centering
+\includegraphics[scale = 0.45]{smallvis.png}
+\caption{GUI for visualising ALife}
+\label{fig:interface1}
+\end{figure}
+
+This figure shows the interface rendering a small map, with resources placed upon the map, these are the red apples. The interface can
+render multiple life forms on the map at one time, and render different types of resources that the life form may consume. The animation
+or image for each object on the screen is handled by the Java object represented by it. This means that the animation for the green
+ALife form in the center is controlled by the ALife. The color of the ALife, or size, or shape could be manipulated by the evolutionary
+computation also. Along with the ALife visualisation, there is a real time graph showing the fitness  across the generations of the 
+evolutionary computation. This graph is updated as the evolutionary computation moves through generations. This can be seen in figure
+~\ref{fig:nicegraph}. This figure has the highest, lowest and average fitness achieved for each generation across 60 generations. This
+graph is also easily extensibile allowing more data to be visualised with the minimum of effort thanks to the framework developed in
+this project.
+
+\begin{figure} [ht]
+\centering
+\includegraphics[scale = 0.75]{nicegraph.png}
+\caption{Real time graph showing fitness across each generation of the evolutionary algorithm.}
+\label{fig:nicegraph}
+\end{figure}
 %Environment change
 
 %CREATION OF ALIFE.
@@ -705,6 +734,14 @@ repetitive testing.
 \label{the-label-for-cross-referencing}
 \end{figure}
 
+
+\section{Conclusion}
+The project has generated interesting findings along with a useful tool for further information gathering. The finds relate to the implementation of each algorithm
+showing the beneifits of using GAs or GPs within different situations. The application developed allows the easily fine tune a GA or GP and produce visual results 
+from its fittest offspring. This tools has been developed with mindset that other developers may with to adapt or extend this applicationa and has therefore
+been produced in a readable and documented way. The application produced has been of high quality, with a test driven development, allowing furhter tests to be
+added easily also. The applications GUI is professional looking, with a clean interface and simple to use, allowing the user to visualise and play with the 
+ALife that has been created by the evolutionary computation.
 
 \bibliographystyle{plain}
 \bibliography{disseration}
