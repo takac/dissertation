@@ -600,13 +600,33 @@ this project.
 
 \begin{figure} [ht]
 \centering
-\includegraphics[scale = 0.75]{nicegraph.png}
+\includegraphics[scale = 0.6]{nicegraph.png}
 \caption{Real time graph showing fitness across each generation of the evolutionary algorithm.}
 \label{fig:nicegraph}
 \end{figure}
 %Environment change
 
+\begin{figure} [ht]
+\centering
+\includegraphics[scale = 0.75]{gen0-2500.png}
+\caption{Fitness distribution of one generation from a genetic algorithm run.}
+\label{fig:graph2500}
+\end{figure}
 
+
+\begin{figure} [ht]
+\centering
+\subfigure[Generation 1]{\label{fig:gen0graph}\includegraphics[width=60mm,height=30mm]{gen.png}}
+\subfigure[Generation 2]{\label{fig:gen1graph}\includegraphics[width=60mm,height=30mm]{gen1-2500.png}}
+\subfigure[Generation 3]{\label{fig:gen2graph}\includegraphics[width=60mm,height=30mm]{gen2-2500.png}}
+\subfigure[Generation 4]{\label{fig:gen3graph}\includegraphics[width=60mm,height=30mm]{gen3-2500.png}}
+\subfigure[Generation 5]{\label{fig:gen4graph}\includegraphics[width=60mm,height=30mm]{gen4-2500.png}}
+\subfigure[Generation 6]{\label{fig:gen5graph}\includegraphics[width=60mm,height=30mm]{gen5-2500.png}}
+\caption{Series of graphs show population distribution across 6 generations}
+\label{fig:genseries}
+\end{figure}
+
+Figure ~\ref{fig:graph2500} shows the fitness distribution a generation of 2500 GA solutions. 
 
 %CREATION OF ALIFE.
 %implementation
@@ -623,7 +643,7 @@ this project.
 The main goal behind testing this project was to ensure complete correctness of the implementation which utilises the JGAP framework.
 
 Unit testing was one of the main tools used for this project. JUnit 4 was used in this project and was chosen for this project because
-of its high renown in software engineering, and is usually the defacto choice for any testing in Java. It provides a robust framework
+of its high renown in software engineering, and is usually the de facto standard choice for any testing in Java. It provides a robust framework
 in which tests can be written and run with ease. JUnit also integrates extremely well with Eclipse, the main IDE used during this project. Eclipse has default plugins for running and writing JUnit tests making the whole testing process even easier. Any test
 failures will be shown, along with an exact reference on screen to where they failed. Individual test methods can then be run and
 debugged to enable the code being test to be fixed very quickly.
@@ -681,7 +701,7 @@ ability without costing the project runtime. During debugging the trace log can 
 run time of the project but provide invaluable help when debugging the code. When logging is turned off the performance
 of the code has very similar performance to code with any logging statements in, this makes Log4j very powerful. Also
 Log4j has many built in output and format options which means one can customise it to suit any project. Log4j is often
-thought of as industry defacto logging platform and therefore is highly supported meaning increased performance
+thought of as industry de facto logging platform and therefore is highly supported meaning increased performance
 and one of the safest logging platforms in terms of the number of bugs because of its age and community support. All these
 factors contribute to a highly effective and stable logging platform. 
 
@@ -744,13 +764,13 @@ been produced in a readable and documented way. The application produced has bee
 added easily also. The applications GUI is professional looking, with a clean interface and simple to use, allowing the user to visualise and play with the 
 ALife that has been created by the evolutionary computation.
 
-The documenation produced along with the code is also of high quaility. The main documentation provided with the source code is the Javadoc. A javadoc has been 
+The documentation produced along with the code is also of high quality. The main documentation provided with the source code is the JavaDoc. A JavaDoc has been 
 written for almost every method and every class, with useful and often detailed description of the method or class. This documentation allows future developers
 of this code to quickly understand the code and be able to extend and improve the current code. This JavaDoc is also improves code during development as it 
 provides a constant reference to information about any classes used and how they should be used in the context of this application. 
 Along with the JavaDoc, the code has used strict coding standards and has adhered to them very well which has produced very high quality code. High quality code
 means that the code is readable, understandable and extensible. The code has been designed with extension in mind, producing interfaces and abstract classes
-that facilitate these extensions easily. 
+that facilitate these extensions easily.
 
 \subsection{Future Improvements}
 The application developed went through a long design process however this design had to be altered somewhat during the implementation stage, this meant that some
@@ -760,7 +780,7 @@ handling the idea of time within the simulation. Currently time is handled by th
 calls each ALife form on the map and ask to to make a 'move'. Ideally this idea of time could be handled independently by the ALife, without deferring to the map for
 a call to move. Perhaps the ALife could have a cycle speed in which it can do one action every cycle, where the cycle time maybe controlled by the evolutionary algorithm
 or statically set. 
-Another design improvement that could be made is to improve the secuirty and abstractness of the code. Currently many classes that do not need access to the ALife
+Another design improvement that could be made is to improve the security and abstractness of the code. Currently many classes that do not need access to the ALife
 object have access to the ALife object. It was very difficult separating responsibilities for this class into distinct sets which could then be implemented through
 interfaces. The biggest weakness of the ALife class is the Brain.java interface that has to be set during the creation of a concrete class. The brain interface
 delegates control of the ALife during run time, and has complete control of the ALife. This Brain object needs to be reimplemented to allow better abstract and allow
@@ -775,6 +795,7 @@ Another general improvement that could be made is to write more unit tests for t
 value may seem very low, but the tests have been focused on the logic portions of the code and the critical code that would cause major error in the code if there 
 were errors. With that said, other areas of the code could certainly produce errors that could effect the running of the application. To remedy this, more tests
 should be written to increase code coverage and branch coverage. Test coverage should ideally be around 80% ~\cite{massol04}.
+
 
 
 
