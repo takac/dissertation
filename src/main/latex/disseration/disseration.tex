@@ -376,7 +376,7 @@ information this program may contain. Visualising the Alife presents a common pr
 device. The view will be the graphical user interface, which will display the animation of the Alife inside its environment, the 
 model will be the environment in which the Alife inhabits and the controller will be the Alife. This problem has a generic programming
 solution or architectural pattern called Model View Controller (MVC)~\cite{fowler03}. This pattern facilitates separation or responsibility
-and independence between these three components. The application designed followed this model, figure ~\ref{fig:mvc} demonstrates 
+and independence between these three components. The application designed followed this model; figure ~\ref{fig:mvc} demonstrates 
 how this model can be applied to this application. The arrows on this figure demonstrate which components interaction; a leading arrow
 shows that this component interacts and may alter the component it is point to.
 
@@ -820,8 +820,8 @@ delegates control of the Alife during run-time, and has complete control of the 
 easier extension. The Brain interface is slightly confusing as the only method it implements is the think() method. This method is called when the Alife is required to
 move. The GP Alife implements this interface with only a few lines with a call to the GP solution which then chooses the action for the Alife to execute, whereas the
 GA Alife Brain contains all of the sensors for the Alife, and directly controls the flow of the GA Alife.
-There are also many other forms of Alife that could be simulated and tested, some testing was done of interacting and symbiotic Alife, however the implementation of
-these Alife has not yet been finished. The testing done showed promising results. Simulations run where Alife could produce resources which other could consume, produced
+There are also many other forms of Alife that could be simulated and tested; some testing was done of interacting and symbiotic Alife, however the implementation of
+these Alife has not yet been finished. The testing done showed promising results. Simulations run where Alife could produce resources which others could consume, produced
 interesting results where the Alife would learn to follow each other as close as possible and occasionally changing directions. This behaviour was
 interesting to observer and further study of interacting Alife would certainly be a path this project would take if more work was to be done.
 Another general improvement that could be made is to write more unit tests for the application. Currently the test coverage reported by Cobertura is only 31%. This
