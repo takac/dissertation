@@ -122,20 +122,20 @@ evolutionary algorithms. The research done in this project shows novel use of so
 artificial life.
 
 \subsection{Requirements}
-Comparing evolutionary algorithms in a fair and equal way has certain challenges. First, both of the algorithms have to be implemented in such a way that allows a direct comparison. 
-This can be done by constructing an environmental problem for artificial life to solve, and then implemented either evolutionary algorithm to solve the problem. Direct
-comparisons can be made on how these algorithms were implemented and how efficient and effective they are at solving the given environmental problem. This
-environmental challenge can then be changed, and the algorithms reimplemented and a comparison can be made on how well the algorithms can be adapted to the new
-problem and again how effective the algorithms were at finding a solution to this problem.
-
-To setup these environmental problems for the artificial life to solve, an environment needs to be constructed in which either of the algorithms can generate
-an artificial life form to inhabit.
+Comparing evolutionary algorithms in a fair and equal way has certain challenges. First, both of the algorithms have to be implemented in such
+a way that allows a direct comparison.  This can be done by constructing an environmental problem for artificial life to solve,
+and then by implementing either evolutionary algorithm to solve the problem. Direct comparisons can be made on how these algorithms
+were implemented and how efficient and effective they are at solving the given environmental problem. 
+This environmental challenge can then be changed, and the algorithms reimplemented. Comparisons can then be made on how well the algorithms
+can adapted to the new problem, and how effective the algorithms were at finding a solution to this problem.
+To setup these environmental problems for the artificial life to solve, an environment needs to be constructed in which either of the 
+algorithms can generate an artificial life form to inhabit.
 
 \paragraph{}
 This interoperability between the two algorithms will also carry over to the visualisation of the artificial life. This will mean
 that the visualisation and statistics generated about these artificial life forms will have to be abstract and produce similar results regardless of
-whether the Alife was generated through a GA or a GP, this information will be encapsulated. This will increase the ease of which the algorithm output can
-be compared. However this will pose a challenge to program; to be able to implement the same functionality between the 
+whether the Alife was generated through a GA or a GP, this information will be encapsulated. This will increase the ease of which the algorithm
+output can be compared. However this will pose a challenge to program; to be able to implement the same functionality between the 
 different algorithms. For example if the life form has a sight function or 'ability' this need to be programmed for both
 the GA and GP because of the way the two algorithms work. These need to give the same response in the same situation. One of the
 algorithms can not have advantages over another.
@@ -303,7 +303,7 @@ will just ignore this node if this node is reached during the tree's execution.
 As specified earlier, trees are used in this implementation, this means that the crossover during the evolutionary computation
 will work through the tree representation. Using trees for representing your solution means that genetic crossover is
 very simple. Two solution trees will first be selected for crossover, this selection will be based around the fitness of the given
-solutions. This selection could be done through a variety ofa variety of  methods and is left to be explained elsewhere. Once two trees
+solutions. Once two trees
 have been selected for crossover and that the return types of all the nodes is the same, then the process of crossing over
 is fairly straightforward.
 
@@ -410,8 +410,8 @@ life form is evaluate to be.
 The underlying genetic and evolutionary computations were completed on a Java framework called JGAP (Java Genetic Algorithms Package).
 This package provides a tried and very well tested method for using genetic algorithms in Java, while also providing the 
 ability to extend the package and use the package to fit into this project's needs. The package was tested several times before usage
-and simple life forms were developed to ensure this package was appropriate. Other packages such as %TODO other packages
-were used but found to be lacking extendibility and documentation. JGAP has very good documentation, which meant that extending
+and simple life forms were developed to ensure this package was appropriate. Other packages such as: 'The Watchmaker framework', 'ECJ' and 'Java GALib'
+were tested and used but found to be lacking extendibility and documentation. JGAP has very good documentation, which meant that extending
 the package and adapting the package to this projects needs was even easier.
 
 JGAP provides two general overarching algorithm frameworks to work with, genetic algorithms and genetic programming. However
@@ -570,8 +570,8 @@ the tree structure. Once the genetic program was stable, the process to extend t
 run-time, genes can be enabled and disabled for usage during the evolutionary computation. This means that genes can be hot-swapped between
 runs and results can be directly compared to understand the impact the change had on the run. An example of this was disabling the turn
 right gene in one particular run. The fitness took more generations to climb to the fitness achieved by the run with both turn right and
-turn left. This shows how much more resilient the genetic algorithm is to change in the genome, it is able to adapt better to change in
-the environment.
+turn left. This shows how much more resilient the Alife created by the genetic algorithm is to change in the genome. It is also
+able to adapt better to changes in the environment.
 
 \subsection{User Interface}
 To help in the comparison of the two algorithms a user interface was developed. There are several parts to the user interface; the main
@@ -628,12 +628,12 @@ Figure ~\ref{fig:graph2500} shows the fitness distribution a generation of 2500 
 \subsection{Alife Creation}
 
 Creation of Alife through the genetic algorithm and the genetic program was very successful. Both algorithms could solve and complete all of the test
-environments that were tested. These environments included, environments with an abundance of resources, environments with sparse resources and 
-environments with obstacles. The genetic algorithm was very good at generating a general solution for all situations, and produced fit life forms
+environments that were tested. These environments included: environments with an abundance of resources, environments with sparse resources and 
+environments with obstacles and resources. The genetic algorithm was very good at generating a general solution for all situations, and produced fit life forms
 very quickly. A run of a map of size 600 by 400 in which there was 150 resources saw a very quick convergence on the global optimum. Within 
-15 generations the highest fitness was in 90% of final highest fitness. This life form has 29 genes, with 19 possible actions genes to call.
-Using the same environment the genetic program run took fewer generations, only 10 generations, to converge on a fitness within 90% of the global optimum fitness, however
-the simulation took 140 seconds longer to compute. The genetic program had 16 possible genes available. 
+15 generations the highest fitness was in 90\% of final highest fitness. This life form has 29 genes, with 19 possible actions genes to call.
+Using the same environment the genetic program run took fewer generations, only 10 generations, to converge on a fitness within 90\% of the
+global optimum fitness, however the simulation took 140 seconds longer to compute. The genetic program had 16 possible genes available. 
 
 Simulations with obstacles was the next challenge for the Alife. The genetic algorithm was not as competent at navigating the obstacles as the
 program flow was static and could not dynamically adapt to different situations posed by the obstacles. However the genetic program dealt with
@@ -662,11 +662,11 @@ life generated by two distinct evolutionary algorithms and this has also been su
 \subsection{Comparison of Artificial Life}
 The results obtained were what was expected, both algorithms produced artificial life that converged upon the global optimum within 30 generations
 for all environments tested. The artificial life showed that more complex problems could be solved, this was demonstrated by the navigation around
-obstacles in the environment which was handled well by both algorithms however the genetic program managed to solve the problem of navigation much
-more succesfully than the genetic algorithm. This was because the dynamic way in which the genetic program can execute its commands, the genetic
+obstacles in the environment which was handled well by both algorithms. However the genetic program managed to solve the problem of navigation much
+more successfully than the genetic algorithm. This was because of the dynamic way in which the genetic program can execute its commands, whereas the genetic
 algorithm has a static implementation of its program flow. This is a major limitation for genetic algorithms. To adapt the genetic algorithm to the
 new environment with obstacles would have meant redesigning the underlying program within the Alife and not just modify the genes. This is a major 
-consideration when developing artificial life, if your environment is chaning it will be much more costly to develop a genetic algorithm due to the 
+consideration when developing artificial life, if your environment is changing it will be much more costly to develop a genetic algorithm due to the 
 fact that the underlying logic will need refactoring if the environment is modified beyond what the Alife is programmed to solve. The genetic 
 program was very good at dealing with this new scenario, however its run-time was longer than that of the genetic algorithm for both situations. The 
 run-time has been discussed previously in this report and is longer than that of the genetic algorithm because of the dynamic way in which solutions
@@ -683,16 +683,17 @@ section{Testing}
 The main goal behind testing this project was to ensure complete correctness of the implementation which utilises the JGAP framework.
 
 Unit testing was one of the main tools used for this project. JUnit 4 was used in this project and was chosen for this project because
-of its high renown in software engineering, and is usually the de facto standard choice for any testing in Java. It provides a robust framework
+of its high renown in software engineering, and is usually the de facto standard choice for any testing in Java~\cite{massol04}. It provides a robust framework
 in which tests can be written and run with ease. JUnit also integrates extremely well with Eclipse, the main IDE used during this project. Eclipse has default plugins for running and writing JUnit tests making the whole testing process even easier. Any test
 failures will be shown, along with an exact reference on screen to where they failed. Individual test methods can then be run and
 debugged to enable the code being test to be fixed very quickly.
 This project also utilised Maven 3, Maven has the ability to run JUnit tests and generate reports from these tests. Using the Maven
-Surefire plugin and enabling reporting from these tests produced very useful reports on the project in HTML, although these were not
-that useful as most of the tests were run through Eclipse. However Maven really comes into its own when other testing plugins are
+Surefire plugin and enabling reporting from these tests produced very useful reports on the project in HTML, although these HTML 
+JUnit reports were not that useful as most of the tests were run through Eclipse which had its own reports on tests.
+However Maven really comes into its own when other testing plugins are
 utilised. This project used the Maven Cobertura plugin, Cobertura is a ''tool that calculates the percentage of code accessed by 
-tests'' - http://cobertura.sourceforge.net. Using the Cobertura with Maven's reporting capabilities meant that detailed reports
-on exactly what code was being tested by the unit tests. The HTML reports produced show the exact source code that is run during the
+tests''~\cite{cobertura}. Using the Cobertura with Maven's reporting capabilities meant that detailed reports were made 
+outlining exactly what code was being tested by the unit tests. The HTML reports produced show the exact source code that is run during the
 testing. This meant that JUnit tests could also be checked for correctness, and that any code that needed to be tested has not been
 missed out.
 Another tool used for testing was FindBugs, this tool used static code analysis to find errors in Java source code. This tool also
@@ -700,7 +701,7 @@ has a Maven reporting plugin which produced more HTML reports in readable and ea
 applications code which would have otherwise been missed. FindBugs not only finds bugs and issues with the logic in the code
 but also assess the performance, security, style and code convention. Many trivial issues can be raised by FindBugs such as 
 incorrectly defining static fields or other simple programming mistakes. It can produce very useful feedback for producing
-higher quality code and helps the programmer avoid common mistakes and improve efficiency of the code. The find bugs report breaks
+higher quality code and helps the programmer avoid common mistakes and improve efficiency of the code. The FindBugs report breaks
 down the issues it finds by class, and then by priority. Most reports generated during this project contained many 'low' priority
 issues such as: ''uses the same code for two switch clauses'', these issues are often ignored due to the fact they are artifacts
 from code that is still in development, but occasionally a 'high' priority issue arises and these that often need to be immediately
@@ -713,14 +714,14 @@ the code produced is more readable, easier to understand, easier to debug and he
 This complete strategy for testing was chosen as it enabled this project to focus on development of the code and spend as little
 time as possible on developing tests. This streamlined testing process improved the efficiency of the project, tests could 
 be written, tested and verified in very little time. Using Cobertura the tests could be verified that they were covering the
-correct areas, FindBugs, CheckStyle improved the readability and transparency of the code and also helped stop static code
+correct areas; FindBugs, CheckStyle improved the readability and transparency of the code and also helped stop static code
 bugs occur.
 
 
 \paragraph{}
 
 The Unit tests written for this project were aimed at the most important and complex areas of code. Exhaustive testing was 
-unfortunately of the scope of this project, and full test coverage of the entire code was not feasible to implement.
+unfortunately not within the scope of this project, and full test coverage of the entire code was not feasible to implement.
 
 This project focused on implementing test driven development, TDD, which meant writing unit tests alongside writing project code.
 This increased the work load but was essential to ensure correctness of the code being produced. Major benefits were seen from
@@ -743,13 +744,13 @@ run-time of the project but provide invaluable help when debugging the code. Whe
 of the code has very similar performance to code with any logging statements in, which makes Log4j very powerful. Also
 Log4j has many built-in output and format options which means one can customise it to suit any project. Log4j is often
 thought of as industry de facto logging platform and therefore is highly supported meaning increased performance
-and one of the safest logging platforms in terms of the number of bugs because of its age and community support. All these
+and one of the safest logging platforms in terms of the number of bugs because of its age and community support~\cite{log4j}. All these
 factors contribute to a highly effective and stable logging platform. 
 
 Log4j has several levels of logging; 'fatal'; 'error'; 'warn'; 'info'; 'debug', 'trace'. Each of these logging levels can be used throughout
-the project, however logging in this project was used with a strict set of rules. Any errors or erroneous outcomes 
-was logged as either 'fatal' or with error level logging, 'fatal' was used in a case where any further outcome of the project
-would be invalid or erroneous, 'error' was used for logging any error that would cause the current run of the system to be
+the project, however logging in this project was used with a strict set of rules. Any errors or erroneous outcomes program states 
+was logged as either 'fatal' or with 'error' level logging; 'fatal' was used in a case where any further outcome of the application
+would be invalid or erroneous due to the initial error. 'Error' was used for logging any error that would cause the current run of the system to be
 erroneous however would probably not impact the rest of the run. 'Warn' was used when parameters exceed recommended
 extremes or an acceptable or expected bad input was recorded and adjusted. 'Info' was used for recording the current state of
 the project run, for example each time a new generation was started during either the GA or GP run the 'info' logging level was
@@ -794,7 +795,7 @@ The project has generated interesting findings along with a useful tool for furt
 showing the benefits of using GAs or GPs within different situations. The application developed allows the user to easily fine tune a GA or GP and produce visual results 
 from its fittest offspring. This tools has been developed with the mindset that other developers may wish to adapt or extend this application and has therefore
 been produced in a readable and documented way. The application produced has been of high quality, with a test driven development, allowing further tests to be
-added easily . The applications GUI is professional looking, with a clean and simple-to-use interface , allowing the user to visualise and play with the 
+added easily . The application's GUI is professional looking, with a clean and simple-to-use interface , allowing the user to visualise and play with the 
 Alife that has been created by the evolutionary computation.
 
 The documentation produced along with the code is also of high quality. The main documentation provided with the source code is the JavaDoc. A JavaDoc has been 
