@@ -186,7 +186,7 @@ These genes must be able to mutate, which is easy to understand when using binar
 Figure ~\ref{fig:garun} shows the pseudo-code for a genetic algorithm. This is the basic structure of the code developed in this project for the genetic algorithm.
 Much of the genetic algorithm in this project is handled by an evolutionary computation package JGAP; this package will be dicussed in detail further on in this
 report.In the pseudo-code first a random population is generated, random values are assinged for each gene; then the fitness is calculated for each of these
-random population members. The fittest members of this population are then selected to create a new generation through cross over and mutation. 
+random population members. The fittest members of this population are then selected to create a new generation through crossover and mutation. 
 
 \begin{algorithm}
 \caption{Pseudo-code for a simple genetic algorithm}
@@ -301,13 +301,13 @@ will just ignore this node if this node is reached during the tree's execution.
 \subsection{Crossover}
 
 As specified earlier, trees are used in this implementation, this means that the crossover during the evolutionary computation
-will work through the tree representation. Using trees for representing your solution means that genetic cross over is
+will work through the tree representation. Using trees for representing your solution means that genetic crossover is
 very simple. Two solution trees will first be selected for crossover, this selection will be based around the fitness of the given
-solutions. This selection could be done several through several methods and is left to be explained elsewhere. Once two trees
+solutions. This selection could be done through a variety ofa variety of  methods and is left to be explained elsewhere. Once two trees
 have been selected for crossover and that the return types of all the nodes is the same, then the process of crossing over
-is fairly straight forward.
+is fairly straightforward.
 
-Figures ~\ref{fig:treesab} and ~\ref{fig:resultanttrees} demonstrates a crossover at node C on tree ~\ref{fig:tree-b} and 4 on tree ~\ref{fig:tree-a}. In
+Figures ~\ref{fig:treesab} and ~\ref{fig:resultanttrees} demonstrate a crossover at node C on tree ~\ref{fig:tree-b} and 4 on tree ~\ref{fig:tree-a}. In
 figure  ~\ref{fig:treesab}, giving the two resultant trees in figure ~\ref{fig:resultanttrees}.
 
 \begin{figure} [ht]
@@ -346,8 +346,8 @@ on GitHub.com which meant that development could quickly begin from any location
 
 Before implementation the architecture and design of this project was laid out in UML. The actual design has changed somewhat since the first UML diagram was
 constructed, however this was expected and planned for. Figure ~\ref{fig:umldiag1} shows the first UML design for this project.
-Most software projects usually have changing requirements and aims during their life cycles as did this project. The project 
-used a software development cycle akin to agile software development, where first a feature list was made up with consolation, this
+Most software projects usually have changing requirements and aims during their life cycles, as did this project. The project 
+used a software development cycle akin to agile software development, where first a feature list was made up with consultation; this
 list contained all requirements for the upcoming sprint in the project. These features were then implemented in the project, such
 as developing new features in the user interface. These features were then rigorously tested and fixed where necessary. Then 
 the cycle was repeated again, drawing up a new feature list.  This project consisted 3 sprint periods where new features 
@@ -355,7 +355,7 @@ were drawn up, implemented, tested and bugs fixed.
 
 As Java was the language being developed the design was very focused towards object orientation; this meant using the concepts 
 of encapsulation, abstraction and polymorphism. The map design revolved around encapsulating all life, resources and obstacles 
-under one object, making this overall object only expose necessary attributes and readonly methods. This meant the underlying 
+under one object, making this overall object only expose necessary attributes and read-only methods. This meant the underlying 
 objects would not be disturbed by any GUI or user interface functions that exist on top.  
 
 \begin{figure} [ht]
@@ -367,17 +367,17 @@ objects would not be disturbed by any GUI or user interface functions that exist
 
 \subsection{Project Design}
 The requirements of this project were to create an evolutionary computation implementation along with an application to visualise and
-display the Alife created by the evolutionary computation. Breaking down the requirements we can see there are two many aspects
-the evolutionary computation and the visualisation components, these two components are fairly abstract and do not need to alter
-each others states during execution the application. The visualisation only references the Alife and does not need to alter
-the Alife, and the Alife does not need to know of the existence of the visualisation; the same goes for the evolutionary framework
+display the Alife created by the evolutionary computation. Breaking down the requirements we can see there are two main aspects
+of the evolutionary computation and the visualisation components; these two components are fairly abstract and do not need to alter
+each others states during execution of the application. The visualisation only references the Alife and does not need to alter
+the Alife, and the Alife does not need to know of the existence of the visualisation. The same goes for the evolutionary framework
 in which it does not need to know the existence of the visualisation and the visualisation does not need to alter any state or
-information this program may contain. Visualising the Alife presents a common programming problem, in which we have a model a view and a controlling
+information this program may contain. Visualising the Alife presents a common programming problem, in which we have a model; a view, and a controlling
 device. The view will be the graphical user interface, which will display the animation of the Alife inside its environment, the 
 model will be the environment in which the Alife inhabits and the controller will be the Alife. This problem has a generic programming
 solution or architectural pattern called Model View Controller (MVC)~\cite{fowler03}. This pattern facilitates separation or responsibility
 and independence between these three components. The application designed followed this model, figure ~\ref{fig:mvc} demonstrates 
-how this model can be applied to this application. The arrows on this figure demonstrate which components interaction, a leading arrow
+how this model can be applied to this application. The arrows on this figure demonstrate which components interaction; a leading arrow
 shows that this component interacts and may alter the component it is point to.
 
 \begin{figure} [ht]
@@ -406,23 +406,23 @@ GUI components.
 \section{Implementation}
 To evaluate a common artificial life form a simulation environment has been created.
 This environment is a 2D arena where a life form must continue to consume food to survive, the more food the life form consumes the fitter the  
-life form is evaluate to.
+life form is evaluate to be.
 The underlying genetic and evolutionary computations were completed on a Java framework called JGAP (Java Genetic Algorithms Package).
 This package provides a tried and very well tested method for using genetic algorithms in Java, while also providing the 
-ability to extend the package and use the package to fit into this projects needs. The package was tested several times before usage
+ability to extend the package and use the package to fit into this project's needs. The package was tested several times before usage
 and simple life forms were developed to ensure this package was appropriate. Other packages such as %TODO other packages
 were used but found to be lacking extendibility and documentation. JGAP has very good documentation, which meant that extending
 the package and adapting the package to this projects needs was even easier.
 
-JGAP provides two general over arching algorithm frameworks to work with, genetic algorithms and genetic programming. However
+JGAP provides two general overarching algorithm frameworks to work with, genetic algorithms and genetic programming. However
 the package does not provide any high level interfaces between the genetic algorithms side and the genetic programming side. A 
 lot of development during this project was focused on developing a framework for evolution that could incorporate both GAs and GPs developed
 using JGAP. 
 
 Visualising both the GP and GA in the life form meant developing an abstract way of representing the state of the life form. This was done
 through an abstract class called Alife. This abstract class provided a high level interface for other objects to read (and modify if necessary)
-the state of the life form. The abstract class contained many of the variables for the life form and the setting and getting functions 
-associated with them. 
+the state of the life form. The abstract class contained many of the variables for the life form and the methods associated with accessing and
+setting them.
 
 \subsection{Life}
 
@@ -450,9 +450,9 @@ that it can consume to increase its energy level. The fitness of the life forms 
 
 The environment that the life forms exist on during the simulations are referred to as maps. These maps are two dimensional and can vary in size.
 The size of the map can be set at run time and can also be set to dynamically change during a run if necessary. The map also holds references
-to the resources contained in the environment. The map is split up into cells which form a 2D grid for which the life forms can inhabit. 
+to the resources contained in the environment. The map is split up into cells which form a 2D grid in which the life forms can inhabit. 
 
-Generally for evolving good fit life forms an unique map is generated for each simulation. This creates an environment in the life form has not
+Generally for evolving good fit life forms a unique map is generated for each simulation. This creates an environment in the life form has not
 seen before and has not adapted to before. This means that the fit life forms are the ones which will be able to adapt to any give situation
 and still be able to consume and interact with their environment. Each time a map is generated a new set of resources is generated with different
 positions on the map and different calorie values. If a static map is used, with the same positions of resources for each run, a very specialised 
@@ -466,7 +466,7 @@ a type which can be checked by the life form. If a life form is on top of a reso
 To investigate and compare these two algorithms a framework to accommodate both algorithms was designed and implemented. This framework had to allow comparison
 of the effectiveness and fitness of the life forms evolved, efficiency of the 
 evolutionary computations in generating a fit life form and the correctness of the solutions generated. To enable all these things an abstract framework had 
-to be developed to allow comparison without respect to the algorithm that was used. This first accomplished by visualising members of the population and 
+to be developed to allow comparison without respect to the algorithm that was used. This was first accomplished by visualising members of the population and 
 manually inspecting the fittest life form of each generation. 
 
 
@@ -477,20 +477,20 @@ was developed early on. The visualisation was developed using the model view con
 which meant that the map and the life form were completely detached from the visualisation.
 The life form was made abstract by using an abstract class which contains the basic variables need for the life
 form and some simple functions to get and set these variables. These include the life forms position, orientation
-and energy level. The visualisation renders the 2D map with resources on, with the cell size depending on the attributes selected at runtime. The frame speed can
-adjusted during the visualisation, but is default set to 5 frames per second. The visualisation itself is contained within the visualisation window. This window
+and energy level. The visualisation renders the 2D map with resources on, with the cell size depending on the 
+attributes selected at runtime. The frame speed can be adjusted during the visualisation, but is default set to 5 frames per second. The visualisation itself is contained within the visualisation window. This window
 provides access to the visualisation such as start, stopping and restarting the simulation.
 
 The visualisation has also been used to debug the life forms produced, to find errors in the project code which the life forms have ended up exploiting. An example
 of this was during early development their existed a bug that cause the life form to stop decrementing its energy when it got to a map corner. When the simulation
-was run with this bug in the life forms would evolve to find the corners of the map as they could get stuck their and never die. These life forms were not that fit 
-as they usually only had a fitness value that was around their starting energy.
+was run with this bug in the life forms would evolve to find the corners of the map as they could get stuck their and never die. These 
+life forms were not that fit as they usually only had a fitness value that was around their starting energy.
 
 Later in development other features were added to the visualisation window. One of these features was the ability to import and export maps for the life forms to be
-tested out on. A previously generated made could be loaded and the life form could be assessed on how it dealt with the that particular map. Producing this ability meant that it would be easier to compare life forms, understanding exactly how they interacted with the same environment.
+tested out on. A previously generated map could be loaded and the life form could be assessed on how it dealt with the that particular map. Producing this ability meant that it would be easier to compare life forms, understanding exactly how they interacted with the same environment.
 Another feature that was added was the ability to run the simulation frame by frame. The user can pause the simulation and step through the simulation, this again provides another method of fully understanding how a life form interacts with the environment. 
-Along with the abilities to interact with the simulation was the ability to access information on the current life form, such as its genetic make what generation
-and run time parameters were involved with its creation.
+Along with the abilities to interact with the simulation was the ability to access information on the current life form, such as its genetic 
+makeup, what generation it was from and what run-time parameters were involved in its creation.
 
 \paragraph{}
 Along with being able to visualise the artificial life form in an environment, there is also the ability to visualise the
@@ -539,14 +539,14 @@ implement each of the algorithms and how effective and responsive the Alife was 
 \subsection{Effort in Implementation}
 
 After the general framework for the evolutionary computation was developed the genetic algorithm was implemented. The JGAP package used
-was straight forward to use and after some time reading documentation and other resources about JGAP it was simple to implement a basic
+was straightforward to use and after some time reading documentation and other resources about JGAP it was simple to implement a basic
 Alife program. However this program did not receive any output from the environment, these elements could not be directly programmed into
 the genetic algorithm. The main bulk of implementation and testing was done on the Alife sensors. These sensor could not self evolve or 
 create themselves as there is no mechanism for complex recombination of variables in genetic algorithms. Once the sensors were developed
 the parameters for these sensors could be fed in from the genetic algorithm. The genetic algorithm then optimises the sensors to suit
 the environment best. The other genes that were programmed into the Alife for the genetic algorithm were other Alife characteristics
 such as memory length and variables that effected some life abilities. These variables were also optimised during the run. Introducing
-these variables into the genome was straight forward, and expanding on the current genome to add more genes would be a trivial process.
+these variables into the genome was straightforward, and expanding on the current genome to add more genes would be a trivial process.
 The genetic algorithm produced good results during development too, as more sensors and more genes were added to the Alife the results
 improved and showed a strong correlation between more sensors and higher fitness. This meant that development could be incremental allowing
 instant testing. The actual runtime of the GA was quicker than anticipated, this enabled the project to increase the population size which
@@ -574,7 +574,7 @@ turn left. This shows how much more resilient the genetic algorithm is to change
 the environment also.
 
 \subsection{User Interface}
-To help in the comparison of the two algorithms an user interface was developed. There are several cal parts to the user interface, the main
+To help in the comparison of the two algorithms a user interface was developed. There are several cal parts to the user interface, the main
 interface was the Alife visualisation. This interface has been robust and very informative throughout the project, providing valuable
 feedback about the Alife the from both algorithms. Figure ~\ref{fig:interface1} shows this main interface, using a small sized map.
 
@@ -641,6 +641,7 @@ the obstacles much better. Convergence on a global optimum took 25 generations w
 a fitness as high as the genetic algorithm, converging on a local optimum in 18 generations. The genetic algorithm was still quicker, reaching the 18th generation
 in 112 seconds and the genetic program took 279 seconds to reach the 25th generation.
 
+Figure ~\ref{geneseries} shows a set of graphs from a run of a genetic algorithm. 
 
 %CREATION OF ALIFE.
 %implementation
@@ -671,10 +672,14 @@ program was very good at dealing with this new scenario, however its run time wa
 run time has been discussed previously in this report and is longer than that of the genetic algorithm because of the dynamic way in which solutions
 are formed, creating some very long programs. 
 
-These results show that if time and computational power are not of issue then the genetic algorithm creates more adaptable and 
+These results show that if time and computational power are not of issue then the genetic algorithm creates more adaptable and useful
+artificial life. However these issues are usually a big concern when choosing an evolutionary algorithm. The genetic algorithm
+showed a considerable faster run time with similar population sizes. However it is very hard to directly compare the run times of each algorithm;
+this is because a GA population and GP population are not equal. 
 
 
-\section{Testing}
+t
+section{Testing}
 The main goal behind testing this project was to ensure complete correctness of the implementation which utilises the JGAP framework.
 
 Unit testing was one of the main tools used for this project. JUnit 4 was used in this project and was chosen for this project because
@@ -784,7 +789,7 @@ repetitive testing.
 
 
 \section{Conclusion}
-The project has generated interesting findings along with an useful tool for further information gathering. The finds relate to the implementation of each algorithm
+The project has generated interesting findings along with a useful tool for further information gathering. The finds relate to the implementation of each algorithm
 showing the benefits of using GAs or GPs within different situations. The application developed allows the easily fine tune a GA or GP and produce visual results 
 from its fittest offspring. This tools has been developed with mindset that other developers may with to adapt or extend this application and has therefore
 been produced in a readable and documented way. The application produced has been of high quality, with a test driven development, allowing further tests to be
