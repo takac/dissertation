@@ -147,18 +147,20 @@ algorithms can not have advantages over another.
 Producing artificial life that can solve the environmental and situational problems that are presented in the simulated environment 
 was the biggest problem to overcome in this project. Generating artificial life is a complex process; first an environment to simulate the artificial life has to be produced, and then
 an interface between the artificial life and the environment has to be implemented. Finally the process for creating artificial life through a GA or GP can be produced, but these algorithms
-both need to interface with the artificial life in an abstract manner so one can not distinguish between an GP implementation of artificial life and a GA implementation.
+both need to interface with the artificial life in an abstract manner so one can not distinguish between a GP implementation of artificial life and a GA implementation.
 
 \paragraph{}
 The first problem identified was producing an environment for the artificial life. This environment will support the artificial life and allow interaction between the resources present
-in the environment and also other life in the environment. The environment that the artificial life will inhabit will be fairly simple with several parameters than can be affected such as
-size, and objects for the artificial life to interact with. These objects that the artificial life can interact with will either be resources which the artificial life can possible consume
-or an obstacle which the artificial life cannot move over, instead bypass. Keeping this environment simple will enable this project to focus more on producing a high quality artificial life
+in the environment and also other life in the environment. The environment that the artificial life will inhabit will be fairly simple with several parameters that can be affected such as
+size, and objects for the artificial life to interact with. These objects that the artificial life can interact with will either be resources which the artificial life can possibly consume
+or an obstacle which the artificial life cannot move over, but instead bypass. Keeping this environment simple will enable this project to focus more on producing a high quality artificial life
 which will interact correctly and effectively with their environment. 
 
 \paragraph{}
 Another problem identified is what methods and values would be used when comparing these two algorithms. To draw conclusions from this project the data generated from both algorithms needs 
-to be comparable but also similar. Simple methods for comparing the algorithms will be runtime, memory/space requirements to compute a solution to a give problem. Further detail will need to
+to be comparable but also similar.
+Some simple methods for comparing the algorithms will be runtime and memory/space requirements of the evolutionary computation to compute a solution to a given problem.
+Further detail will need to
 be drawn from the algorithms, such as average fitness of a whole generation of artificial life forms, the effectiveness of the algorithm to find a global optimum solution and also the
 intelligence of the artificial life produced. 
 
@@ -171,65 +173,50 @@ The key issues with this project are based around a fair comparison of the algor
 
 \section{Genetic Algorithms}
 
-Genetic algorithms were first became a main stream theory in the 1970s when John Holland published his ideas on the future of evolutionary 
-computation. His book 'Adapation in Nature and Artificial System' in 1975 laid the ground works for modern genetic algorithms. However due to computation
+Genetic algorithms first became a main stream theory in the 1970s when John Holland published his ideas on the future of evolutionary 
+computation. His book 'Adapation in Nature and Artificial System' in 1975 laid the ground works for modern genetic algorithms~\cite{holland1992adaptation}. However due to computation
 power of the computers at these times genetic algorithms did not take off until the 1980s when the average desktops computational power became
 high enough to allow any practical application of genetic algorithms.
 
 The general form of a genetic algorithm uses genes to represent parameters inside a program.
 These parameters effect the running of a program.
 These genes were historically represented in binary form, however more modern implementations can use any value as a gene, from programming objects to double floating point numbers.
-These genes must be able to mutate, this is easy to understand when using binary number, to mutate a binary number you flip one bit in the gene sequence. 
+These genes must be able to mutate, which is easy to understand when using binary numbers: to mutate a binary number you flip one bit in the gene sequence. 
+
+Figure ~\ref{fig:garun} shows the pseudo-code for a genetic algorithm. This is the basic structure of the code developed in this project for the genetic algorithm.
+Much of the genetic algorithm in this project is handled by an evolutionary computation package JGAP; this package will be dicussed in detail further on in this
+report.In the pseudo-code first a random population is generated, random values are assinged for each gene; then the fitness is calculated for each of these
+random population members. The fittest members of this population are then selected to create a new generation through cross over and mutation. 
 
 \begin{algorithm}
-\caption{Pseduocode for a simple genetic algorithm}
+\caption{Pseudo-code for a simple genetic algorithm}
 \label{fig:garun}
 \begin{algorithmic}
-%\Function{GenerateInitialPopulation}{$popsize$}
-%	\State $population \gets ( )$
-%	\For{$i = 0 \to popsize$}
-%		\State $i \gets i + 1$ 
-%	\State $population + randomGenes$		
-%	\EndFor
-%	\State \Return $population$
-%\EndFunction
-
-\State $pop = GenerateInitialPopulation(100)$
+\State $pop \gets GenerateInitialPopulation(desiredPopulationSize)$
 \State $pop \gets assignFitnessToEachMember(pop)$
-\While{$time > allowTime$}
-	\State $newPop \gets selectMembersOfPopForCrossover(pop)$
-	\State $newPop \gets mutatePopulation(newPop)$
+\While{$runtime < allowedTime$}
+	\State $newGeneration \gets selectMembersOfPopForCrossover(pop)$
+	\State $newGeneration \gets mutatePopulation(newGeneration)$
 	\State $pop \gets assignFitnessToEachMember(pop)$
-	\If{$highestFitnessInPopulation(pop) > fitnessRequired$}
+	\If{$highestFitnessInPopulation(pop) >= fitnessRequired$}
 		\State \Return $fittestMemeberOfPopulation(pop)$
 	\EndIf
 \EndWhile
 \State \Return $fittestMemeberOfPopulation(pop)$
 
-
-%\State $population =$ GenerateInitialPopulation()
-%\State evaluate( $population )
-%\Repeat
-%\State $pop \gets 10$
-%\State select fit individuals for crossover and/or elitism
-%\State generate new individuals through crossover and mutation
-%\State replace old generation with new individuals
-%\State evaluate fitness of each individual in population
-%\Until { fitest individual \geq fitness required OR time elapsed \geq time allowed } 
 \end{algorithmic}
 \end{algorithm}
 
 \subsection{Population Representation}
 In genetic algorithms each member of the population (or candidate solution) is represented by a list or string of values.
 Each value represents a parameter that will be used in the solution.
-The value could represent the number of iterations of a loop or represent a operator in a sum.
-Traditionally binary numbers strings were used to represent a member of the population.
-This was because of the ease of which this could be manipulated by computers and the simplicity mutations could be achieved.
+The value could represent the number of iterations of a loop or represent an operator in a sum.
+Traditionally binary number strings were used to represent a member of the population.
+This was because of the ease of which binary numbers can be manipulated by computers and the simplicity of carrying out mutations on these binary numbers.
 To mutate a binary string a bit can be flipped.
 This can work in most situations however it soon becomes apparent that this cannot useful in all situations.
-%Fix and show formula? Find solution.
-If numbers are being represented in binary strings the most significant bit is at start of the string, if this is flipped 
-then the number will change by a factor of ???.
+If numbers are being represented in binary strings the most significant bit is at start of the string, if a bit near this end is flipped 
+then the number will change dramatically, whereas if a bit is flipped near the least significant end then the number will change very little.
 
 
 \subsection{Mutation}
@@ -237,7 +224,7 @@ In genetic algorithms mutation occurs on a per gene basis. In the configuration 
 determines the likelihood of a mutation on a gene within an individual. This mutation is usually applied after or during crossover ~\cite{goldberg1989genetic}.
 This mutation can vary depending on the precise implementation. The mutation can cause a complete gene change, meaning the gene before mutation will
 have no impact on the new gene, you can also have a variance mutation in which the mutation will cause a change in the current gene. A variance
-mutation on a integer gene would change the value represented by this gene by a set amount in relation to the original value. The mutation could be \(\pm5\)
+mutation on an integer gene would change the value represented by this gene by a set amount in relation to the original value. The mutation could be \(\pm5\)
 which would cause an integer gene of 81 to change to a maximum of 86 or a minimum of 76. This project actually makes use of the variance mutation, as it is 
 better for narrowing in on a local optimum, and most of the simulations used in this project the local optimum is usually the global one.
 
@@ -245,11 +232,13 @@ better for narrowing in on a local optimum, and most of the simulations used in 
 %intro to gp
 Genetic programming is one of the newest forms of evolutionary computing. 
 %different ways
-The run of a genetic programming algorithm is very similar to that of the genetic algorithm given in figure ~\ref{fig:garun}. An initial
+The run of a genetic programming algorithm are very similar to that of the genetic algorithm given in figure ~\ref{fig:garun}. An initial
 population is constructed and then the fitness is computed. Individuals are selected for crossover and mutation which then forms a new 
-population to repeat this process on. The main difference between genetic algorithms and genetic programming is in genetic programming
-the program to evaluate is the individual in contrast to genetic algorithms where the genes represented in the individual are applied to
-a program for evaluation~\cite{whitley94,gpintro98}. Each individual in the population represents an entire program, rather than a set of values which can be
+population to repeat this process until a suitable candidate program is found.
+The main difference between genetic algorithms and genetic programming is in genetic programming
+the program that will be evaluated is the individual in the population, in contrast to genetic algorithms where the genes represented in the individual are applied to
+a program for evaluation~\cite{whitley94,gpintro98}.
+Each individual in the population represents an entire program, rather than a set of values which can be
 applied to a program. 
 
 \subsection{Population Representation}
@@ -257,16 +246,16 @@ applied to a program.
 In genetic programming there is a variety of ways to represent a solution. Genetic algorithms are most
 commonly represented in tree form which was first made popular by Nicheal Lynn Cramer after publishing his research in 1985~\cite{cramer1985,conf1985}.
 Other methods of representing a genetically programmed solution such as a graph pose a greater programming/implementation 
-challenge~\cite{gpintro98, poli99}. These more complex method were out of the scope of this research project and so a easier
-to implement tree based system has been used.
-The software package used to build the genetic program had very good support for tree based genetic programming which made implementation
-of this project much quicker, this was another reason the tree based representation has been chosen.
-Using this method or representation, the solution to a given problem is made up of node genes, each gene represents a function or variable
+challenge~\cite{gpintro98, poli99}. These more complex methods were out of the scope of this research project and so an
+easier-to-implement tree-based system has been used.
+The software package used to build the genetic program had very good support for tree-based genetic programming which made implementation
+of this project much quicker - this was another reason the tree-based representation has been chosen.
+Using this method of representation, the solution to a given problem is made up of node genes, where each gene represents a function or variable
 which the life form can execute or reference.
 This tree will contain only one root node and this node will be executed first, subsequent nodes can have a varying arity. The choice of
 which node will be executed next will depend on the function node that was last executed. If the root node had an arity of two, then
 the next node to execute will depend on the outcome of the root node. Figure ~\ref{fig:tree1} shows a simple program represented in
-tree form. This is the standard form that a genetic program will take. Any non leaf node is a function and the leaf nodes are terminals.
+tree form. This is the standard form that a genetic program will take. Any non-leaf node is a function and the leaf nodes are terminals.
 Functions can be any type of function that takes in at least one input (an arity of at least 1) and returns a value. A terminal is a
 function that does not take any input or a variable. In figure ~\ref{fig:tree1} the leaf nodes are the numbers 4, 19, 8 and 12 in this
 case. The functions are addition (+), subtraction (-) and multiplication (*). These functions all have an arity of two and therefore
@@ -285,15 +274,15 @@ require two input, or two sub nodes. Evaluating this example tree gives:
 
 
 To expand on this example we can replace the basic math functions of addition, subtraction, etc with functions that the Alife can
-do or carry out that require input and receive and we can replace the terminal with either state variables or with functions that do not 
-require an input. These functions could be checking for a wall ahead or checking for life, could issue a command to turn a certain
-amount or any other command that the Alife is programmed to carry out that requires an input. The terminals could also be functions
-such as move forward, which do not require any input or can be simple state variables such as y position or x position on a given map.
+do or carry out that require input and we can replace the terminal with either state variables or with functions that do not 
+require an input. These functions could be checking for a wall ahead; checking for life; could issue a command to turn a certain
+amount; or any other command that the Alife is programmed to carry out that requires an input. The terminals could also be functions
+such as move life forward, which do not require any input or can be simple state variables such as y position or x position on a given map.
 The program trees can be also made more complex by adding control statements into the tree. Figure ~\ref{fig:tree-if} shows a visual
-representation of this. The IF node requires 3 child nodes; the right most child is evaluated first, this the control statement. If
+representation of this. The IF node requires 3 child nodes; the rightmost child is evaluated first, this the control statement. If
 the control statement is evaluated to a value above 0 then this gives a true response. If a true response is received from this 
 child node then only the second child node is evaluated (the middle node). If the control child node evaluates to false, only the 
-left most node is evaluated. As we can see from figure ~\ref{fig:tree-if} the LifeAhead terminal will not get evaluated, as the 
+leftmost node is evaluated. As we can see from figure ~\ref{fig:tree-if} the LifeAhead terminal will not get evaluated, as the 
 control statement child \(5*0\) will evaluate to 0 which is considered false, and therefore only the true branch will be evaluated.
 
 %TREE
@@ -304,17 +293,14 @@ control statement child \(5*0\) will evaluate to 0 which is considered false, an
 \end{figure}
 
 \subsection{Mutation}
-%asdsss
-
-Mutation of the genetic program is handled by JGAP, however when and how much this mutation occurs can be altered through JGAP
-configuration. The genetic code of each life form is made of of nodes on a tree, each of these nodes can be mutated by either
-replacing the node or removing the node. The nodes can be replaced with an another node with the same arity and type, the
-removal of node is fairly simple can is done by replacing the node with a null node. This will be a empty child node and
-will just end execution if this node is reached during the trees execution.
+The genetic code of each life form is made of nodes on a tree, each of these nodes can be mutated by either
+replacing the node or removing the node. The nodes can be replaced with another node with the same arity and type - the
+removal of a node is done by replacing the node with a null node. This will be an empty child node and
+will just ignore this node if this node is reached during the tree's execution.
 
 \subsection{Crossover}
 
-As specified earlier this implementation is using trees, this means that the crossover during the evolutionary computation
+As specified earlier, trees are used in this implementation, this means that the crossover during the evolutionary computation
 will work through the tree representation. Using trees for representing your solution means that genetic cross over is
 very simple. Two solution trees will first be selected for crossover, this selection will be based around the fitness of the given
 solutions. This selection could be done several through several methods and is left to be explained elsewhere. Once two trees
@@ -348,7 +334,7 @@ Java was chosen because of a strong prior intimate knowledge of the language and
 The evolutionary computation libraries which this project are based also use Java, this made interfacing with them very easy. 
 Another reason Java was chosen was because of the graphical user interface programming libraries supplied as standard in Java. 
 Having prior knowledge of these also meant that developing a visual format for the simulation could be accomplished.  Along with using 
-Java for development several other tools were used these were Eclipse, Maven and Git. Eclipse is a integrated development environment or 
+Java for development several other tools were used these were Eclipse, Maven and Git. Eclipse is an integrated development environment or 
 IDE which provides the user with an interface with faster programming and debugging abilities than are available as standard.
 This meant faster development. Maven was used a build tool to manage dependencies and build jar files for running the application 
 that contains the simulations. Using this made it easy to develop on any computer, as managing the dependencies necessary for the 
@@ -380,7 +366,7 @@ objects would not be disturbed by any GUI or user interface functions that exist
 \end{figure}
 
 \subsection{Project Design}
-The requirements of this project were to create a evolutionary computation implementation along with a application to visualise and
+The requirements of this project were to create an evolutionary computation implementation along with an application to visualise and
 display the Alife created by the evolutionary computation. Breaking down the requirements we can see there are two many aspects
 the evolutionary computation and the visualisation components, these two components are fairly abstract and do not need to alter
 each others states during execution the application. The visualisation only references the Alife and does not need to alter
@@ -420,7 +406,7 @@ GUI components.
 \section{Implementation}
 To evaluate a common artificial life form a simulation environment has been created.
 This environment is a 2D arena where a life form must continue to consume food to survive, the more food the life form consumes the fitter the  
-
+life form is evaluate to.
 The underlying genetic and evolutionary computations were completed on a Java framework called JGAP (Java Genetic Algorithms Package).
 This package provides a tried and very well tested method for using genetic algorithms in Java, while also providing the 
 ability to extend the package and use the package to fit into this projects needs. The package was tested several times before usage
@@ -466,7 +452,7 @@ The environment that the life forms exist on during the simulations are referred
 The size of the map can be set at run time and can also be set to dynamically change during a run if necessary. The map also holds references
 to the resources contained in the environment. The map is split up into cells which form a 2D grid for which the life forms can inhabit. 
 
-Generally for evolving good fit life forms a unique map is generated for each simulation. This creates an environment in the life form has not
+Generally for evolving good fit life forms an unique map is generated for each simulation. This creates an environment in the life form has not
 seen before and has not adapted to before. This means that the fit life forms are the ones which will be able to adapt to any give situation
 and still be able to consume and interact with their environment. Each time a map is generated a new set of resources is generated with different
 positions on the map and different calorie values. If a static map is used, with the same positions of resources for each run, a very specialised 
@@ -511,8 +497,8 @@ Along with being able to visualise the artificial life form in an environment, t
 evolutionary process. A high level view of the processes occurring underneath is available during a standard launch of the
 main application. First is a graph displaying the fitness across the evolutionary generations. This graph shows in real-time the
 average, maximum and minimum fitness of all the artificial life in each generation.
-
-This can however be a significi
+This can however be a significant drain on computational power, and will slow down the simulation. This graph can be disabled to give
+a simulation speed up.
 
 \subsection{PROGRAM FLOW}
 
@@ -588,7 +574,7 @@ turn left. This shows how much more resilient the genetic algorithm is to change
 the environment also.
 
 \subsection{User Interface}
-To help in the comparison of the two algorithms a user interface was developed. There are several cal parts to the user interface, the main
+To help in the comparison of the two algorithms an user interface was developed. There are several cal parts to the user interface, the main
 interface was the Alife visualisation. This interface has been robust and very informative throughout the project, providing valuable
 feedback about the Alife the from both algorithms. Figure ~\ref{fig:interface1} shows this main interface, using a small sized map.
 
@@ -676,7 +662,7 @@ life generated by two distinct evolutionary algorithms and this has also been su
 The results obtained were what was expected, both algorithms produced artificial life that converged upon the global optimum within 30 generations
 for all environments tested. The artificial life showed that more complex problems could be solved, this was demonstrated by the navigation around
 obstacles in the environment which was handled well by both algorithms however the genetic program managed to solve the problem of navigation much
-more succesfully than the genetic algorithm. This was because the dynamic way in which the the genetic program can execute its commands, the genetic
+more succesfully than the genetic algorithm. This was because the dynamic way in which the genetic program can execute its commands, the genetic
 algorithm has a static implementation of its program flow. This is a major limitation for genetic algorithms. To adapt the genetic algorithm to the
 new environment with obstacles would have meant redesigning the underlying program with in the Alife and not just modify the genes. This is a major 
 consideration when developing artificial life, if your environment is chaning it will be much more costly to develop a genetic algorithm due to the 
@@ -739,8 +725,8 @@ refactoring.
 
 However the 
 areas of the code that could produce 'silent' bugs were targeted for testing. A silent bug is one which would not throw an error
-or even produce erroneous output, but would perhaps alter the outcome of a run slightly. A example of this was a method that
-was used as the eyes of the Alife in the genetic algorithm. The range value is taken from the set of genes, and is used to 
+or even produce erroneous output, but would perhaps alter the outcome of a run slightly. An example of this was a method that
+was used as the eyes of the Alife in the genetic algorithm. The range value is taken from the set of genes, and is used 
 to limit how far the artificial life can see. The method that was written accidentally reduced this range by 1 due to an issue
 in incrementing a for-loop. This bug was not spotted until a test for this method was written. 
 \paragraph{}
@@ -798,7 +784,7 @@ repetitive testing.
 
 
 \section{Conclusion}
-The project has generated interesting findings along with a useful tool for further information gathering. The finds relate to the implementation of each algorithm
+The project has generated interesting findings along with an useful tool for further information gathering. The finds relate to the implementation of each algorithm
 showing the benefits of using GAs or GPs within different situations. The application developed allows the easily fine tune a GA or GP and produce visual results 
 from its fittest offspring. This tools has been developed with mindset that other developers may with to adapt or extend this application and has therefore
 been produced in a readable and documented way. The application produced has been of high quality, with a test driven development, allowing further tests to be
@@ -818,7 +804,7 @@ The application developed went through a long design process however this design
 features in the design could not be fully implemented in the desired way. An oversight on how the GP would execute its solution left a design flaw within the program,
 such that the frame timing between the GP and GA was not equal. If the project was redesigned then this issue could be remedied by creating a different framework for
 handling the idea of time within the simulation. Currently time is handled by the EnvironmentMap.java interface, where the incrementTimeFrame() is called, this then
-calls each Alife form on the map and ask to to make a 'move'. Ideally this idea of time could be handled independently by the Alife, without deferring to the map for
+calls each Alife form on the map and ask to make a 'move'. Ideally this idea of time could be handled independently by the Alife, without deferring to the map for
 a call to move. Perhaps the Alife could have a cycle speed in which it can do one action every cycle, where the cycle time maybe controlled by the evolutionary algorithm
 or statically set. 
 Another design improvement that could be made is to improve the security and abstractness of the code. Currently many classes that do not need access to the Alife
