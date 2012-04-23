@@ -109,8 +109,8 @@ Both these algorithms will have their benefits and pitfalls; exposing these in t
 \paragraph{}
 This project will design and implement an application which will launch and visualise the evolution of a
 simple artificial life form. This application will make use of either genetic algorithms or genetic programming,
-depending on conditions chosen at run time, this application will then generate an artificial life form that will navigate a given environment.
-The initial parameters for the creation of Alife can be chosen before run time. During run time statistics of the evolutionary process will be produced, and
+depending on conditions chosen at run-time, this application will then generate an artificial life form that will navigate a given environment.
+The initial parameters for the creation of Alife can be chosen before run-time. During run-time statistics of the evolutionary process will be produced, and
 graphing the fitness over generations will show how the evolutionary algorithm is doing. There will also be an interface to visualise the life  algorithms form in its
 environment. This will give the use the advantage of being able to study the behaviour of the life form and understand its behaviour better
 than reading the genome.
@@ -159,7 +159,7 @@ which will interact correctly and effectively with their environment.
 \paragraph{}
 Another problem identified is what methods and values would be used when comparing these two algorithms. To draw conclusions from this project the data generated from both algorithms needs 
 to be comparable but also similar.
-Some simple methods for comparing the algorithms will be runtime and memory/space requirements of the evolutionary computation to compute a solution to a given problem.
+Some simple methods for comparing the algorithms will be run-time and memory/space requirements of the evolutionary computation to compute a solution to a given problem.
 Further detail will need to
 be drawn from the algorithms, such as average fitness of a whole generation of artificial life forms, the effectiveness of the algorithm to find a global optimum solution and also the
 intelligence of the artificial life produced. 
@@ -194,7 +194,7 @@ random population members. The fittest members of this population are then selec
 \begin{algorithmic}
 \State $pop \gets GenerateInitialPopulation(desiredPopulationSize)$
 \State $pop \gets assignFitnessToEachMember(pop)$
-\While{$runtime < allowedTime$}
+\While{$run-time < allowedTime$}
 	\State $newGeneration \gets selectMembersOfPopForCrossover(pop)$
 	\State $newGeneration \gets mutatePopulation(newGeneration)$
 	\State $pop \gets assignFitnessToEachMember(pop)$
@@ -439,7 +439,7 @@ are multiple life forms in the environment then each life form in turn will get 
 meant to represent time for the life forms, it has been slightly simplified to be an amount of time a life form can move forward or interact in another way. Only one 'major' interaction can be completed per frame. These include moving, consuming a resource and turning.
 
 To survive in an environment the life form must keep its energy above zero for the duration of the simulation, if the life forms energy
-drops to zero or below then the life form will be assumed deceased and can no longer make any more interactions with its environment. A simulation can have indefinite run time and how long the life form can survive will depend on its fitness and availability of resources for energy.
+drops to zero or below then the life form will be assumed deceased and can no longer make any more interactions with its environment. A simulation can have indefinite run-time and how long the life form can survive will depend on its fitness and availability of resources for energy.
 
 When a life form needs to be tested for fitness it is added to a map, and the life form is asked to make an action for every frame. The life form starts out
 with a nominal energy value, so that it does not die at the start of the simulation. A fit life form will then make intelligent actions and move towards resources
@@ -449,7 +449,7 @@ that it can consume to increase its energy level. The fitness of the life forms 
 \subsection{Map}
 
 The environment that the life forms exist on during the simulations are referred to as maps. These maps are two dimensional and can vary in size.
-The size of the map can be set at run time and can also be set to dynamically change during a run if necessary. The map also holds references
+The size of the map can be set at run-time and can also be set to dynamically change during a run if necessary. The map also holds references
 to the resources contained in the environment. The map is split up into cells which form a 2D grid in which the life forms can inhabit. 
 
 Generally for evolving good fit life forms a unique map is generated for each simulation. This creates an environment in the life form has not
@@ -478,7 +478,7 @@ which meant that the map and the life form were completely detached from the vis
 The life form was made abstract by using an abstract class which contains the basic variables need for the life
 form and some simple functions to get and set these variables. These include the life forms position, orientation
 and energy level. The visualisation renders the 2D map with resources on, with the cell size depending on the 
-attributes selected at runtime. The frame speed can be adjusted during the visualisation, but is default set to 5 frames per second. The visualisation itself is contained within the visualisation window. This window
+attributes selected at run-time. The frame speed can be adjusted during the visualisation, but is default set to 5 frames per second. The visualisation itself is contained within the visualisation window. This window
 provides access to the visualisation such as start, stopping and restarting the simulation.
 
 The visualisation has also been used to debug the life forms produced, to find errors in the project code which the life forms have ended up exploiting. An example
@@ -497,8 +497,8 @@ Along with being able to visualise the artificial life form in an environment, t
 evolutionary process. A high level view of the processes occurring underneath is available during a standard launch of the
 main application. First is a graph displaying the fitness across the evolutionary generations. This graph shows in real-time the
 average, maximum and minimum fitness of all the artificial life in each generation.
-This can however be a significant drain on computational power, and will slow down the simulation. This graph can be disabled to give
-a simulation speed up.
+This can however be a significant drain on computational power, and will slow down the simulation. This graph can be disabled to speed up
+the simulation. 
 
 \subsection{PROGRAM FLOW}
 
@@ -508,7 +508,7 @@ During implementation many hurdles had to be overcome during each sprint phase o
 producing fair and equal output per time frame from each algorithm. The problem was that during each time frame the artificial life had the opportunity to survey its environment and then react to this
 environment, hopefully in a way such that it can find more resources to consume, but the rules governing these interactions differed between the two algorithms.
 This was because of the way the two algorithms generate output which controls the life form it was difficult to align
-the rules governing the two algorithms. Originally the genetic programming solution controlled the artificial life by calling functions with in its chromosome tree, such as move forward, turn left etc.
+the rules governing the two algorithms. Originally the genetic programming solution controlled the artificial life by calling functions within its chromosome tree, such as move forward, turn left etc.
 However it was quickly realised that this would not work as the genetic program could call these functions multiple times during one time frame. This method would not work in this project because
 of the way the genetic algorithm controls the artificial life. The GA did not have an opportunity to call functions multiple times during one time frame. These methods of control had to be aligned. 
 
@@ -524,15 +524,15 @@ untested modification to the code could produce errors. During some refactoring 
 which meant a longer than necessary amount of time was spent debugging. However due to this project adopting the software version control system
 Git, a 'diff' or file comparison could be made on the changed files. For the refactoring a new branch was created on git, the refactored code
 was then developed on this refactoring branch, and the working code remained on the master branch. When the bugs occurred in the
-projects code the file comparison between these two branches was extremely helpful in locating exactly what had been changed and what
+applications code the file comparison between these two branches was extremely helpful in locating exactly what had been changed and what
 possible bugs could have arisen from these changes. In this particular case a method that was acting as the sight for the artificial life
-contained an erroneous 'not' symbol causing havoc. Initially it was hard to understand where the bug had arisen as many methods had been
-altered, but using git diff, a tool for comparing files, meant I could easily inspect the changes and quickly went through any changes would could have produced the
-results that were being produced by the project.
+contained an erroneous 'not' symbol causing havoc. Initially it was hard to understand where the bug had arisen as many files and objects had been
+altered, but using git diff, a tool for comparing files, the code that has been modified recently could be inspected and that 
+allowed the source of the bug to be traced quickly. 
 
 \section{Results}
 
-Results obtained from the project showed expected but interested outcomes. The results cover the whole Alife creation process including
+Results obtained from the project showed expected but interesting outcomes. The results cover the whole Alife creation process including
 development and implementation of the evolutionary computation. The results showed how much effort and technical skill was needed to
 implement each of the algorithms and how effective and responsive the Alife was to its environment.
 
@@ -540,7 +540,7 @@ implement each of the algorithms and how effective and responsive the Alife was 
 
 After the general framework for the evolutionary computation was developed the genetic algorithm was implemented. The JGAP package used
 was straightforward to use and after some time reading documentation and other resources about JGAP it was simple to implement a basic
-Alife program. However this program did not receive any output from the environment, these elements could not be directly programmed into
+Alife program. However this program did not receive any output from the environment; these elements could not be directly programmed into
 the genetic algorithm. The main bulk of implementation and testing was done on the Alife sensors. These sensor could not self evolve or 
 create themselves as there is no mechanism for complex recombination of variables in genetic algorithms. Once the sensors were developed
 the parameters for these sensors could be fed in from the genetic algorithm. The genetic algorithm then optimises the sensors to suit
@@ -548,35 +548,35 @@ the environment best. The other genes that were programmed into the Alife for th
 such as memory length and variables that effected some life abilities. These variables were also optimised during the run. Introducing
 these variables into the genome was straightforward, and expanding on the current genome to add more genes would be a trivial process.
 The genetic algorithm produced good results during development too, as more sensors and more genes were added to the Alife the results
-improved and showed a strong correlation between more sensors and higher fitness. This meant that development could be incremental allowing
-instant testing. The actual runtime of the GA was quicker than anticipated, this enabled the project to increase the population size which
-was initial meant to remain around 1000 to around 2000.
+improved and showed a strong correlation between more sensors and higher fitness. This meant that development could be incremental, allowing
+instant testing. The actual run-time of the GA was quicker than anticipated, this enabled the project to increase the population size which
+was initially meant to remain around 1000 to around 2000.
 
 \paragraph{}
-The genetic program took much longer to develop and refine. The was less documentation and resources available for genetic programming 
-development in JGAP but that will not be taken into account. The complexity came in developing genes for each of the sensors. Each sensor
+The genetic program took much longer to develop and refine. There was less documentation and resources available for genetic programming 
+development in JGAP, but that will not be taken into account. The complexity came in developing genes for each of the sensors. Each sensor
 needed to be encapsulated inside a gene, which either required an input and produced output or just produced output. The output between
 the genes had to also be standardised to a certain type to allow interoperability between the genes. The genes produced in this application
-all produced primitive doubles, which caused some issue with some of the sensors. As the program structure was made up during runtime by
-the genetic program, the genes had to be completely abstract. The run time for these programs was actually faster than that of the GA due
-to the fact many of the solutions generated were much smaller than the GA Alife produced. This meant that the average run time was much 
+all produced primitive doubles, which caused some issue with some of the sensors. As the program structure was made up during run-time by
+the genetic program, the genes had to be completely abstract. The run-time for these programs was actually faster than that of the GA due
+to the fact many of the solutions generated were much smaller than the GA Alife produced. This meant that the average run-time was much 
 less overall. However this was not always the case as some run configurations created GP solution trees that were much larger than the 
-GA solutions, these took much longer to evaluate and caused a slow down for the entire genetic program. The implementation of the GP was 
+GA solutions; these took much longer to evaluate and caused a slow down for the entire genetic program. The implementation of the GP was 
 more of a technical challenge as well, requiring a greater understanding of Java and of evolutionary computation. Understanding and debugging
 was a longer and more drawn out process, as the Alife program to be debugged was hidden behind the GP tree inside the JGAP interface.
 This would hold true for any other implementation of a GP, the code being run inside the evolutionary computations is hidden away. If strange
 structures arise inside the tree such as a loop in the tree it can be very hard to detect as the only real output is the log and
 the tree structure. Once the genetic program was stable, the process to extend the Alife's capabilities and sensors was a simple one. Before
-runtime genes can be enabled and disabled for usage during the evolutionary computation. This means that genes can be hotswapped between
-runs and results can be directly compared to understand the impact that change had on the run. An example of this was disabling the turn
+run-time, genes can be enabled and disabled for usage during the evolutionary computation. This means that genes can be hot-swapped between
+runs and results can be directly compared to understand the impact the change had on the run. An example of this was disabling the turn
 right gene in one particular run. The fitness took more generations to climb to the fitness achieved by the run with both turn right and
-turn left. This shows how much more resilient the genetic algorithm is to change in the genome, it is able to adapt better to changed in
-the environment also.
+turn left. This shows how much more resilient the genetic algorithm is to change in the genome, it is able to adapt better to change in
+the environment.
 
 \subsection{User Interface}
-To help in the comparison of the two algorithms a user interface was developed. There are several cal parts to the user interface, the main
+To help in the comparison of the two algorithms a user interface was developed. There are several parts to the user interface; the main
 interface was the Alife visualisation. This interface has been robust and very informative throughout the project, providing valuable
-feedback about the Alife the from both algorithms. Figure ~\ref{fig:interface1} shows this main interface, using a small sized map.
+feedback about the Alife from both algorithms. Figure ~\ref{fig:interface1} shows this main interface, using a small sized map.
 
 \begin{figure} [ht]
 \centering
@@ -592,7 +592,7 @@ Alife form in the center is controlled by the Alife. The color of the Alife, or 
 computation also. Along with the Alife visualisation, there is a real-time graph showing the fitness  across the generations of the 
 evolutionary computation. This graph is updated as the evolutionary computation moves through generations. This can be seen in figure
 ~\ref{fig:nicegraph}. This figure has the highest, lowest and average fitness achieved for each generation across 60 generations. This
-graph is also easily extensible allowing more data to be visualised with the minimum of effort thanks to the framework developed in
+graph is also easily extensible allowing more data to be visualised with the minimum of effort, thanks to the framework developed in
 this project.
 
 \begin{figure} [ht]
@@ -665,16 +665,16 @@ for all environments tested. The artificial life showed that more complex proble
 obstacles in the environment which was handled well by both algorithms however the genetic program managed to solve the problem of navigation much
 more succesfully than the genetic algorithm. This was because the dynamic way in which the genetic program can execute its commands, the genetic
 algorithm has a static implementation of its program flow. This is a major limitation for genetic algorithms. To adapt the genetic algorithm to the
-new environment with obstacles would have meant redesigning the underlying program with in the Alife and not just modify the genes. This is a major 
+new environment with obstacles would have meant redesigning the underlying program within the Alife and not just modify the genes. This is a major 
 consideration when developing artificial life, if your environment is chaning it will be much more costly to develop a genetic algorithm due to the 
 fact that the underlying logic will need refactoring if the environment is modified beyond what the Alife is programmed to solve. The genetic 
-program was very good at dealing with this new scenario, however its run time was longer than that of the genetic algorithm for both situations. The 
-run time has been discussed previously in this report and is longer than that of the genetic algorithm because of the dynamic way in which solutions
+program was very good at dealing with this new scenario, however its run-time was longer than that of the genetic algorithm for both situations. The 
+run-time has been discussed previously in this report and is longer than that of the genetic algorithm because of the dynamic way in which solutions
 are formed, creating some very long programs. 
 
 These results show that if time and computational power are not of issue then the genetic algorithm creates more adaptable and useful
 artificial life. However these issues are usually a big concern when choosing an evolutionary algorithm. The genetic algorithm
-showed a considerable faster run time with similar population sizes. However it is very hard to directly compare the run times of each algorithm;
+showed a considerable faster run-time with similar population sizes. However it is very hard to directly compare the run-times of each algorithm;
 this is because a GA population and GP population are not equal. 
 
 
@@ -696,7 +696,8 @@ on exactly what code was being tested by the unit tests. The HTML reports produc
 testing. This meant that JUnit tests could also be checked for correctness, and that any code that needed to be tested has not been
 missed out.
 Another tool used for testing was FindBugs, this tool used static code analysis to find errors in Java source code. This tool also
-has a Maven reporting plugin which produced more HTML reports in readable and easily accessible format. FindBugs assisted in finding bugs in the projects code which would have otherwise been missed. FindBugs not only finds bugs and issues with the logic in the code
+has a Maven reporting plugin which produced more HTML reports in readable and easily accessible format. FindBugs assisted in finding bugs in the 
+applications code which would have otherwise been missed. FindBugs not only finds bugs and issues with the logic in the code
 but also assess the performance, security, style and code convention. Many trivial issues can be raised by FindBugs such as 
 incorrectly defining static fields or other simple programming mistakes. It can produce very useful feedback for producing
 higher quality code and helps the programmer avoid common mistakes and improve efficiency of the code. The find bugs report breaks
@@ -736,30 +737,30 @@ to limit how far the artificial life can see. The method that was written accide
 in incrementing a for-loop. This bug was not spotted until a test for this method was written. 
 \paragraph{}
 
-The logging used in this project was implemented through Log4j, this system enabled this project to customise the logging 
-ability without costing the project runtime. During debugging the trace log can be enabled which will slow down the
-run time of the project but provide invaluable help when debugging the code. When logging is turned off the performance
-of the code has very similar performance to code with any logging statements in, this makes Log4j very powerful. Also
-Log4j has many built in output and format options which means one can customise it to suit any project. Log4j is often
+The logging used in this project was implemented through Log4j - this system enabled this project to customise the logging 
+ability without costing the project run-time. During debugging the trace log can be enabled which will slow down the
+run-time of the project but provide invaluable help when debugging the code. When logging is turned off the performance
+of the code has very similar performance to code with any logging statements in, which makes Log4j very powerful. Also
+Log4j has many built-in output and format options which means one can customise it to suit any project. Log4j is often
 thought of as industry de facto logging platform and therefore is highly supported meaning increased performance
 and one of the safest logging platforms in terms of the number of bugs because of its age and community support. All these
 factors contribute to a highly effective and stable logging platform. 
 
-Log4j has several levels of logging, fatal, error, warn, info, debug, trace. Each of these logging levels can be used throughout
-the project, however logging in this project was used with a strict set of rules. Any errors or erroneous outcomes will 
-be logged as either fatal or with error level logging, fatal will be used in a case where any further outcome of the project
-will be invalid or erroneous, error will be used for logging any error that will cause the current run of the system to be
-erroneous however will probably not impact the rest of the run. Warn will be used when parameters exceed recommended
-extremes or an acceptable or expected bad input is recorded and adjusted. Info is used for recording the current state of
-the project run, for example each time a new generation is started during either the GA or GP run the info logging level is
-used to print and record that this is the current state of the program. It is used to record high level state of the run,
-not the low level state of each of the components which combine together during this run. Other common info level logging
-information would be the fitness of the entire generation or if a target is reached in the code such as a fitness level.
-Debug and trace are only used for debugging, and often trace is disabled at run time because of the impact enabling this
-logging level has on the code. Most logging that occurs in this project is trace or debug logging, logging statements are
-put into frequently used methods and classes to record the current state that they are in and to help during the debugging
-process. The trace log level is used for calls that are very frequent and if not disabled would likely produce a significant
-low down during runtime. 
+Log4j has several levels of logging; 'fatal'; 'error'; 'warn'; 'info'; 'debug', 'trace'. Each of these logging levels can be used throughout
+the project, however logging in this project was used with a strict set of rules. Any errors or erroneous outcomes 
+was logged as either 'fatal' or with error level logging, 'fatal' was used in a case where any further outcome of the project
+would be invalid or erroneous, 'error' was used for logging any error that would cause the current run of the system to be
+erroneous however would probably not impact the rest of the run. 'Warn' was used when parameters exceed recommended
+extremes or an acceptable or expected bad input was recorded and adjusted. 'Info' was used for recording the current state of
+the project run, for example each time a new generation was started during either the GA or GP run the 'info' logging level was
+used to print and record the current state of the program. It was used to record the high level state of the application,
+not the low level state of each of the components which combine together during this run. Other common 'info' level logging
+information would be the fitness of the entire generation or if a target was reached in the code, such as a fitness level.
+Debug and 'trace' are only used for debugging, and often 'trace' was disabled at run-time because of the impact enabling this
+logging level has on the code. Most logging that occurs in this project was 'trace' or debug logging; logging statements are
+put into frequently-used methods and classes to record the current state that they are in and to help during the debugging
+process. The 'trace' log level was used for calls that are very frequent and if not disabled would likely produce a significant
+low down during run-time. 
 
 \subsection{Test Alife}
 
@@ -790,22 +791,22 @@ repetitive testing.
 
 \section{Conclusion}
 The project has generated interesting findings along with a useful tool for further information gathering. The finds relate to the implementation of each algorithm
-showing the benefits of using GAs or GPs within different situations. The application developed allows the easily fine tune a GA or GP and produce visual results 
-from its fittest offspring. This tools has been developed with mindset that other developers may with to adapt or extend this application and has therefore
+showing the benefits of using GAs or GPs within different situations. The application developed allows the user to easily fine tune a GA or GP and produce visual results 
+from its fittest offspring. This tools has been developed with the mindset that other developers may wish to adapt or extend this application and has therefore
 been produced in a readable and documented way. The application produced has been of high quality, with a test driven development, allowing further tests to be
-added easily also. The applications GUI is professional looking, with a clean interface and simple to use, allowing the user to visualise and play with the 
+added easily . The applications GUI is professional looking, with a clean and simple-to-use interface , allowing the user to visualise and play with the 
 Alife that has been created by the evolutionary computation.
 
 The documentation produced along with the code is also of high quality. The main documentation provided with the source code is the JavaDoc. A JavaDoc has been 
 written for almost every method and every class, with useful and often detailed description of the method or class. This documentation allows future developers
 of this code to quickly understand the code and be able to extend and improve the current code. This JavaDoc is also improves code during development as it 
 provides a constant reference to information about any classes used and how they should be used in the context of this application. 
-Along with the JavaDoc, the code has used strict coding standards and has adhered to them very well which has produced very high quality code. High quality code
+Along with the JavaDoc, the code has used strict coding standards and has adhered to them very well, which has produced very high quality code. High quality code
 means that the code is readable, understandable and extensible. The code has been designed with extension in mind, producing interfaces and abstract classes
 that facilitate these extensions easily.
 
 \subsection{Future Improvements}
-The application developed went through a long design process however this design had to be altered somewhat during the implementation stage, this meant that some
+The application developed went through a long design process however this design had to be altered somewhat during the implementation stage. This meant that some
 features in the design could not be fully implemented in the desired way. An oversight on how the GP would execute its solution left a design flaw within the program,
 such that the frame timing between the GP and GA was not equal. If the project was redesigned then this issue could be remedied by creating a different framework for
 handling the idea of time within the simulation. Currently time is handled by the EnvironmentMap.java interface, where the incrementTimeFrame() is called, this then
@@ -815,7 +816,7 @@ or statically set.
 Another design improvement that could be made is to improve the security and abstractness of the code. Currently many classes that do not need access to the Alife
 object have access to the Alife object. It was very difficult separating responsibilities for this class into distinct sets which could then be implemented through
 interfaces. The biggest weakness of the Alife class is the Brain.java interface that has to be set during the creation of a concrete class. The brain interface
-delegates control of the Alife during run time, and has complete control of the Alife. This Brain object needs to be reimplemented to allow better abstract and allow
+delegates control of the Alife during run-time, and has complete control of the Alife. This Brain object needs to be reimplemented to allow better abstract and allow
 easier extension. The Brain interface is slightly confusing as the only method it implements is the think() method. This method is called when the Alife is required to
 move. The GP Alife implements this interface with only a few lines with a call to the GP solution which then chooses the action for the Alife to execute, whereas the
 GA Alife Brain contains all of the sensors for the Alife, and directly controls the flow of the GA Alife.
