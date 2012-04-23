@@ -19,7 +19,10 @@
 \setlength{\headsep}{40pt}
 \setlength\absleftindent{0.5in}
 \setlength\absrightindent{0.5in}
+\setlength{\footskip}{80pt}
 \newcommand{\mytitle}{Artificial Life Creation Comparing Genetic Algorithms and Genetic Programming}
+
+\renewcommand{\thispagestyle}[1]{} % do nothing
 
 \pagestyle{fancy}
 \fancyfoot{}
@@ -31,7 +34,6 @@
 \fancyfoot[R]{\small Page \thepage}
 \fancyfoot[L]{\small \it 183 CS/2012/UG/TC/1}
 
-
 \captionsetup[figure]{labelformat=simple, labelsep=period}
 \titleformat{\section}
 	{\normalfont\large\bfseries}{\thesection.}{1em}{}
@@ -39,6 +41,7 @@
 	{\normalfont\normalsize\it}{\thesubsection.}{1em}{}
 %\titleformat{\subsubsection}
 %	{\normalfont\normalsize\it}{\thesubsubsection}{1em}{}
+
 \begin{document}
 \title{\LARGE \bf Artificial Life Creation Comparing Genetic Algorithms and Genetic Programming\vspace{1cm}}
 \author{\small Tom Cammann\\
@@ -531,6 +534,60 @@ altered, but using git diff meant I could easily inspect the changes and quickly
 results that were being produced by the project.
 
 \section{Results}
+
+Results obtained from the project showed expected but interested outcomes. The results cover the whole ALife creation process including
+development and implementation of the evolutionary computation. The results showed how much effort and technical skill was needed to
+implement each of the algorithms and how effective and responsive the ALife was to its environment.
+
+\subsection{Effort in Implementation}
+
+After the general framework for the evolutionary computation was developed the genetic algorithm was implemented. The JGAP package used
+was straight forward to use and after some time reading documentation and other resources about JGAP it was simple to implement a basic
+ALife program. However this program did not receive any output from the environment, these elements could not be directly programmed into
+the genetic algorithm. The main bulk of implementation and testing was done on the ALife sensors. These sensor could not self evolve or 
+create themselves as there is no mechanism for complex recombination of variables in genetic algorithms. Once the sensors were developed
+the parameters for these sensors could be fed in from the genetic algorithm. The genetic algorithm then optimises the sensors to suit
+the environment best. The other genes that were programmed into the ALife for the genetic algorithm were other ALife characteristics
+such as memory length and variables that effected some life abilities. These variables were also optimised during the run. Introducing
+these variables into the genome was straight forward, and expanding on the current genome to add more genes would be a trivial process.
+The genetic algorithm produced good results during development too, as more sensors and more genes were added to the ALife the results
+improved and showed a strong correlation between more sensors and higher fitness. This meant that development could be incremental allowing
+instant testing. The actual runtime of the GA was quicker than anticipated, this enabled the project to increase the population size which
+was initial meant to remain around 1000 to around 2000.
+
+\paragraph{}
+The genetic program took much longer to develop and refine. The was less documentation and resources available for genetic programming 
+development in JGAP but that will not be taken into account. The complexity came in developing genes for each of the sensors. Each sensor
+needed to be encapsulated inside a gene, which either required an input and produced output or just produced output. The output between
+the genes had to also be standardised to a certain type to allow interoperablity between the genes. The genes produced in this application
+all produced primitive doubles, which caused some issue with some of the sensors. As the program structure was made up during runtime by
+the genetic program, the genes had to be completely abstract. The run time for these programs was actualy faster than that of the GA due
+to the fact many of the solutions generated were much smaller than the GA ALife produced. This meant that the average run time was much 
+less overall. However this was not always the case as some run configurations created GP solution trees that were much larger than the 
+GA solutions, these took much longer to evaluate and caused a slow down for the entire genetic program. The implementation of the GP was 
+more of a technical challeneg as well, requiring a greater understanding of Java and of evolutionary computation. Understanding and debugging
+was a longer and more drawn out process, as the ALife program to be debuged was hidden behind the GP tree inside the JGAP interface.
+This would hold true for any other implementation of a GP, the code being run inside the evolutionary computations is hidden away. If strange
+structures arise inside the tree such as a loop in the tree it can be very hard to detect as the only real output is the log and
+the tree structure. Once the genetic program was stable, the process to extend the ALife's capabilities and sensors was a simple one. Before
+runtime genes can be enabled and disabled for usaged during the evolutionary computation. This means that genes can be hotswapped between
+runs and results can be directly compared to understand the impact that change had on the run. An example of this was disabling the the turn
+right gene in one particular run. The fitness took more generations to climb to the fitness achieved by the run with both turn right and
+turn left. This shows how much more resilient the genetic algorithm is to change in the genome, it is able to adapt better to changed in
+the environment also.
+
+%Environment change
+
+%CREATION OF ALIFE.
+%implementation
+%evaluation
+%adaptation - how well the ALife adapted.
+%extension, different environments. 
+
+
+%Ease of extension to other ALife
+
+
 
 \section{Testing}
 The main goal behind testing this project was to ensure complete correctness of the implementation which utilises the JGAP framework.
