@@ -576,8 +576,7 @@ right gene in one particular run. The fitness took more generations to climb to 
 turn left. This shows how much more resilient the genetic algorithm is to change in the genome, it is able to adapt better to changed in
 the environment also.
 
-\subsection{Tools}
-\subsubsection{User Interface}
+\subsection{User Interface}
 To help in the comparison of the two algorithms a user interface was developed. There are several cal parts to the user interface, the main
 interface was the ALife visualisation. This interface has been robust and very informative throughout the project, providing valuable
 feedback about the ALife the from both algorithms. Figure ~\ref{fig:interface1} shows this main interface, using a small sized map.
@@ -596,7 +595,7 @@ ALife form in the center is controlled by the ALife. The color of the ALife, or 
 computation also. Along with the ALife visualisation, there is a real time graph showing the fitness  across the generations of the 
 evolutionary computation. This graph is updated as the evolutionary computation moves through generations. This can be seen in figure
 ~\ref{fig:nicegraph}. This figure has the highest, lowest and average fitness achieved for each generation across 60 generations. This
-graph is also easily extensibile allowing more data to be visualised with the minimum of effort thanks to the framework developed in
+graph is also easily extensible allowing more data to be visualised with the minimum of effort thanks to the framework developed in
 this project.
 
 \begin{figure} [ht]
@@ -606,6 +605,8 @@ this project.
 \label{fig:nicegraph}
 \end{figure}
 %Environment change
+
+
 
 %CREATION OF ALIFE.
 %implementation
@@ -737,11 +738,45 @@ repetitive testing.
 
 \section{Conclusion}
 The project has generated interesting findings along with a useful tool for further information gathering. The finds relate to the implementation of each algorithm
-showing the beneifits of using GAs or GPs within different situations. The application developed allows the easily fine tune a GA or GP and produce visual results 
-from its fittest offspring. This tools has been developed with mindset that other developers may with to adapt or extend this applicationa and has therefore
-been produced in a readable and documented way. The application produced has been of high quality, with a test driven development, allowing furhter tests to be
+showing the benefits of using GAs or GPs within different situations. The application developed allows the easily fine tune a GA or GP and produce visual results 
+from its fittest offspring. This tools has been developed with mindset that other developers may with to adapt or extend this application and has therefore
+been produced in a readable and documented way. The application produced has been of high quality, with a test driven development, allowing further tests to be
 added easily also. The applications GUI is professional looking, with a clean interface and simple to use, allowing the user to visualise and play with the 
 ALife that has been created by the evolutionary computation.
+
+The documenation produced along with the code is also of high quaility. The main documentation provided with the source code is the Javadoc. A javadoc has been 
+written for almost every method and every class, with useful and often detailed description of the method or class. This documentation allows future developers
+of this code to quickly understand the code and be able to extend and improve the current code. This JavaDoc is also improves code during development as it 
+provides a constant reference to information about any classes used and how they should be used in the context of this application. 
+Along with the JavaDoc, the code has used strict coding standards and has adhered to them very well which has produced very high quality code. High quality code
+means that the code is readable, understandable and extensible. The code has been designed with extension in mind, producing interfaces and abstract classes
+that facilitate these extensions easily. 
+
+\subsection{Future Improvements}
+The application developed went through a long design process however this design had to be altered somewhat during the implementation stage, this meant that some
+features in the design could not be fully implemented in the desired way. An oversight on how the GP would execute its solution left a design flaw within the program,
+such that the frame timing between the GP and GA was not equal. If the project was redesigned then this issue could be remedied by creating a different framework for
+handling the idea of time within the simulation. Currently time is handled by the EnvironmentMap.java interface, where the incrementTimeFrame() is called, this then
+calls each ALife form on the map and ask to to make a 'move'. Ideally this idea of time could be handled independently by the ALife, without deferring to the map for
+a call to move. Perhaps the ALife could have a cycle speed in which it can do one action every cycle, where the cycle time maybe controlled by the evolutionary algorithm
+or statically set. 
+Another design improvement that could be made is to improve the secuirty and abstractness of the code. Currently many classes that do not need access to the ALife
+object have access to the ALife object. It was very difficult separating responsibilities for this class into distinct sets which could then be implemented through
+interfaces. The biggest weakness of the ALife class is the Brain.java interface that has to be set during the creation of a concrete class. The brain interface
+delegates control of the ALife during run time, and has complete control of the ALife. This Brain object needs to be reimplemented to allow better abstract and allow
+easier extension. The Brain interface is slightly confusing as the only method it implements is the think() method. This method is called when the ALife is required to
+move. The GP ALife implements this interface with only a few lines with a call to the GP solution which then chooses the action for the ALife to execute, whereas the
+GA ALife Brain contains all of the sensors for the ALife, and directly controls the flow of the GA ALife.
+There are also many other forms of ALife that could be simulated and tested, some testing was done of interacting and symbiotic ALife, however the implementation of
+these ALife has not yet been finished. The testing done showed promising results. Simulations run where ALife could produce resources which other could consume, produced
+interesting results where the ALife would learn to follow each other as close as possible and occasionally changing directions. This behaviour was
+interesting to observer and further study of interacting ALife would certainly be a path this project would take if more work was to be done.
+Another general improvement that could be made is to write more unit tests for the application. Currently the test coverage reported by Cobertura is only 31%. This
+value may seem very low, but the tests have been focused on the logic portions of the code and the critical code that would cause major error in the code if there 
+were errors. With that said, other areas of the code could certainly produce errors that could effect the running of the application. To remedy this, more tests
+should be written to increase code coverage and branch coverage. Test coverage should ideally be around 80% ~\cite{massol04}.
+
+
 
 \bibliographystyle{plain}
 \bibliography{disseration}
