@@ -46,13 +46,12 @@
 \title{\LARGE \bf Artificial Life Creation Comparing Genetic Algorithms and Genetic Programming\vspace{1cm}}
 \author{\small Tom Cammann\\
 \small \it{School of Systems Engineering, The University of Reading, UK}}
-%Computer Science, cy004947@reading.ac.uk}
 \date{}
 \maketitle
 
 \renewcommand{\abstractname}{}
 \begin{onecolabstract}
-\noindent \it Abstract - This report focuses on the generating artificial life through two distinct methods, genetic algorithms and genetic programming. The
+\noindent \it Abstract - This report focuses on generating artificial life through two distinct methods, genetic algorithms and genetic programming. The
 report describes the fundamentals of these two methodologies, compares and contrasts their differences in the creation of similar 
 artificial life. The report outlines tools developed during this project to accomplish an effective comparison of these two methods.
 These include a method of visualising the artificial life and the environment it inhabits during its existence. The outcome of 
@@ -63,88 +62,90 @@ in contrast to genetic algorithms which are much simpler and can better replicat
 
 \section{Introduction}
 
-Artificial life or ALife is the study and implementation of systems that are simulations or replications of natural life.
-These systems can be biochemical, mechanical, computer software and many other medium that supports the existence of structured self controlled information.
-This report will be looking at software artificial life, or Soft ALife and how it can be implemented using evolutionary computation.
-Evolutionary computation has been used for the creation of artificial life for many decades, REF + EXAMPLE. Koza demonstrated the use of GP in 1992 ??? to solve the ant's nest problem. This used a set
-of available commands for the ants to use, such as move forward, turn, move to nest. The idea was for
-the ants problem was to order a set or resources on a simple 2D map. This simple example showed how ALife could
-be used in the context of genetic programming.
-Using evolutionary computation has many qualities that replicate naturally evolved life, and is one few computational methods known that can generate solutions to problems without human interaction.
+Artificial life or Alife is the study and implementation of systems that are simulations or replications of natural life~\cite{adami98}.
+These systems can be biochemical, mechanical, computer software, or any other medium that supports the existence of structured self controlled information.
+This report will be looking at software artificial life, or Soft Alife and how it can be implemented using evolutionary computation.
+Evolutionary computation has been used for the creation of artificial life for many decades with the field of study first beginning in 1986~\cite{mit99}.
+Koza demonstrated the use of genetic programming to  in 1992 to solve the ant's nest problem~\cite[~p.329]{koza92}. This used a set genes as available
+commands for the simulated ants to use, such as move forward, turn, move to nest. The ants problem was an ordering problem on a set of resources on a simple
+2D map. This simple example showed how Alife could be used in the context of genetic programming.
+Using evolutionary computation has many qualities that replicate naturally evolved life, and is one few computational methods known that
+can generate computational solutions to problems without human interaction~\cite{koza91}.
 Evolutionary computation has been applied to artificial life to generate life forms that can inhabit an environment and are 'solutions' to this environment.
 
 \paragraph{}
-This project also aims to develop an application that can be modified and extending, providing relevant documentation, adopting established design
-patterns and developing readable source code. This application will facilitate the running of two evolutionary computation algorithms and allows
+This project also aims to develop an application that can be modified and extended; providing relevant documentation, adopting established design
+patterns and developing readable source code. This application will facilitate the running of two evolutionary computation algorithms and will allow
 custom goals to be set for these algorithms. Different environment and challenges can be developed for the artificial life to solve using the 
-genetic algorithms, with easy to use structured code set up to allow the extension and alteration of these environments for new and further
-usage of the application. This application will also provide real time feed back to the use about the algorithms progress and the life forms
-this algorithm produces. This will allow quicker understanding of whether the right implementation has been chosen and great visual feedback
-to confirm the correct implementation has been chosen. The application will also allow in depth simulation of the ALife, with the ability to 
-run the ALife on a previously saved environment or a new randomly generated one. The simulations can be paused and slowed, and run through 
-step by step to help understand the ALife generated even better. 
+genetic algorithms, with easy-to-use structured code set up to allow the extension and alteration of these environments for new and further
+usage of the application. This application will also provide real-time feedback to the user about the algorithms progress and the life forms
+this algorithm produces. This will allow quicker understanding of whether the right implementation has been chosen and provide great visual feedback
+to confirm the correct implementation has been chosen. The application will also allow in-depth simulation of the Alife, with the ability to 
+run the Alife on a previously saved environment or a new randomly generated one. The simulations can be paused and slowed, and run through 
+step-by-step, to help better understand the Alife generated.
 
 
 \paragraph{}
-Evolutionary computation generally works by generating a population of solutions to a problem, and then using this population to create a better next population that can solve the given problem better.
+Evolutionary computation generally works by generating a population of solutions to a problem, and then using this population to create a better generation that can solve the given problem better.
 To create a better population crossover, mutation and selection are used in various forms to generate a fitter population.
 Each of these populations is referred to as a generation.
 Each member in the population is a solution to the problem, however these solutions do not have to be correct, and are often close to correct before many generations have passed.
 Each member of the population is assigned a fitness value to correspond with how close the solution is to correct, or how effective the solution is.
-In the Context of artificial life this fitness value may correspond to how well the life form survives in a given environment.
+In the context of artificial life this fitness value may correspond to how well the life form survives in a given environment.
 
-% why are we comparing these 2 methods
 \paragraph{}
-The purpose of this investigation is to compare and contrast the usage of genetic algorithms and genetic programming in the creation of artificial life. Genetic programming first became prevalent in the early 1990 after Koza used used GP to solve ??? ~\cite{Koza90}. After the advancements made by Koza many applications for GP emerged and one of the earlier applications was in ALife. Before these advancements GA was the primary method for generating ALife.
-
-However these two have very different implementations and usage, this report will investigate the usage of both in the context of artificial life creation. 
-% Genetic programming can generate unique solutions, unrestrained, GA more restrained. 
+The purpose of this investigation is to compare and contrast the usage of genetic algorithms and genetic programming in the creation of artificial life.
+Genetic programming (GP) first became prevalent in the early 1990 after Koza used GP to solve many real world problems such as the creation of an antenna
+which performed better than previous man-made designs~\cite{koza05}. After the advancements made by Koza, many
+applications for GP emerged and one of the earlier applications was in Alife. Before these advancements genetic algorithms (GA) were the primary method for generating Alife.
+However these two algorithms have very different implementations and usage, this report will investigate the usage of both in the context of artificial life creation. 
 Being able to compare this two types of algorithms will enable faster and better selection of algorithms during 
-the design for an artificially evolved life form. It can be very daunting prospect to choose an algorithm
-for developing and evolving artificial life, there are many factors that will need to be considered and this
+the design of an artificially evolved life form. It can be a very daunting prospect to choose an algorithm
+for developing and evolving artificial life; there are many factors that will need to be considered and this
 project will help future research into artificial life by comparing the two algorithms used in this project.
-These algorithms will both have their benefits and pitfalls, with these exposed through this report this 
-will enable better understanding of which algorithm to choose.
+Both these algorithms will have their benefits and pitfalls; exposing these in this report will enable better understanding of which algorithm to choose.
 
 
 \paragraph{}
 This project will design and implement an application which will launch and visualise the evolution of a
 simple artificial life form. This application will make use of either genetic algorithms or genetic programming,
-depending on conditions chosen. The initial parameters can be chosen for developing this artificial life form
-and then this will produce a statistics of the evolutionary process, graphing the fitness over generations
-and also the ability to visualise the life form in its environment. This will give the use the advantage of being
-able to study the behaviour of the life form and understand it better than reading the genome of the fit life forms
-produced by the evolutionary algorithm.
-
+depending on conditions chosen at run time, this application will then generate an artificial life form that will navigate a given environment.
+The initial parameters for the creation of Alife can be chosen before run time. During run time statistics of the evolutionary process will be produced, and
+graphing the fitness over generations will show how the evolutionary algorithm is doing. There will also be an interface to visualise the life  algorithms form in its
+environment. This will give the use the advantage of being able to study the behaviour of the life form and understand its behaviour better
+than reading the genome.
 
 \paragraph{}
-%how we compare them
+Research on choosing an algorithm for artificial life is fairly sparse and almost none on a direct comparison between the two algorithms. There are also
+very few research articles on the generation of artificial life using JGAP or creating a framework for evolution that can accommodate multiple 
+evolutionary algorithms. The research done in this project shows novel use of software to compare two evolutionary algorithms in the pursuit of
+artificial life.
 
 \subsection{Requirements}
-Comparing evolutionary algorithms in a fair and equal way has certain requirements. First both of the algorithms have to be implemented in such a way that allows a direct comparison. 
-This can be done by constructing an environmental problem for artificial life to solve, and then implemented a GA to solve to problem and then a GP to solve the problem. Direct
-comparisons can be made on how these algorithms were implemented and how efficient and effective they are at solving the given environmental problem. This problem can then be changed, 
-and the algorithms reimplemented and a comparison can be made on how well the algorithms could be adapted to the new problem and again how effective the algorithms were at
-finding a solution to this problem.
+Comparing evolutionary algorithms in a fair and equal way has certain challenges. First, both of the algorithms have to be implemented in such a way that allows a direct comparison. 
+This can be done by constructing an environmental problem for artificial life to solve, and then implemented either evolutionary algorithm to solve the problem. Direct
+comparisons can be made on how these algorithms were implemented and how efficient and effective they are at solving the given environmental problem. This
+environmental challenge can then be changed, and the algorithms reimplemented and a comparison can be made on how well the algorithms can be adapted to the new
+problem and again how effective the algorithms were at finding a solution to this problem.
 
-To setup these environmental problems for the artificial life to solve an environment needs to be constructed, in which either algorithm can generate an artificial life form
-to inhabit.
+To setup these environmental problems for the artificial life to solve, an environment needs to be constructed in which either of the algorithms can generate
+an artificial life form to inhabit.
 
 \paragraph{}
 This interoperability between the two algorithms will also carry over to the visualisation of the artificial life. This will mean
-that the visualisation and statistics generated about these artificial life forms will not care if the life form was created
-through an GA or a GP, this information will be abstracted away. This will increase the ease of which the algorithm output can
-be compared. However this will pose a challenge to program, to be able to implement the same functionality between the 
+that the visualisation and statistics generated about these artificial life forms will have to be abstract and produce similar results regardless of
+whether the Alife was generated through a GA or a GP, this information will be encapsulated. This will increase the ease of which the algorithm output can
+be compared. However this will pose a challenge to program; to be able to implement the same functionality between the 
 different algorithms. For example if the life form has a sight function or 'ability' this need to be programmed for both
-the GA and GP because of the way the two algorithms work. These need give the same response in the same situation. One of the
+the GA and GP because of the way the two algorithms work. These need to give the same response in the same situation. One of the
 algorithms can not have advantages over another.
 	
 
 \section{Analysis}
 
 \subsection{Key Problems}
-Producing artificial life that can solve the environmental and situational problems that are presented in the simulated environment %TENSE?!
-will be the biggest problem to over come in this project. Generating artificial life is a complex process; first an environment to simulate the artificial life has to be produced, and then
+Producing artificial life that can solve the environmental and situational problems that are presented in the simulated environment 
+was the biggest problem to overcome in this project. Generating artificial life is a complex process; first an environment to simulate the artificial life has to be produced, and then
 an interface between the artificial life and the environment has to be implemented. Finally the process for creating artificial life through a GA or GP can be produced, but these algorithms
 both need to interface with the artificial life in an abstract manner so one can not distinguish between an GP implementation of artificial life and a GA implementation.
 
@@ -171,7 +172,7 @@ The key issues with this project are based around a fair comparison of the algor
 \section{Genetic Algorithms}
 
 Genetic algorithms were first became a main stream theory in the 1970s when John Holland published his ideas on the future of evolutionary 
-computation. His book on 'Adapation in Nature and Artificial System' in 1975 laid the ground works for modern genetic algorithms. However due to computation
+computation. His book 'Adapation in Nature and Artificial System' in 1975 laid the ground works for modern genetic algorithms. However due to computation
 power of the computers at these times genetic algorithms did not take off until the 1980s when the average desktops computational power became
 high enough to allow any practical application of genetic algorithms.
 
@@ -233,11 +234,12 @@ then the number will change by a factor of ???.
 
 \subsection{Mutation}
 In genetic algorithms mutation occurs on a per gene basis. In the configuration of the genetic algorithm there will be a value which 
-determines the likelihood of a mutation on a gene within an individual. This mutation is usually applied after crossover 
-
-%better title needed!!!
-%Section about how this project uses GA
-\subsection{USAGE IN THIS}
+determines the likelihood of a mutation on a gene within an individual. This mutation is usually applied after or during crossover ~\cite{goldberg1989genetic}.
+This mutation can vary depending on the precise implementation. The mutation can cause a complete gene change, meaning the gene before mutation will
+have no impact on the new gene, you can also have a variance mutation in which the mutation will cause a change in the current gene. A variance
+mutation on a integer gene would change the value represented by this gene by a set amount in relation to the original value. The mutation could be \(\pm5\)
+which would cause an integer gene of 81 to change to a maximum of 86 or a minimum of 76. This project actually makes use of the variance mutation, as it is 
+better for narrowing in on a local optimum, and most of the simulations used in this project the local optimum is usually the global one.
 
 \section{Genetic Programming}
 %intro to gp
@@ -247,15 +249,15 @@ The run of a genetic programming algorithm is very similar to that of the geneti
 population is constructed and then the fitness is computed. Individuals are selected for crossover and mutation which then forms a new 
 population to repeat this process on. The main difference between genetic algorithms and genetic programming is in genetic programming
 the program to evaluate is the individual in contrast to genetic algorithms where the genes represented in the individual are applied to
-a program for evaluation ~cite{whitley94} ~cite{gpintro98}. Each individual in the population represents an entire program, rather than a set of values which can be
+a program for evaluation~\cite{whitley94,gpintro98}. Each individual in the population represents an entire program, rather than a set of values which can be
 applied to a program. 
 
 \subsection{Population Representation}
 
 In genetic programming there is a variety of ways to represent a solution. Genetic algorithms are most
-commonly represented in tree form which was first made popular by Nicheal Lynn Cramer after publishing his research in 1985 ~\cite{cramer1985} ~\cite{conf1985}.
+commonly represented in tree form which was first made popular by Nicheal Lynn Cramer after publishing his research in 1985~\cite{cramer1985,conf1985}.
 Other methods of representing a genetically programmed solution such as a graph pose a greater programming/implementation 
-challenge ~\cite{gpintro98} ~cite{poli99}. These more complex method were out of the scope of this research project and so a easier
+challenge~\cite{gpintro98, poli99}. These more complex method were out of the scope of this research project and so a easier
 to implement tree based system has been used.
 The software package used to build the genetic program had very good support for tree based genetic programming which made implementation
 of this project much quicker, this was another reason the tree based representation has been chosen.
@@ -282,10 +284,10 @@ require two input, or two sub nodes. Evaluating this example tree gives:
 \end{figure}
 
 
-To expand on this example we can replace the basic math functions of addition, subtraction, etc with functions that the ALife can
+To expand on this example we can replace the basic math functions of addition, subtraction, etc with functions that the Alife can
 do or carry out that require input and receive and we can replace the terminal with either state variables or with functions that do not 
 require an input. These functions could be checking for a wall ahead or checking for life, could issue a command to turn a certain
-amount or any other command that the ALife is programmed to carry out that requires an input. The terminals could also be functions
+amount or any other command that the Alife is programmed to carry out that requires an input. The terminals could also be functions
 such as move forward, which do not require any input or can be simple state variables such as y position or x position on a given map.
 The program trees can be also made more complex by adding control statements into the tree. Figure ~\ref{fig:tree-if} shows a visual
 representation of this. The IF node requires 3 child nodes; the right most child is evaluated first, this the control statement. If
@@ -379,15 +381,15 @@ objects would not be disturbed by any GUI or user interface functions that exist
 
 \subsection{Project Design}
 The requirements of this project were to create a evolutionary computation implementation along with a application to visualise and
-display the ALife created by the evolutionary computation. Breaking down the requirements we can see there are two many aspects
+display the Alife created by the evolutionary computation. Breaking down the requirements we can see there are two many aspects
 the evolutionary computation and the visualisation components, these two components are fairly abstract and do not need to alter
-each others states during execution the application. The visualisation only references the ALife and does not need to alter
-the ALife, and the ALife does not need to know of the existence of the visualisation; the same goes for the evolutionary framework
+each others states during execution the application. The visualisation only references the Alife and does not need to alter
+the Alife, and the Alife does not need to know of the existence of the visualisation; the same goes for the evolutionary framework
 in which it does not need to know the existence of the visualisation and the visualisation does not need to alter any state or
-information this program may contain. Visualising the ALife presents a common programming problem, in which we have a model a view and a controlling
-device. The view will be the graphical user interface, which will display the animation of the ALife inside its environment, the 
-model will be the environment in which the ALife inhabits and the controller will be the ALife. This problem has a generic programming
-solution or architectural pattern called Model View Controller (MVC) ~\cite{fowler03}. This pattern facilitates separation or responsibility
+information this program may contain. Visualising the Alife presents a common programming problem, in which we have a model a view and a controlling
+device. The view will be the graphical user interface, which will display the animation of the Alife inside its environment, the 
+model will be the environment in which the Alife inhabits and the controller will be the Alife. This problem has a generic programming
+solution or architectural pattern called Model View Controller (MVC)~\cite{fowler03}. This pattern facilitates separation or responsibility
 and independence between these three components. The application designed followed this model, figure ~\ref{fig:mvc} demonstrates 
 how this model can be applied to this application. The arrows on this figure demonstrate which components interaction, a leading arrow
 shows that this component interacts and may alter the component it is point to.
@@ -400,8 +402,20 @@ shows that this component interacts and may alter the component it is point to.
 \end{figure}
 
 The application developed for this project created several high level interfaces to allow for this model, and the development for each
-component was done separately. Development of one component, eg. ALife controller would not affect any development of the visual 
+component was done separately. Development of one component, eg. Alife controller would not affect any development of the visual 
 GUI components.
+
+\paragraph{}
+
+
+\begin{figure} [ht]
+\centering
+\subfigure[Genetic Algorithm Alife architecture]{\includegraphics[scale = 0.3]{alife-arch.png}}
+\subfigure[Genetic Programming Alife architecture]{\includegraphics[scale = 0.3]{gpalife.png}}
+\caption{Architecture design of the artificial life between the two algorithms}
+\label{fig:mvc}
+\end{figure}
+
 
 \section{Implementation}
 To evaluate a common artificial life form a simulation environment has been created.
@@ -420,7 +434,7 @@ lot of development during this project was focused on developing a framework for
 using JGAP. 
 
 Visualising both the GP and GA in the life form meant developing an abstract way of representing the state of the life form. This was done
-through an abstract class called ALife. This abstract class provided a high level interface for other objects to read (and modify if necessary)
+through an abstract class called Alife. This abstract class provided a high level interface for other objects to read (and modify if necessary)
 the state of the life form. The abstract class contained many of the variables for the life form and the setting and getting functions 
 associated with them. 
 
@@ -462,11 +476,9 @@ The resources generated for each map are randomly placed, with random calorific 
 a type which can be checked by the life form. If a life form is on top of a resource, i.e. if it is in the same cell then the life form can consume a resource. 
  
 
-%talking about how the project framework
-%how a frame to accommodate genetic programming and GA
 \subsection{Evolutionary Framework}
-To investigate and compare these two algorithms %? algorithms??%
-a framework to accommodate both algorithms was produced. This framework had to allow comparison of the effectiveness and fitness of the life forms evolved, efficiency of the 
+To investigate and compare these two algorithms a framework to accommodate both algorithms was designed and implemented. This framework had to allow comparison
+of the effectiveness and fitness of the life forms evolved, efficiency of the 
 evolutionary computations in generating a fit life form and the correctness of the solutions generated. To enable all these things an abstract framework had 
 to be developed to allow comparison without respect to the algorithm that was used. This first accomplished by visualising members of the population and 
 manually inspecting the fittest life form of each generation. 
@@ -483,7 +495,6 @@ and energy level. The visualisation renders the 2D map with resources on, with t
 adjusted during the visualisation, but is default set to 5 frames per second. The visualisation itself is contained within the visualisation window. This window
 provides access to the visualisation such as start, stopping and restarting the simulation.
 
-
 The visualisation has also been used to debug the life forms produced, to find errors in the project code which the life forms have ended up exploiting. An example
 of this was during early development their existed a bug that cause the life form to stop decrementing its energy when it got to a map corner. When the simulation
 was run with this bug in the life forms would evolve to find the corners of the map as they could get stuck their and never die. These life forms were not that fit 
@@ -498,7 +509,7 @@ and run time parameters were involved with its creation.
 \paragraph{}
 Along with being able to visualise the artificial life form in an environment, there is also the ability to visualise the
 evolutionary process. A high level view of the processes occurring underneath is available during a standard launch of the
-main application. First is a graph displaying the fitness across the evolutionary generations. This graph shows in real time the
+main application. First is a graph displaying the fitness across the evolutionary generations. This graph shows in real-time the
 average, maximum and minimum fitness of all the artificial life in each generation.
 
 This can however be a significi
@@ -507,7 +518,7 @@ This can however be a significi
 
 \section{Problems Encountered}
 
-During implementation many hurdles had to be over come during each sprint phase of the project. However there were some issues that were much harder to overcome than others. One of these problems was
+During implementation many hurdles had to be overcome during each sprint phase of the project. However there were some issues that were much harder to overcome than others. One of these problems was
 producing fair and equal output per time frame from each algorithm. The problem was that during each time frame the artificial life had the opportunity to survey its environment and then react to this
 environment, hopefully in a way such that it can find more resources to consume, but the rules governing these interactions differed between the two algorithms.
 This was because of the way the two algorithms generate output which controls the life form it was difficult to align
@@ -517,40 +528,40 @@ of the way the genetic algorithm controls the artificial life. The GA did not ha
 
 This was a difficult problem to solve, either the genetic algorithm had to modified in such a way that meant it could call interaction methods
 a number of times or limit the number of calls the GP could make to these interactions. It was deemed easier to modify the GP, and a solution
-was devised to fix this issue. The solution was to change the way the GP controlled the ALife. Instead of directly calling the interaction methods
+was devised to fix this issue. The solution was to change the way the GP controlled the Alife. Instead of directly calling the interaction methods
 the GP would instead return a number, this number would then refer to a specific action. The interactions that could take place in 
-the environment are then hard coded into the program, e.g. if 1 is returned the ALife turns left, if 2 is returned the ALife turns right.
+the environment are then hard coded into the program, e.g. if 1 is returned the Alife turns left, if 2 is returned the Alife turns right.
 
 \paragraph{}
 Another problem encountered was during refactoring of the code. Towards the end of the project the code base was fairly substantial, and any
 untested modification to the code could produce errors. During some refactoring of the EnvironmentMap class several bugs slipped through
 which meant a longer than necessary amount of time was spent debugging. However due to this project adopting the software version control system
 Git, a 'diff' or file comparison could be made on the changed files. For the refactoring a new branch was created on git, the refactored code
-was then developed on this refactoring branch, and the working unfactored code remained on the master branch. When the bugs occurred in the
+was then developed on this refactoring branch, and the working code remained on the master branch. When the bugs occurred in the
 projects code the file comparison between these two branches was extremely helpful in locating exactly what had been changed and what
 possible bugs could have arisen from these changes. In this particular case a method that was acting as the sight for the artificial life
 contained an erroneous 'not' symbol causing havoc. Initially it was hard to understand where the bug had arisen as many methods had been
-altered, but using git diff meant I could easily inspect the changes and quickly went through any changes would could have produced the
+altered, but using git diff, a tool for comparing files, meant I could easily inspect the changes and quickly went through any changes would could have produced the
 results that were being produced by the project.
 
 \section{Results}
 
-Results obtained from the project showed expected but interested outcomes. The results cover the whole ALife creation process including
+Results obtained from the project showed expected but interested outcomes. The results cover the whole Alife creation process including
 development and implementation of the evolutionary computation. The results showed how much effort and technical skill was needed to
-implement each of the algorithms and how effective and responsive the ALife was to its environment.
+implement each of the algorithms and how effective and responsive the Alife was to its environment.
 
 \subsection{Effort in Implementation}
 
 After the general framework for the evolutionary computation was developed the genetic algorithm was implemented. The JGAP package used
 was straight forward to use and after some time reading documentation and other resources about JGAP it was simple to implement a basic
-ALife program. However this program did not receive any output from the environment, these elements could not be directly programmed into
-the genetic algorithm. The main bulk of implementation and testing was done on the ALife sensors. These sensor could not self evolve or 
+Alife program. However this program did not receive any output from the environment, these elements could not be directly programmed into
+the genetic algorithm. The main bulk of implementation and testing was done on the Alife sensors. These sensor could not self evolve or 
 create themselves as there is no mechanism for complex recombination of variables in genetic algorithms. Once the sensors were developed
 the parameters for these sensors could be fed in from the genetic algorithm. The genetic algorithm then optimises the sensors to suit
-the environment best. The other genes that were programmed into the ALife for the genetic algorithm were other ALife characteristics
+the environment best. The other genes that were programmed into the Alife for the genetic algorithm were other Alife characteristics
 such as memory length and variables that effected some life abilities. These variables were also optimised during the run. Introducing
 these variables into the genome was straight forward, and expanding on the current genome to add more genes would be a trivial process.
-The genetic algorithm produced good results during development too, as more sensors and more genes were added to the ALife the results
+The genetic algorithm produced good results during development too, as more sensors and more genes were added to the Alife the results
 improved and showed a strong correlation between more sensors and higher fitness. This meant that development could be incremental allowing
 instant testing. The actual runtime of the GA was quicker than anticipated, this enabled the project to increase the population size which
 was initial meant to remain around 1000 to around 2000.
@@ -562,14 +573,14 @@ needed to be encapsulated inside a gene, which either required an input and prod
 the genes had to also be standardised to a certain type to allow interoperability between the genes. The genes produced in this application
 all produced primitive doubles, which caused some issue with some of the sensors. As the program structure was made up during runtime by
 the genetic program, the genes had to be completely abstract. The run time for these programs was actually faster than that of the GA due
-to the fact many of the solutions generated were much smaller than the GA ALife produced. This meant that the average run time was much 
+to the fact many of the solutions generated were much smaller than the GA Alife produced. This meant that the average run time was much 
 less overall. However this was not always the case as some run configurations created GP solution trees that were much larger than the 
 GA solutions, these took much longer to evaluate and caused a slow down for the entire genetic program. The implementation of the GP was 
 more of a technical challenge as well, requiring a greater understanding of Java and of evolutionary computation. Understanding and debugging
-was a longer and more drawn out process, as the ALife program to be debugged was hidden behind the GP tree inside the JGAP interface.
+was a longer and more drawn out process, as the Alife program to be debugged was hidden behind the GP tree inside the JGAP interface.
 This would hold true for any other implementation of a GP, the code being run inside the evolutionary computations is hidden away. If strange
 structures arise inside the tree such as a loop in the tree it can be very hard to detect as the only real output is the log and
-the tree structure. Once the genetic program was stable, the process to extend the ALife's capabilities and sensors was a simple one. Before
+the tree structure. Once the genetic program was stable, the process to extend the Alife's capabilities and sensors was a simple one. Before
 runtime genes can be enabled and disabled for usage during the evolutionary computation. This means that genes can be hotswapped between
 runs and results can be directly compared to understand the impact that change had on the run. An example of this was disabling the turn
 right gene in one particular run. The fitness took more generations to climb to the fitness achieved by the run with both turn right and
@@ -578,21 +589,21 @@ the environment also.
 
 \subsection{User Interface}
 To help in the comparison of the two algorithms a user interface was developed. There are several cal parts to the user interface, the main
-interface was the ALife visualisation. This interface has been robust and very informative throughout the project, providing valuable
-feedback about the ALife the from both algorithms. Figure ~\ref{fig:interface1} shows this main interface, using a small sized map.
+interface was the Alife visualisation. This interface has been robust and very informative throughout the project, providing valuable
+feedback about the Alife the from both algorithms. Figure ~\ref{fig:interface1} shows this main interface, using a small sized map.
 
 \begin{figure} [ht]
 \centering
 \includegraphics[scale = 0.45]{smallvis.png}
-\caption{GUI for visualising ALife}
+\caption{GUI for visualising Alife}
 \label{fig:interface1}
 \end{figure}
 
 This figure shows the interface rendering a small map, with resources placed upon the map, these are the red apples. The interface can
 render multiple life forms on the map at one time, and render different types of resources that the life form may consume. The animation
 or image for each object on the screen is handled by the Java object represented by it. This means that the animation for the green
-ALife form in the center is controlled by the ALife. The color of the ALife, or size, or shape could be manipulated by the evolutionary
-computation also. Along with the ALife visualisation, there is a real time graph showing the fitness  across the generations of the 
+Alife form in the center is controlled by the Alife. The color of the Alife, or size, or shape could be manipulated by the evolutionary
+computation also. Along with the Alife visualisation, there is a real-time graph showing the fitness  across the generations of the 
 evolutionary computation. This graph is updated as the evolutionary computation moves through generations. This can be seen in figure
 ~\ref{fig:nicegraph}. This figure has the highest, lowest and average fitness achieved for each generation across 60 generations. This
 graph is also easily extensible allowing more data to be visualised with the minimum of effort thanks to the framework developed in
@@ -601,7 +612,7 @@ this project.
 \begin{figure} [ht]
 \centering
 \includegraphics[scale = 0.6]{nicegraph.png}
-\caption{Real time graph showing fitness across each generation of the evolutionary algorithm.}
+\caption{real-time graph showing fitness across each generation of the evolutionary algorithm.}
 \label{fig:nicegraph}
 \end{figure}
 %Environment change
@@ -628,15 +639,53 @@ this project.
 
 Figure ~\ref{fig:graph2500} shows the fitness distribution a generation of 2500 GA solutions. 
 
+\subsection{Alife Creation}
+
+Creation of Alife through the genetic algorithm and the genetic program was very successful. Both algorithms could solve and complete all of the test
+environments that were tested. These environments included, environments with an abundance of resources, environments with sparse resources and 
+environments with obstacles. The genetic algorithm was very good at generating a general solution for all situations, and produced fit life forms
+very quickly. A run of a map of size 600 by 400 in which there was 150 resources saw a very quick convergence on the global optimum. Within 
+15 generations the highest fitness was in 90% of final highest fitness. This life form has 29 genes, with 19 possible actions genes to call.
+Using the same environment the genetic program run took fewer generations, only 10 generations, to converge on a fitness within 90% of the global optimum fitness, however
+the simulation took 140 seconds longer to compute. The genetic program had 16 possible genes available. 
+
+Simulations with obstacles was the next challenge for the Alife. The genetic algorithm was not as competent at navigating the obstacles as the
+program flow was static and could not dynamically adapt to different situations posed by the obstacles. However the genetic program dealt with
+the obstacles much better. Convergence on a global optimum took 25 generations with the genetic program with the genetic algorithm not quite obtaining
+a fitness as high as the genetic algorithm, converging on a local optimum in 18 generations. The genetic algorithm was still quicker, reaching the 18th generation
+in 112 seconds and the genetic program took 279 seconds to reach the 25th generation.
+
+
 %CREATION OF ALIFE.
 %implementation
 %evaluation
-%adaptation - how well the ALife adapted.
+%adaptation - how well the Alife adapted.
 %extension, different environments. 
 
 
-%Ease of extension to other ALife
+%Ease of extension to other Alife
 
+\section{Discussion}
+
+The main point to draw out of the results is the success of creating artificial life from both genetic algorithms. Along with this point the 
+visualisation of artificial life was also successful, a high quality GUI was produced that enabled viewing and interaction with the Alife.
+The code produced for this project has also been of very high quality. The main aim of this project however was the comparison of artificial 
+life generated by two distinct evolutionary algorithms and this has also been successful. The aims outlined in this project have been fulfilled.
+
+\subsection{Comparison of Artificial Life}
+The results obtained were what was expected, both algorithms produced artificial life that converged upon the global optimum within 30 generations
+for all environments tested. The artificial life showed that more complex problems could be solved, this was demonstrated by the navigation around
+obstacles in the environment which was handled well by both algorithms however the genetic program managed to solve the problem of navigation much
+more succesfully than the genetic algorithm. This was because the dynamic way in which the the genetic program can execute its commands, the genetic
+algorithm has a static implementation of its program flow. This is a major limitation for genetic algorithms. To adapt the genetic algorithm to the
+new environment with obstacles would have meant redesigning the underlying program with in the Alife and not just modify the genes. This is a major 
+consideration when developing artificial life, if your environment is chaning it will be much more costly to develop a genetic algorithm due to the 
+fact that the underlying logic will need refactoring if the environment is modified beyond what the Alife is programmed to solve. The genetic 
+program was very good at dealing with this new scenario, however its run time was longer than that of the genetic algorithm for both situations. The 
+run time has been discussed previously in this report and is longer than that of the genetic algorithm because of the dynamic way in which solutions
+are formed, creating some very long programs. 
+
+These results show that if time and computational power are not of issue then the genetic algorithm creates more adaptable and 
 
 
 \section{Testing}
@@ -691,7 +740,7 @@ refactoring.
 However the 
 areas of the code that could produce 'silent' bugs were targeted for testing. A silent bug is one which would not throw an error
 or even produce erroneous output, but would perhaps alter the outcome of a run slightly. A example of this was a method that
-was used as the eyes of the ALife in the genetic algorithm. The range value is taken from the set of genes, and is used to 
+was used as the eyes of the Alife in the genetic algorithm. The range value is taken from the set of genes, and is used to 
 to limit how far the artificial life can see. The method that was written accidentally reduced this range by 1 due to an issue
 in incrementing a for-loop. This bug was not spotted until a test for this method was written. 
 \paragraph{}
@@ -721,24 +770,24 @@ put into frequently used methods and classes to record the current state that th
 process. The trace log level is used for calls that are very frequent and if not disabled would likely produce a significant
 low down during runtime. 
 
-\subsection{Test ALife}
+\subsection{Test Alife}
 
-Testing the correctness of the ALife was a slightly more complex task, and could not be completely automated through unit testing.
-The common errors that occurred during development of the project which affected the ALife simulation were normally due to the
+Testing the correctness of the Alife was a slightly more complex task, and could not be completely automated through unit testing.
+The common errors that occurred during development of the project which affected the Alife simulation were normally due to the
 artificial life evolving to exploit bugs in the simulation. One such bug allowed to the artificial life to never die by exploiting
-a case were it could skip code that required energy to decremented at the end of each turn, and therefore the ALife did not need
+a case were it could skip code that required energy to decremented at the end of each turn, and therefore the Alife did not need
 to consume resources to become fit.
 
-Another common bug would be where the ALife would get stuck in the corner of the map and not be able to escape this corner. This
-was an error to do with the ALife's navigation and movement commands.
+Another common bug would be where the Alife would get stuck in the corner of the map and not be able to escape this corner. This
+was an error to do with the Alife's navigation and movement commands.
 
 These bugs were discovered by inspection and not through automated testing. This meant these bugs took longer to find and longer to
-debug. Automated tests could not be written for the ALife as there was not an expected behaviour to test against. The best
+debug. Automated tests could not be written for the Alife as there was not an expected behaviour to test against. The best
 test for these artificial life forms was the fitness function. The life form would be successful and pass the tests if the fitness
 was above a certain threshold. Through a particular run of the project if the fitness outcomes were exceptionally high or close to 
 zero then this run would probably have a bug in the implementation of the project and would be inspected. When this occurred
 it was often a time costly bug as the cause would not be given and would have to be found. However the tools developed in this
-project helped greatly in finding these bugs. The first one was using the visualisation frame, an ALife form could be chosen
+project helped greatly in finding these bugs. The first one was using the visualisation frame, an Alife form could be chosen
 and run on a chosen map. The artificial life could then be debugged by stepping through its life, using the visualisation tools.
 Using the verbose logging setup throughout the project and the ability to run the life form time frame by time frame meant that
 some bugs could quickly be found through this process. Different maps could be loaded and the whole process reloaded again for
@@ -748,21 +797,13 @@ repetitive testing.
 \subsection{Testing The Environment}
 
 
-\begin{figure} [ht]
-\centering
-\includegraphics[scale = 0.25]{gen1-2500.png}
-\caption{My figure}
-\label{the-label-for-cross-referencing}
-\end{figure}
-
-
 \section{Conclusion}
 The project has generated interesting findings along with a useful tool for further information gathering. The finds relate to the implementation of each algorithm
 showing the benefits of using GAs or GPs within different situations. The application developed allows the easily fine tune a GA or GP and produce visual results 
 from its fittest offspring. This tools has been developed with mindset that other developers may with to adapt or extend this application and has therefore
 been produced in a readable and documented way. The application produced has been of high quality, with a test driven development, allowing further tests to be
 added easily also. The applications GUI is professional looking, with a clean interface and simple to use, allowing the user to visualise and play with the 
-ALife that has been created by the evolutionary computation.
+Alife that has been created by the evolutionary computation.
 
 The documentation produced along with the code is also of high quality. The main documentation provided with the source code is the JavaDoc. A JavaDoc has been 
 written for almost every method and every class, with useful and often detailed description of the method or class. This documentation allows future developers
@@ -777,24 +818,24 @@ The application developed went through a long design process however this design
 features in the design could not be fully implemented in the desired way. An oversight on how the GP would execute its solution left a design flaw within the program,
 such that the frame timing between the GP and GA was not equal. If the project was redesigned then this issue could be remedied by creating a different framework for
 handling the idea of time within the simulation. Currently time is handled by the EnvironmentMap.java interface, where the incrementTimeFrame() is called, this then
-calls each ALife form on the map and ask to to make a 'move'. Ideally this idea of time could be handled independently by the ALife, without deferring to the map for
-a call to move. Perhaps the ALife could have a cycle speed in which it can do one action every cycle, where the cycle time maybe controlled by the evolutionary algorithm
+calls each Alife form on the map and ask to to make a 'move'. Ideally this idea of time could be handled independently by the Alife, without deferring to the map for
+a call to move. Perhaps the Alife could have a cycle speed in which it can do one action every cycle, where the cycle time maybe controlled by the evolutionary algorithm
 or statically set. 
-Another design improvement that could be made is to improve the security and abstractness of the code. Currently many classes that do not need access to the ALife
-object have access to the ALife object. It was very difficult separating responsibilities for this class into distinct sets which could then be implemented through
-interfaces. The biggest weakness of the ALife class is the Brain.java interface that has to be set during the creation of a concrete class. The brain interface
-delegates control of the ALife during run time, and has complete control of the ALife. This Brain object needs to be reimplemented to allow better abstract and allow
-easier extension. The Brain interface is slightly confusing as the only method it implements is the think() method. This method is called when the ALife is required to
-move. The GP ALife implements this interface with only a few lines with a call to the GP solution which then chooses the action for the ALife to execute, whereas the
-GA ALife Brain contains all of the sensors for the ALife, and directly controls the flow of the GA ALife.
-There are also many other forms of ALife that could be simulated and tested, some testing was done of interacting and symbiotic ALife, however the implementation of
-these ALife has not yet been finished. The testing done showed promising results. Simulations run where ALife could produce resources which other could consume, produced
-interesting results where the ALife would learn to follow each other as close as possible and occasionally changing directions. This behaviour was
-interesting to observer and further study of interacting ALife would certainly be a path this project would take if more work was to be done.
+Another design improvement that could be made is to improve the security and abstractness of the code. Currently many classes that do not need access to the Alife
+object have access to the Alife object. It was very difficult separating responsibilities for this class into distinct sets which could then be implemented through
+interfaces. The biggest weakness of the Alife class is the Brain.java interface that has to be set during the creation of a concrete class. The brain interface
+delegates control of the Alife during run time, and has complete control of the Alife. This Brain object needs to be reimplemented to allow better abstract and allow
+easier extension. The Brain interface is slightly confusing as the only method it implements is the think() method. This method is called when the Alife is required to
+move. The GP Alife implements this interface with only a few lines with a call to the GP solution which then chooses the action for the Alife to execute, whereas the
+GA Alife Brain contains all of the sensors for the Alife, and directly controls the flow of the GA Alife.
+There are also many other forms of Alife that could be simulated and tested, some testing was done of interacting and symbiotic Alife, however the implementation of
+these Alife has not yet been finished. The testing done showed promising results. Simulations run where Alife could produce resources which other could consume, produced
+interesting results where the Alife would learn to follow each other as close as possible and occasionally changing directions. This behaviour was
+interesting to observer and further study of interacting Alife would certainly be a path this project would take if more work was to be done.
 Another general improvement that could be made is to write more unit tests for the application. Currently the test coverage reported by Cobertura is only 31%. This
 value may seem very low, but the tests have been focused on the logic portions of the code and the critical code that would cause major error in the code if there 
 were errors. With that said, other areas of the code could certainly produce errors that could effect the running of the application. To remedy this, more tests
-should be written to increase code coverage and branch coverage. Test coverage should ideally be around 80% ~\cite{massol04}.
+should be written to increase code coverage and branch coverage. Test coverage should ideally be around 80%~\cite{massol04}.
 
 
 
